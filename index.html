@@ -1,403 +1,705 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="bg">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Механо · FLL Отбор</title>
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Механо — FLL Отбор 2025-26</title>
+<meta name="description" content="Механо — FLL отбор 2025-26. Иновации, роботика, код и страст към инженерството." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --bg: #f0f4f8; --bg2: #e2e8f0; --dark: #0f172a;
-    --blue: #38bdf8; --green: #4ade80; --orange: #fb923c;
-    --muted: #475569; --border: rgba(0,0,0,0.09);
+    --bg: #f6f8ff;
+    --bg-2: #eef1fb;
+    --surface: #ffffff;
+    --surface-2: #f3f5fc;
+    --text: #0f1838;
+    --text-muted: #5b6584;
+    --border: #e3e7f3;
+
+    --cyan: #06b6d4;
+    --blue: #3b82f6;
+    --purple: #8b5cf6;
+    --pink: #ec4899;
+    --green: #10b981;
+    --yellow: #f59e0b;
+
+    --grad-hero: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+    --grad-text: linear-gradient(135deg, #06b6d4, #8b5cf6, #ec4899);
+
+    --shadow-sm: 0 4px 14px -6px rgba(15, 24, 56, 0.08);
+    --shadow-md: 0 12px 32px -12px rgba(15, 24, 56, 0.15);
+    --shadow-lg: 0 24px 60px -20px rgba(59, 130, 246, 0.25);
   }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  body { min-height: 100vh; background: var(--bg); color: var(--dark); font-family: 'Rajdhani', sans-serif; font-size: 17px; overflow-x: hidden; }
-  .mono { font-family: 'Share Tech Mono', monospace; }
-  @keyframes sd { 0%,100%{opacity:.2;transform:scaleY(0.5)} 50%{opacity:1;transform:scaleY(1)} }
-  .animate-scroll { animation: sd 1.8s ease-in-out infinite; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    background-image:
+      radial-gradient(ellipse at top left, rgba(139, 92, 246, 0.08), transparent 50%),
+      radial-gradient(ellipse at top right, rgba(6, 182, 212, 0.08), transparent 50%);
+    background-attachment: fixed;
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em; line-height: 1.1; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+  .section { padding: 6rem 0; }
 
   /* NAV */
-  header.nav { position: sticky; top: 0; z-index: 200; border-bottom: 1px solid var(--border); background: rgba(240,244,248,0.92); backdrop-filter: blur(12px); }
-  .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 62px; }
-  .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  .logo-badge { font-family: 'Share Tech Mono', monospace; font-size: 12px; padding: 6px 8px; border-radius: 6px; background: linear-gradient(135deg,#38bdf8,#4ade80); color: #0f172a; font-weight: 700; }
-  .logo-name { font-size: 22px; font-weight: 700; letter-spacing: 3px; color: #0f172a; }
-  .logo-sub { font-family: 'Share Tech Mono', monospace; font-size: 9px; color: #475569; letter-spacing: 3px; display: block; margin-top: -2px; text-transform: uppercase; }
-  nav.links { display: flex; gap: 2rem; }
-  nav.links a { color: #475569; text-decoration: none; font-family: 'Share Tech Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; transition: color .2s; }
-  nav.links a:hover { color: #0f172a; }
-
-  /* HERO */
-  .hero { position: relative; min-height: 92vh; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
-  .hero-bg { position: absolute; inset: 0; background-image: url('https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1600&q=80'); background-size: cover; background-position: center; filter: brightness(0.3) saturate(1.2); }
-  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(240,244,248,0.15), rgba(240,244,248,0.05) 40%, rgba(240,244,248,0.88)); }
-  .hero-content { position: relative; z-index: 10; padding: 2rem; }
-  .hero-badge { display: inline-block; border: 1px solid rgba(56,189,248,0.5); background: rgba(56,189,248,0.12); padding: 6px 24px; border-radius: 2px; font-family: 'Share Tech Mono', monospace; font-size: 11px; color: #0369a1; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 2rem; }
-  .hero h1 { font-size: clamp(4rem,12vw,9rem); font-weight: 700; letter-spacing: 12px; text-transform: uppercase; line-height: 0.9; color: white; filter: drop-shadow(0 0 60px rgba(56,189,248,0.5)); margin-bottom: 1rem; }
-  .hi { color: #38bdf8; } .ha { color: #4ade80; } .no { color: #fb923c; }
-  .hero-sub { font-family: 'Share Tech Mono', monospace; font-size: 13px; color: rgba(255,255,255,0.7); letter-spacing: 5px; margin-bottom: 2.5rem; text-transform: uppercase; }
-  .hero-desc { max-width: 540px; margin: 0 auto 2.5rem; color: rgba(255,255,255,0.75); font-size: 18px; line-height: 1.7; }
-  .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-  .scroll-hint { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 8px; }
-  .scroll-hint span { font-family: 'Share Tech Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.5); letter-spacing: 3px; }
-  .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom,#38bdf8,transparent); }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto; padding: 1rem 1.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo { display: flex; align-items: center; gap: 0.6rem; font-family: 'Space Grotesk'; font-weight: 700; }
+  .logo-mark {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: var(--grad-hero); color: white;
+    display: flex; align-items: center; justify-content: center; font-weight: 700;
+    transition: transform 0.3s;
+  }
+  .logo:hover .logo-mark { transform: scale(1.1); }
+  .nav-links { display: none; gap: 1.75rem; font-size: 0.9rem; font-weight: 500; color: var(--text-muted); }
+  .nav-links a:hover { color: var(--cyan); }
+  @media (min-width: 768px) { .nav-links { display: flex; } }
 
   /* BUTTONS */
-  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 32px; border-radius: 3px; font-family: 'Share Tech Mono', monospace; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; text-decoration: none; transition: all .2s; border: none; cursor: pointer; }
-  .btn-orange { background: #fb923c; color: #0f172a; }
-  .btn-orange:hover { box-shadow: 0 0 30px rgba(251,146,60,0.45); transform: translateY(-2px); }
-  .btn-blue { background: #38bdf8; color: #0f172a; }
-  .btn-blue:hover { box-shadow: 0 0 30px rgba(56,189,248,0.45); transform: translateY(-2px); }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    font-family: inherit; font-weight: 600; font-size: 0.95rem;
+    padding: 0.7rem 1.4rem; border-radius: 12px; cursor: pointer;
+    border: none; transition: all 0.3s; text-decoration: none;
+  }
+  .btn-lg { padding: 0.95rem 1.8rem; font-size: 1rem; border-radius: 14px; }
+  .btn-xl { padding: 1.15rem 2.3rem; font-size: 1.05rem; border-radius: 16px; }
+  .btn-hero {
+    background: var(--grad-hero); color: white;
+    box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.5);
+    background-size: 200% 200%;
+  }
+  .btn-hero:hover { background-position: 100% 50%; transform: translateY(-2px); box-shadow: 0 15px 40px -10px rgba(139, 92, 246, 0.6); }
+  .btn-cyan { background: rgba(6, 182, 212, 0.1); color: var(--cyan); border: 1px solid rgba(6, 182, 212, 0.3); }
+  .btn-cyan:hover { background: var(--cyan); color: white; }
+  .btn-purple { background: rgba(139, 92, 246, 0.1); color: var(--purple); border: 1px solid rgba(139, 92, 246, 0.3); }
+  .btn-purple:hover { background: var(--purple); color: white; }
+  .btn-yellow { background: var(--yellow); color: white; box-shadow: 0 10px 25px -8px rgba(245, 158, 11, 0.5); }
+  .btn-yellow:hover { transform: translateY(-2px); }
+  .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .btn-outline:hover { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 20px rgba(6, 182, 212, 0.2); }
+  .btn-run {
+    background: var(--green); color: white; font-weight: 600;
+    animation: pulse-glow 2s infinite;
+  }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+    50% { box-shadow: 0 0 0 14px rgba(16, 185, 129, 0); }
+  }
+
+  /* BADGE */
+  .badge {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.35rem 0.85rem; border-radius: 999px;
+    font-size: 0.78rem; font-weight: 600; margin-bottom: 1rem;
+    border: 1px solid;
+  }
+  .badge-cyan { background: rgba(6, 182, 212, 0.1); color: var(--cyan); border-color: rgba(6, 182, 212, 0.3); }
+  .badge-purple { background: rgba(139, 92, 246, 0.1); color: var(--purple); border-color: rgba(139, 92, 246, 0.3); }
+  .badge-pink { background: rgba(236, 72, 153, 0.1); color: var(--pink); border-color: rgba(236, 72, 153, 0.3); }
+  .badge-green { background: rgba(16, 185, 129, 0.1); color: var(--green); border-color: rgba(16, 185, 129, 0.3); }
+  .badge-yellow { background: rgba(245, 158, 11, 0.12); color: var(--yellow); border-color: rgba(245, 158, 11, 0.3); }
+  .badge-glow { background: rgba(6, 182, 212, 0.1); color: var(--cyan); border-color: rgba(6, 182, 212, 0.3); box-shadow: 0 0 25px rgba(6, 182, 212, 0.25); }
+
+  /* CARD */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 1.75rem;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.4s;
+  }
+  .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+
+  /* TEXT GRADIENTS */
+  .text-grad {
+    background: var(--grad-text);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; position: relative; padding: 8rem 1.5rem 4rem;
+    background-image:
+      linear-gradient(rgba(59, 130, 246, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59, 130, 246, 0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  .blob {
+    position: absolute; border-radius: 50%; filter: blur(100px);
+    pointer-events: none; z-index: 0;
+  }
+  .blob-1 { width: 380px; height: 380px; top: 15%; left: -100px; background: rgba(139, 92, 246, 0.25); animation: float 6s ease-in-out infinite; }
+  .blob-2 { width: 380px; height: 380px; bottom: 15%; right: -100px; background: rgba(6, 182, 212, 0.25); animation: float 6s ease-in-out infinite 2s; }
+  .blob-3 { width: 500px; height: 500px; top: 30%; left: 50%; transform: translateX(-50%); background: rgba(236, 72, 153, 0.12); }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+  .hero-content { position: relative; z-index: 1; max-width: 900px; }
+  .hero h1 {
+    font-size: clamp(4.5rem, 14vw, 11rem);
+    font-weight: 700; margin: 1.5rem 0 1.5rem;
+    background: var(--grad-hero);
+    background-size: 200% 200%;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: gradient-shift 8s ease infinite;
+  }
+  @keyframes gradient-shift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+  .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 2.2rem; }
+  .hero-buttons { display: flex; flex-wrap: wrap; gap: 0.85rem; justify-content: center; }
+
+  .scroll-hint { margin-top: 4rem; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: rgba(91, 101, 132, 0.6); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em; }
+  .scroll-line { width: 1px; height: 48px; background: linear-gradient(to bottom, var(--cyan), transparent); }
+
+  /* SECTION HEADER */
+  .section-header { text-align: center; max-width: 700px; margin: 0 auto 4rem; }
+  .section-header h2 { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 700; margin-bottom: 1rem; }
+  .section-header p { color: var(--text-muted); font-size: 1.1rem; }
 
   /* STATS */
-  .stats-bar { background: #e2e8f0; border-bottom: 1px solid var(--border); }
-  .stats-inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: repeat(4,1fr); }
-  .stat { padding: 2rem 1.5rem; text-align: center; border-right: 1px solid var(--border); }
-  .stat:last-child { border-right: none; }
-  .stat-num { display: block; font-family: 'Share Tech Mono', monospace; font-size: 2.4rem; font-weight: 700; line-height: 1; margin-bottom: 6px; }
-  .stat-label { font-family: 'Share Tech Mono', monospace; font-size: 10px; color: #475569; letter-spacing: 3px; text-transform: uppercase; }
-  .c-blue { color: #0369a1; } .c-green { color: #16a34a; } .c-orange { color: #c2410c; } .c-purple { color: #7c3aed; }
+  .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 4rem; }
+  @media (min-width: 768px) { .stats { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; } }
+  .stat {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
+    padding: 1.5rem 1rem; text-align: center; transition: all 0.3s;
+    box-shadow: var(--shadow-sm);
+  }
+  .stat:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .stat-icon { width: 28px; height: 28px; margin: 0 auto 0.75rem; }
+  .stat-value { font-family: 'Space Grotesk'; font-weight: 700; font-size: 2.5rem; line-height: 1; margin-bottom: 0.4rem; }
+  .stat-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
 
-  /* MAIN */
-  main { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; }
-  section { margin-bottom: 5rem; }
-  .section-head { display: flex; align-items: center; gap: 1rem; margin-bottom: 2.5rem; }
-  .pip { width: 4px; height: 28px; border-radius: 2px; flex-shrink: 0; }
-  .pip-blue   { background: #38bdf8; box-shadow: 0 0 10px rgba(56,189,248,0.4); }
-  .pip-green  { background: #4ade80; box-shadow: 0 0 10px rgba(74,222,128,0.4); }
-  .pip-orange { background: #fb923c; box-shadow: 0 0 10px rgba(251,146,60,0.4); }
-  .pip-teal   { background: #2dd4bf; box-shadow: 0 0 10px rgba(45,212,191,0.4); }
-  .pip-purple { background: #a78bfa; box-shadow: 0 0 10px rgba(167,139,250,0.4); }
-  .section-head h2 { font-size: 1.4rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: #0f172a; }
-  .section-head small { font-family: 'Share Tech Mono', monospace; font-size: 10px; color: #475569; letter-spacing: 3px; text-transform: uppercase; display: block; }
-
-  /* ABOUT CARDS */
-  .cards-3 { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 1rem; }
-  .card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 1.75rem; transition: transform .2s, box-shadow .2s; position: relative; overflow: hidden; }
-  .card::before { content:''; position:absolute; top:0;left:0;right:0; height:3px; }
-  .card-blue::before { background:#38bdf8; }
-  .card-green::before { background:#4ade80; }
-  .card-orange::before { background:#fb923c; }
-  .card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-  .card-icon { width:48px; height:48px; border-radius:12px; background:#f1f5f9; display:flex; align-items:center; justify-content:center; font-size:1.3rem; margin-bottom:1rem; transition: transform .2s; }
-  .card:hover .card-icon { transform: scale(1.1); }
-  .card h3 { font-size:1rem; font-weight:700; color:#0f172a; margin-bottom:8px; letter-spacing:1px; }
-  .card p { font-size:0.84rem; color:#475569; line-height:1.8; }
-
-  /* PROJECT */
-  .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-  .project-photo { position:relative; border-radius:8px; overflow:hidden; min-height:300px; }
-  .project-photo img { width:100%; height:100%; object-fit:cover; filter:brightness(0.5) saturate(1.3); }
-  .project-photo-label { position:absolute; bottom:1.5rem; left:1.5rem; font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:3px; color:rgba(255,255,255,0.7); border-left:4px solid #fb923c; padding-left:12px; text-transform:uppercase; }
-  .project-info { background:white; border:1px solid var(--border); border-radius:8px; padding:2.5rem; display:flex; flex-direction:column; justify-content:center; }
-  .project-eyebrow { font-family:'Share Tech Mono',monospace; font-size:10px; color:#fb923c; letter-spacing:4px; text-transform:uppercase; margin-bottom:1rem; }
-  .project-title { font-size:1.9rem; font-weight:700; color:#0f172a; margin-bottom:1.25rem; line-height:1.2; }
-  .project-desc { color:#475569; line-height:1.75; margin-bottom:2rem; font-size:15px; }
-  .tags { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:2rem; }
-  .tag { padding:5px 14px; border-radius:2px; font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; border:1px solid #e2e8f0; background:#f8fafc; color:#64748b; }
-
-  /* DOCS */
-  .docs-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; margin-bottom:2rem; }
-  .doc-card { background:white; border:1px solid var(--border); border-radius:8px; padding:1.5rem; text-decoration:none; transition: transform .2s, box-shadow .2s; display:block; }
-  .doc-card:hover { transform:translateY(-4px); box-shadow:0 10px 30px rgba(0,0,0,0.1); }
-  .doc-icon { width:40px; height:40px; border-radius:8px; display:flex; align-items:center; justify-content:center; color:white; font-size:1rem; margin-bottom:1rem; box-shadow:0 2px 6px rgba(0,0,0,0.15); transition:transform .2s; }
-  .doc-card:hover .doc-icon { transform:scale(1.1); }
-  .doc-title { font-weight:700; font-size:15px; color:#0f172a; margin-bottom:4px; }
-  .doc-label { font-family:'Share Tech Mono',monospace; font-size:9px; color:#475569; letter-spacing:1px; text-transform:uppercase; opacity:.6; }
-  .doc-open { margin-top:1rem; font-family:'Share Tech Mono',monospace; font-size:10px; font-weight:700; color:#38bdf8; letter-spacing:4px; opacity:0; transition:opacity .2s; }
-  .doc-card:hover .doc-open { opacity:1; }
-  .drive-banner { padding:1.5rem; background:rgba(15,23,42,0.05); border-radius:8px; border:1px dashed #cbd5e1; display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
-  .drive-banner-left { display:flex; align-items:center; gap:1rem; }
-  .drive-banner p { font-weight:700; color:#0f172a; margin-bottom:2px; font-size:15px; }
-  .drive-banner span { font-size:12px; color:#475569; }
-  .btn-dark { font-family:'Share Tech Mono',monospace; font-size:11px; background:#0f172a; color:white; padding:10px 24px; border-radius:4px; text-decoration:none; transition:background .2s; letter-spacing:1px; }
-  .btn-dark:hover { background:#38bdf8; color:#0f172a; }
+  /* ABOUT GRID */
+  .grid-3 { display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
+  @media (min-width: 768px) { .grid-3 { grid-template-columns: repeat(3, 1fr); } }
+  .feature-icon {
+    width: 56px; height: 56px; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.25rem; color: white;
+    transition: transform 0.4s;
+  }
+  .card:hover .feature-icon { transform: scale(1.1) rotate(6deg); }
+  .icon-cyan { background: linear-gradient(135deg, var(--cyan), var(--blue)); }
+  .icon-purple { background: linear-gradient(135deg, var(--purple), var(--pink)); }
+  .icon-green { background: linear-gradient(135deg, var(--green), var(--cyan)); }
+  .feature-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.6rem; }
+  .feature-desc { color: var(--text-muted); }
 
   /* CODE */
-  .code-wrap { background:#0f172a; border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,0.1); box-shadow:0 24px 48px rgba(0,0,0,0.2); margin-bottom:2rem; }
-  .code-header { padding:12px 20px; border-bottom:1px solid rgba(255,255,255,0.05); display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.03); }
-  .dots { display:flex; gap:6px; }
-  .dot { width:12px; height:12px; border-radius:50%; }
-  .dot-r{background:#ff5f56;} .dot-y{background:#ffbd2e;} .dot-g{background:#27c93f;}
-  .code-file { font-family:'Share Tech Mono',monospace; font-size:11px; color:#64748b; letter-spacing:2px; }
-  .code-body { padding:1.5rem 1.25rem; font-family:'Share Tech Mono',monospace; font-size:13px; line-height:2; color:#cbd5e1; overflow-x:auto; white-space:pre; }
-  .kw{color:#38bdf8;} .fn{color:#4ade80;} .str{color:#86efac;} .cm{color:#475569;font-style:italic;} .num{color:#facc15;}
+  .code-block {
+    background: #1e1b4b; color: #e0e7ff;
+    border-radius: 20px; overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+  }
+  .code-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.85rem 1.25rem; background: rgba(0, 0, 0, 0.25);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-family: 'JetBrains Mono'; font-size: 0.75rem;
+  }
+  .dots { display: flex; gap: 0.45rem; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot-r { background: #f87171; } .dot-y { background: #fbbf24; } .dot-g { background: #34d399; }
+  .file-name { color: rgba(224, 231, 255, 0.6); }
+  .lang-tag { color: #67e8f9; font-weight: 600; }
+
+  pre.code-body {
+    padding: 1.5rem; overflow-x: auto;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.7;
+  }
+  .code-line { display: flex; gap: 1rem; padding: 0 0.5rem; }
+  .code-line:hover { background: rgba(255, 255, 255, 0.04); }
+  .ln { color: rgba(224, 231, 255, 0.3); width: 1.5rem; text-align: right; flex-shrink: 0; user-select: none; }
+  .tk-comment { color: rgba(224, 231, 255, 0.45); font-style: italic; }
+  .tk-string { color: #6ee7b7; }
+  .tk-keyword { color: #f9a8d4; font-weight: 600; }
+  .tk-fn { color: #67e8f9; }
+  .tk-class { color: #fde68a; }
+  .tk-num { color: #c4b5fd; }
+  .cursor { display: inline-block; width: 8px; height: 14px; background: var(--green); animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 2.5rem; }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+  .code-footer {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    padding: 1.25rem 1.5rem; gap: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.15);
+  }
+  .branch { display: flex; align-items: center; gap: 0.5rem; color: rgba(224, 231, 255, 0.6); font-family: 'JetBrains Mono'; font-size: 0.75rem; }
+  .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  /* DOCS */
+  .grid-4 { display: grid; gap: 1.25rem; grid-template-columns: 1fr; margin-bottom: 3rem; }
+  @media (min-width: 640px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .grid-4 { grid-template-columns: repeat(4, 1fr); } }
+  .doc-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1rem; transition: transform 0.3s;
+  }
+  .card:hover .doc-icon { transform: scale(1.1); }
+  .di-cyan { background: rgba(6, 182, 212, 0.12); color: var(--cyan); border: 1px solid rgba(6, 182, 212, 0.3); }
+  .di-purple { background: rgba(139, 92, 246, 0.12); color: var(--purple); border: 1px solid rgba(139, 92, 246, 0.3); }
+  .di-pink { background: rgba(236, 72, 153, 0.12); color: var(--pink); border: 1px solid rgba(236, 72, 153, 0.3); }
+  .di-yellow { background: rgba(245, 158, 11, 0.12); color: var(--yellow); border: 1px solid rgba(245, 158, 11, 0.3); }
+  .doc-title { font-family: 'Space Grotesk'; font-weight: 700; font-size: 1.1rem; margin-bottom: 0.25rem; }
+  .doc-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; }
+  .doc-link { font-size: 0.85rem; font-weight: 600; opacity: 0; transition: opacity 0.3s; display: flex; align-items: center; gap: 0.3rem; }
+  .card:hover .doc-link { opacity: 1; }
+  .center { text-align: center; }
 
   /* TEAM */
-  .team-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(135px,1fr)); gap:1rem; }
-  .member { background:white; border:1px solid var(--border); border-radius:8px; padding:1.5rem 1rem; text-align:center; transition:transform .2s; }
-  .member:hover { transform:translateY(-4px); }
-  .avatar { width:56px; height:56px; border-radius:50%; background:#94a3b8; margin:0 auto 1rem; display:flex; align-items:center; justify-content:center; font-family:'Share Tech Mono',monospace; color:white; font-weight:700; font-size:14px; transition:background .2s; }
-  .member:hover .avatar { background:#38bdf8; }
-  .member-name { font-weight:700; font-size:14px; color:#0f172a; margin-bottom:4px; }
-  .member-role { font-family:'Share Tech Mono',monospace; font-size:10px; color:#475569; letter-spacing:2px; text-transform:uppercase; }
+  .team-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: 640px) { .team-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1024px) { .team-grid { grid-template-columns: repeat(4, 1fr); } }
+  .member { text-align: center; padding: 1.4rem 1rem; }
+  .avatar-wrap { position: relative; width: 80px; height: 80px; margin: 0 auto 1rem; }
+  .avatar-glow { position: absolute; inset: 0; border-radius: 50%; filter: blur(14px); opacity: 0.5; transition: opacity 0.3s; }
+  .member:hover .avatar-glow { opacity: 0.85; }
+  .avatar {
+    position: relative; width: 100%; height: 100%;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Grotesk'; font-weight: 700; font-size: 1.75rem; color: white;
+  }
+  .num-badge {
+    position: absolute; bottom: -2px; right: -2px;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: white; border: 2px solid var(--green);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono'; font-size: 0.6rem; color: var(--green); font-weight: 600;
+  }
+  .member-name { font-family: 'Space Grotesk'; font-weight: 600; font-size: 1.05rem; }
+  .member-role { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-top: 0.3rem; }
+
+  /* PARTNER */
+  .partner-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 24px;
+    padding: 3rem 2rem; position: relative; overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+  .partner-blob-1 { position: absolute; top: 0; right: 0; width: 220px; height: 220px; background: rgba(245, 158, 11, 0.2); border-radius: 50%; filter: blur(80px); }
+  .partner-blob-2 { position: absolute; bottom: 0; left: 0; width: 220px; height: 220px; background: rgba(236, 72, 153, 0.2); border-radius: 50%; filter: blur(80px); }
+  .partner-inner { position: relative; display: grid; gap: 2rem; align-items: center; }
+  @media (min-width: 768px) { .partner-inner { grid-template-columns: 1fr auto; } }
+  .partner-card h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 1rem; }
+  .partner-card p { color: var(--text-muted); margin-bottom: 1.5rem; max-width: 520px; }
+  .partner-logo {
+    width: 180px; height: 180px; border-radius: 24px;
+    background: var(--surface); border: 2px solid rgba(245, 158, 11, 0.3);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem;
+    transition: transform 0.3s;
+    margin: 0 auto;
+  }
+  .partner-logo:hover { transform: scale(1.05); }
+  .partner-label { font-family: 'Space Grotesk'; font-weight: 700; font-size: 1.1rem; }
+  .partner-sub { font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--text-muted); }
 
   /* CONTACT */
-  .links-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:1rem; }
-  .link-btn { display:flex; align-items:center; gap:1rem; padding:1.25rem 1.5rem; background:white; border:1px solid var(--border); border-radius:8px; text-decoration:none; transition:transform .2s; }
-  .link-btn:hover { transform:translateX(4px); }
-  .link-icon { width:40px; height:40px; border-radius:8px; background:#f8fafc; border:1px solid #e2e8f0; display:flex; align-items:center; justify-content:center; font-size:1.25rem; flex-shrink:0; }
-  .link-label { display:block; font-weight:700; font-size:15px; color:#0f172a; margin-bottom:2px; }
-  .link-desc { font-family:'Share Tech Mono',monospace; font-size:10px; color:#475569; letter-spacing:2px; text-transform:uppercase; }
-  .link-arrow { color:#475569; font-size:16px; transition:transform .2s; margin-left:auto; }
-  .link-btn:hover .link-arrow { transform:translateX(4px); }
+  .contact-grid { display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
+  @media (min-width: 768px) { .contact-grid { grid-template-columns: repeat(3, 1fr); } }
+  .contact-card { text-align: center; padding: 1.75rem 1.25rem; }
+  .contact-icon-wrap {
+    width: 56px; height: 56px; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1rem;
+  }
+  .ci-cyan { background: rgba(6, 182, 212, 0.12); color: var(--cyan); border: 1px solid rgba(6, 182, 212, 0.3); }
+  .ci-purple { background: rgba(139, 92, 246, 0.12); color: var(--purple); border: 1px solid rgba(139, 92, 246, 0.3); }
+  .ci-green { background: rgba(16, 185, 129, 0.12); color: var(--green); border: 1px solid rgba(16, 185, 129, 0.3); }
+  .contact-card h3 { font-family: 'Space Grotesk'; font-weight: 600; margin-bottom: 0.4rem; }
+  .contact-card p { font-size: 0.9rem; color: var(--text-muted); }
+  .socials { display: flex; gap: 0.5rem; justify-content: center; margin-top: 0.6rem; }
+  .social {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: var(--surface-2); color: var(--text-muted);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s;
+  }
+  .social:hover { background: var(--purple); color: white; transform: translateY(-2px); }
 
   /* FOOTER */
-  footer { border-top:1px solid var(--border); background:#e2e8f0; padding:2.5rem; text-align:center; font-family:'Share Tech Mono',monospace; font-size:11px; color:#475569; letter-spacing:3px; text-transform:uppercase; }
-
-  @media(max-width:768px) {
-    nav.links { display:none; }
-    .stats-inner { grid-template-columns:repeat(2,1fr); }
-    .project-grid { grid-template-columns:1fr; }
+  footer {
+    border-top: 1px solid var(--border); margin-top: 3rem;
   }
+  .footer-inner {
+    max-width: 1200px; margin: 0 auto; padding: 2.5rem 1.5rem;
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;
+    color: var(--text-muted); font-size: 0.88rem;
+  }
+  .footer-brand { display: flex; align-items: center; gap: 0.5rem; }
+  .footer-brand .logo-mark { width: 28px; height: 28px; border-radius: 8px; font-size: 0.85rem; }
+  .footer-brand strong { color: var(--text); font-family: 'Space Grotesk'; }
+  .footer-tag { font-family: 'JetBrains Mono'; font-size: 0.75rem; }
+  .heart { color: var(--pink); }
+
+  /* COLOR HELPERS for stats */
+  .c-cyan { color: var(--cyan); }
+  .c-yellow { color: var(--yellow); }
+  .c-pink { color: var(--pink); }
+  .c-green { color: var(--green); }
+
+  /* Avatar gradients */
+  .av-1 { background: linear-gradient(135deg, var(--cyan), var(--blue)); }
+  .av-1g { background: linear-gradient(135deg, var(--cyan), var(--blue)); }
+  .av-2 { background: linear-gradient(135deg, var(--purple), var(--pink)); }
+  .av-3 { background: linear-gradient(135deg, var(--green), var(--cyan)); }
+  .av-4 { background: linear-gradient(135deg, var(--yellow), var(--pink)); }
+  .av-5 { background: linear-gradient(135deg, var(--blue), var(--purple)); }
+  .av-6 { background: linear-gradient(135deg, var(--pink), var(--purple)); }
+  .av-7 { background: linear-gradient(135deg, var(--green), var(--yellow)); }
+  .av-8 { background: linear-gradient(135deg, var(--cyan), var(--purple)); }
 </style>
 </head>
+
 <body>
 
 <!-- NAV -->
-<header class="nav">
-  <div class="header-inner">
-    <a class="logo" href="#">
-      <div class="logo-badge">FLL</div>
-      <div>
-        <span class="logo-name">МЕХАНО</span>
-        <span class="logo-sub">First Lego League · 2025</span>
-      </div>
+<nav>
+  <div class="nav-inner">
+    <a href="#hero" class="logo">
+      <div class="logo-mark">М</div>
+      <span>МЕХАНО</span>
     </a>
-    <nav class="links">
+    <div class="nav-links">
       <a href="#about">За нас</a>
-      <a href="#project">Проект</a>
-      <a href="#docs">Документи</a>
       <a href="#code">Код</a>
+      <a href="#docs">Документи</a>
       <a href="#team">Отбор</a>
-    </nav>
+      <a href="#contact">Контакт</a>
+    </div>
+    <a href="#contact" class="btn btn-cyan" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Свържи се</a>
   </div>
-</header>
+</nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
+<section id="hero" class="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
   <div class="hero-content">
-    <div class="hero-badge">✦ FLL Отбор — Сезон 2025–26 ✦</div>
-    <h1><span class="hi">МЕ</span><span class="ha">ХА</span><span class="no">НО</span></h1>
-    <div class="hero-sub">// SUBEQUUS CHALLENGE · ROBOTICS &amp; INNOVATION</div>
-    <p class="hero-desc">Инженери на бъдещето — един ред код наведнъж. Участници в FIRST LEGO League, движени от любопитство, код и екипна работа.</p>
-    <div class="hero-btns">
-      <a href="#docs" class="btn btn-orange">📂 Документи</a>
-      <a href="#code" class="btn btn-blue">⟨/⟩ Нашият код</a>
+    <span class="badge badge-glow">✨ FLL Отбор 2025-26</span>
+    <h1>МЕХАНО</h1>
+    <p>Млад FIRST LEGO League отбор от инженери, мислители и мечтатели. Изграждаме роботи, решаваме проблеми и оставяме следа.</p>
+    <div class="hero-buttons">
+      <a href="#docs" class="btn btn-hero btn-lg">📄 Документи</a>
+      <a href="#code" class="btn btn-purple btn-lg">💻 Код</a>
+      <a href="#about" class="btn btn-outline btn-lg">Научи повече →</a>
     </div>
-  </div>
-  <div class="scroll-hint">
-    <span>SCROLL</span>
-    <div class="scroll-line animate-scroll"></div>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
   </div>
 </section>
 
-<!-- STATS -->
-<div class="stats-bar">
-  <div class="stats-inner">
-    <div class="stat"><span class="stat-num c-blue">8</span><span class="stat-label">Членове</span></div>
-    <div class="stat"><span class="stat-num c-green">2</span><span class="stat-label">Сезона</span></div>
-    <div class="stat"><span class="stat-num c-orange">3</span><span class="stat-label">Награди</span></div>
-    <div class="stat"><span class="stat-num c-purple">∞</span><span class="stat-label">Идеи</span></div>
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge badge-cyan">За нас</span>
+      <h2>Кои сме <span class="text-grad">ние</span></h2>
+      <p>Отбор от осем младежи, обединени от страст към инженерството и иновациите.</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <svg class="stat-icon c-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div class="stat-value c-cyan">8</div>
+        <div class="stat-label">Члена</div>
+      </div>
+      <div class="stat">
+        <svg class="stat-icon c-yellow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+        <div class="stat-value c-yellow">2</div>
+        <div class="stat-label">Сезона</div>
+      </div>
+      <div class="stat">
+        <svg class="stat-icon c-pink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <div class="stat-value c-pink">100%</div>
+        <div class="stat-label">Отдаденост</div>
+      </div>
+      <div class="stat">
+        <svg class="stat-icon c-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.178 8c5.096 0 5.096 8 0 8-5.095 0-7.133-8-12.739-8-4.585 0-4.585 8 0 8 5.606 0 7.644-8 12.739-8z"/></svg>
+        <div class="stat-value c-green">∞</div>
+        <div class="stat-label">Идеи</div>
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <div class="feature-icon icon-cyan">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="2" x2="9" y2="4"/><line x1="15" y1="2" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="22"/><line x1="15" y1="20" x2="15" y2="22"/><line x1="20" y1="9" x2="22" y2="9"/><line x1="20" y1="14" x2="22" y2="14"/><line x1="2" y1="9" x2="4" y2="9"/><line x1="2" y1="14" x2="4" y2="14"/></svg>
+        </div>
+        <h3 class="feature-title">Дизайн на робот</h3>
+        <p class="feature-desc">Проектираме, конструираме и програмираме LEGO® роботи, оптимизирани за прецизност и скорост.</p>
+      </div>
+      <div class="card">
+        <div class="feature-icon icon-purple">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>
+        </div>
+        <h3 class="feature-title">Иновационен проект</h3>
+        <p class="feature-desc">Решаваме реални проблеми с креативни инженерни идеи, вдъхновени от темата на сезона.</p>
+      </div>
+      <div class="card">
+        <div class="feature-icon icon-green">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 class="feature-title">Основни ценности</h3>
+        <p class="feature-desc">Уважение, откритост, въздействие, приобщаване, работа в екип и забавление — нашата ДНК.</p>
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
-<main>
+<!-- CODE -->
+<section id="code" class="section">
+  <div class="container" style="max-width: 900px;">
+    <div class="section-header">
+      <span class="badge badge-green">Код</span>
+      <h2>Нашият <span class="text-grad">код</span> на победата</h2>
+      <p>Чист Python за SPIKE Prime. Open-source, модулен, оптимизиран.</p>
+    </div>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="section-head">
-      <div class="pip pip-blue"></div>
-      <div>
-        <h2>Кои сме ние</h2>
-        <small>// 01 — ABOUT</small>
-      </div>
-    </div>
-    <div class="cards-3">
-      <div class="card card-blue">
-        <div class="card-icon">🤖</div>
-        <h3>Дизайн на робот</h3>
-        <p>Изграждаме и итерираме нашия LEGO Spike Prime робот, за да изпълнява мисии с прецизност.</p>
-      </div>
-      <div class="card card-green">
-        <div class="card-icon">💡</div>
-        <h3>Иновационен проект</h3>
-        <p>Изследваме реални проблеми и предлагаме творчески, тестируеми решения за споделяне.</p>
-      </div>
-      <div class="card card-orange">
-        <div class="card-icon">🤝</div>
-        <h3>Основни ценности</h3>
-        <p>Gracious Professionalism и Coopertition ни водят — от питото до пода на състезанието.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJECT -->
-  <section id="project">
-    <div class="section-head">
-      <div class="pip pip-orange"></div>
-      <div>
-        <h2>Иновационен проект</h2>
-        <small>// PROJECT_DATA.md</small>
-      </div>
-    </div>
-    <div class="project-grid">
-      <div class="project-photo">
-        <img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=900&q=80" alt="Project">
-        <div class="project-photo-label">Иновационен проект · 2025</div>
-      </div>
-      <div class="project-info">
-        <div class="project-eyebrow">// Тема: Subequus Challenge</div>
-        <div class="project-title">Описание на проекта</div>
-        <p class="project-desc">Тук опишете вашия иновационен проект — проблемът, който решавате, защо е важен и какво решение предлагате. Заменете с вашата реална идея за сезона.</p>
-        <div class="tags">
-          <span class="tag">Роботика</span>
-          <span class="tag">Иновации</span>
-          <span class="tag">Наука</span>
-          <span class="tag">STEM</span>
-        </div>
-        <a href="#docs" class="btn btn-orange" style="width:fit-content;">Виж документацията →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- DOCS -->
-  <section id="docs">
-    <div class="section-head">
-      <div class="pip pip-teal"></div>
-      <div>
-        <h2>Документи и Ресурси</h2>
-        <small>// 02 — ARCHIVE_V2</small>
-      </div>
-    </div>
-    <div class="docs-grid">
-      <a href="#" class="doc-card">
-        <div class="doc-icon" style="background:#3b82f6;">📄</div>
-        <div class="doc-title">Инженерна тетрадка</div>
-        <span class="doc-label">Notebook.pdf</span>
-        <div class="doc-open">OPEN_FILE →</div>
-      </a>
-      <a href="#" class="doc-card">
-        <div class="doc-icon" style="background:#10b981;">📄</div>
-        <div class="doc-title">Иновационен проект</div>
-        <span class="doc-label">Project_Design.docx</span>
-        <div class="doc-open">OPEN_FILE →</div>
-      </a>
-      <a href="#" class="doc-card">
-        <div class="doc-icon" style="background:#f97316;">📄</div>
-        <div class="doc-title">Стратегия за мисии</div>
-        <span class="doc-label">Strategy_2025.pdf</span>
-        <div class="doc-open">OPEN_FILE →</div>
-      </a>
-      <a href="#" class="doc-card">
-        <div class="doc-icon" style="background:#a855f7;">📄</div>
-        <div class="doc-title">Презентация на отбора</div>
-        <span class="doc-label">Team_Pitch.pptx</span>
-        <div class="doc-open">OPEN_FILE →</div>
-      </a>
-    </div>
-    <div class="drive-banner">
-      <div class="drive-banner-left">
-        <span style="font-size:1.5rem;">📁</span>
-        <div>
-          <p>Всички файлове в Google Drive</p>
-          <span>Разгледайте пълния архив на сезона, включително чертежи и изследвания.</span>
-        </div>
-      </div>
-      <a href="#" class="btn-dark">ACCESS_CLOUD_DRIVE</a>
-    </div>
-  </section>
-
-  <!-- CODE -->
-  <section id="code">
-    <div class="section-head">
-      <div class="pip pip-green"></div>
-      <div>
-        <h2>Нашият код</h2>
-        <small>// 03 — CODE</small>
-      </div>
-    </div>
-    <p style="font-size:15px;color:#475569;margin-bottom:1.5rem;line-height:1.8;">Програмираме нашия робот на Python за LEGO Spike Prime. Ето откъс от кода за автономния рън:</p>
-    <div class="code-wrap">
+    <div class="code-block">
       <div class="code-header">
-        <div class="dots">
-          <div class="dot dot-r"></div>
-          <div class="dot dot-y"></div>
-          <div class="dot dot-g"></div>
+        <div class="dots"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div>
+        <span class="file-name">mehano_bot.py</span>
+        <span class="lang-tag">PYTHON 3</span>
+      </div>
+      <pre class="code-body"><code><span class="code-line"><span class="ln">1</span><span><span class="tk-comment"># mehano_bot.py — autonomous mission runner</span></span></span>
+<span class="code-line"><span class="ln">2</span><span><span class="tk-keyword">from</span> spike <span class="tk-keyword">import</span> <span class="tk-class">PrimeHub</span>, <span class="tk-class">Motor</span>, <span class="tk-class">ColorSensor</span></span></span>
+<span class="code-line"><span class="ln">3</span><span><span class="tk-keyword">from</span> spike.control <span class="tk-keyword">import</span> wait_for_seconds</span></span>
+<span class="code-line"><span class="ln">4</span><span> </span></span>
+<span class="code-line"><span class="ln">5</span><span>hub = <span class="tk-class">PrimeHub</span>()</span></span>
+<span class="code-line"><span class="ln">6</span><span>left = <span class="tk-class">Motor</span>(<span class="tk-string">'A'</span>)</span></span>
+<span class="code-line"><span class="ln">7</span><span>right = <span class="tk-class">Motor</span>(<span class="tk-string">'B'</span>)</span></span>
+<span class="code-line"><span class="ln">8</span><span>arm = <span class="tk-class">Motor</span>(<span class="tk-string">'C'</span>)</span></span>
+<span class="code-line"><span class="ln">9</span><span>sensor = <span class="tk-class">ColorSensor</span>(<span class="tk-string">'E'</span>)</span></span>
+<span class="code-line"><span class="ln">10</span><span> </span></span>
+<span class="code-line"><span class="ln">11</span><span><span class="tk-keyword">def</span> <span class="tk-fn">run_mission_one</span>():</span></span>
+<span class="code-line"><span class="ln">12</span><span>    <span class="tk-comment">"""Първа мисия: енергиен модул"""</span></span></span>
+<span class="code-line"><span class="ln">13</span><span>    hub.light_matrix.<span class="tk-fn">show_image</span>(<span class="tk-string">'HEART'</span>)</span></span>
+<span class="code-line"><span class="ln">14</span><span>    left.<span class="tk-fn">start_at_power</span>(<span class="tk-num">50</span>)</span></span>
+<span class="code-line"><span class="ln">15</span><span>    right.<span class="tk-fn">start_at_power</span>(<span class="tk-num">50</span>)</span></span>
+<span class="code-line"><span class="ln">16</span><span> </span></span>
+<span class="code-line"><span class="ln">17</span><span>    <span class="tk-keyword">while</span> sensor.<span class="tk-fn">get_color</span>() != <span class="tk-string">'red'</span>:</span></span>
+<span class="code-line"><span class="ln">18</span><span>        <span class="tk-fn">wait_for_seconds</span>(<span class="tk-num">0.05</span>)</span></span>
+<span class="code-line"><span class="ln">19</span><span> </span></span>
+<span class="code-line"><span class="ln">20</span><span>    left.<span class="tk-fn">stop</span>()</span></span>
+<span class="code-line"><span class="ln">21</span><span>    right.<span class="tk-fn">stop</span>()</span></span>
+<span class="code-line"><span class="ln">22</span><span>    arm.<span class="tk-fn">run_for_degrees</span>(<span class="tk-num">360</span>, speed=<span class="tk-num">80</span>)</span></span>
+<span class="code-line"><span class="ln">23</span><span>    <span class="tk-fn">print</span>(<span class="tk-string">"✅ Mission complete — points secured!"</span>)</span></span>
+<span class="code-line"><span class="ln">24</span><span> </span></span>
+<span class="code-line"><span class="ln">25</span><span><span class="tk-keyword">if</span> __name__ == <span class="tk-string">'__main__'</span>:</span></span>
+<span class="code-line"><span class="ln">26</span><span>    <span class="tk-fn">run_mission_one</span>()<span class="cursor"></span></span></span></code></pre>
+      <div class="code-footer">
+        <div class="branch"><span class="live-dot"></span>main · 47 commits · MIT</div>
+        <a href="https://github.com" target="_blank" rel="noopener" class="btn btn-run btn-lg">▶ Run on GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCS -->
+<section id="docs" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge badge-purple">Документи</span>
+      <h2>Архив на <span class="text-grad">отбора</span></h2>
+      <p>Цялата ни работа на едно място — открита и достъпна.</p>
+    </div>
+
+    <div class="grid-4">
+      <a href="#" class="card">
+        <div class="doc-icon di-cyan">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
         </div>
-        <div class="code-file">MEHANO_RUN1.PY</div>
-      </div>
-      <div class="code-body"><span class="cm"># Отбор Механо — FLL 2025-26 Код на робота</span>
-<span class="kw">from</span> spike <span class="kw">import</span> PrimeHub, MotorPair
-
-hub = PrimeHub()
-motors = MotorPair(<span class="str">'A'</span>, <span class="str">'B'</span>)
-
-<span class="kw">async def</span> <span class="fn">main</span>():
-    hub.light_matrix.show_image(<span class="str">'HAPPY'</span>)
-    <span class="kw">await</span> motors.move(<span class="num">40</span>, <span class="str">'cm'</span>)
-
-runloop.run(main())</div>
+        <div class="doc-title">Правила</div>
+        <div class="doc-desc">Официален rulebook</div>
+        <div class="doc-link c-cyan">Отвори ↗</div>
+      </a>
+      <a href="#" class="card">
+        <div class="doc-icon di-purple">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <div class="doc-title">Стратегия .docx</div>
+        <div class="doc-desc">Match plan</div>
+        <div class="doc-link" style="color: var(--purple);">Отвори ↗</div>
+      </a>
+      <a href="#" class="card">
+        <div class="doc-icon di-pink">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+        </div>
+        <div class="doc-title">Стратегия — карта</div>
+        <div class="doc-desc">Визуален план</div>
+        <div class="doc-link c-pink">Отвори ↗</div>
+      </a>
+      <a href="#" class="card">
+        <div class="doc-icon di-yellow">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        </div>
+        <div class="doc-title">Видеа</div>
+        <div class="doc-desc">Тренировъчни записи</div>
+        <div class="doc-link c-yellow">Отвори ↗</div>
+      </a>
     </div>
-  </section>
 
-  <!-- TEAM -->
-  <section id="team">
-    <div class="section-head">
-      <div class="pip pip-purple"></div>
-      <div>
-        <h2>Нашият отбор</h2>
-        <small>// 04 — CREW_MANIFEST.json</small>
-      </div>
+    <div class="center">
+      <a href="https://drive.google.com" target="_blank" rel="noopener" class="btn btn-hero btn-xl">📁 Отвори Google Drive →</a>
     </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge badge-pink">Отбор</span>
+      <h2>Хората зад <span class="text-grad">Механо</span></h2>
+      <p>Осем уникални умове. Една обща мисия.</p>
+    </div>
+
     <div class="team-grid">
-      <div class="member"><div class="avatar">AK</div><div class="member-name">Alex K.</div><div class="member-role">Lead Programmer</div></div>
-      <div class="member"><div class="avatar">BM</div><div class="member-name">Bella M.</div><div class="member-role">Robot Builder</div></div>
-      <div class="member"><div class="avatar">CS</div><div class="member-name">Chris S.</div><div class="member-role">Strategy Lead</div></div>
-      <div class="member"><div class="avatar">DD</div><div class="member-name">Dana D.</div><div class="member-role">Innovation</div></div>
-      <div class="member"><div class="avatar">EN</div><div class="member-name">Emil N.</div><div class="member-role">Programmer</div></div>
-      <div class="member"><div class="avatar">FP</div><div class="member-name">Faye P.</div><div class="member-role">Research</div></div>
-      <div class="member"><div class="avatar">GR</div><div class="member-name">George R.</div><div class="member-role">Builder</div></div>
-      <div class="member"><div class="avatar">HL</div><div class="member-name">Hana L.</div><div class="member-role">Documentation</div></div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="section-head">
-      <div class="pip pip-teal"></div>
-      <div>
-        <h2>Свържете се</h2>
-        <small>// 05 — EXTERNAL_LINKS[]</small>
+      <div class="card member">
+        <div class="avatar-wrap"><div class="avatar-glow av-1"></div><div class="avatar av-1">А</div><div class="num-badge">01</div></div>
+        <div class="member-name">Алекс</div><div class="member-role">Капитан / Програмист</div>
+      </div>
+      <div class="card member">
+        <div class="avatar-wrap"><div class="avatar-glow av-2"></div><div class="avatar av-2">М</div><div class="num-badge">02</div></div>
+        <div class="member-name">Мария</div><div class="member-role">Лидер иновации</div>
+      </div>
+      <div class="card member">
+        <div class="avatar-wrap"><div class="avatar-glow av-3"></div><div class="avatar av-3">И</div><div class="num-badge">03</div></div>
+        <div class="member-name">Иван</div><div class="member-role">Главен конструктор</div>
+      </div>
+      <div class="card member">
+        <div class="avatar-wrap"><div class="avatar-glow av-4"></div><div class="avatar av-4">В</div><div class="num-badge">04</div></div>
+        <div class="member-name">Виктория</div><div class="member-role">Програмист</div>
+      </div>
+      <div class="card member">
+        <div class="avatar-wrap"><div class="avatar-glow av-5"></div><div class="avatar av-5">С</div><div class="num-badge">05</div></div>
+        <div class="member-name">Стефан</div><div class="member-role">Робот дизайн</div>
+      </div>
+      <div class="card member">
+        <div class="avatar-wrap"><div class="avatar-glow av-6"></div><div class="avatar av-6">Н</div><div class="num-badge">06</div></div>
+        <div class="member-name">Никол</div><div class="member-role">Презентатор</div>
+      </div>
+      <div class="card member">
+        <div class="avatar-wrap"><div class="avatar-glow av-7"></div><div class="avatar av-7">Г</div><div class="num-badge">07</div></div>
+        <div class="member-name">Георги</div><div class="member-role">Тестване / QA</div>
+      </div>
+      <div class="card member">
+        <div class="avatar-wrap"><div class="avatar-glow av-8"></div><div class="avatar av-8">Е</div><div class="num-badge">08</div></div>
+        <div class="member-name">Елена</div><div class="member-role">Документация</div>
       </div>
     </div>
-    <div class="links-grid">
-      <a href="#" class="link-btn">
-        <div class="link-icon">📺</div>
-        <div><span class="link-label">YouTube</span><span class="link-desc">Нашият канал</span></div>
-        <span class="link-arrow">→</span>
-      </a>
-      <a href="#" class="link-btn">
-        <div class="link-icon">📸</div>
-        <div><span class="link-label">Instagram</span><span class="link-desc">Снимки и новини</span></div>
-        <span class="link-arrow">→</span>
-      </a>
-      <a href="mailto:team@mehano.com" class="link-btn">
-        <div class="link-icon">✉️</div>
-        <div><span class="link-label">Имейл</span><span class="link-desc">team@mehano.com</span></div>
-        <span class="link-arrow">→</span>
-      </a>
+  </div>
+</section>
+
+<!-- PARTNER -->
+<section id="partner" class="section">
+  <div class="container" style="max-width: 1000px;">
+    <div class="partner-card">
+      <div class="partner-blob-1"></div>
+      <div class="partner-blob-2"></div>
+      <div class="partner-inner">
+        <div>
+          <span class="badge badge-yellow">Официален партньор</span>
+          <h2>Заедно правим <span class="text-grad">бъдещето</span></h2>
+          <p>Благодарим на нашия официален партньор за подкрепата, ресурсите и доверието. Вашият принос превръща мечтите ни в реалност.</p>
+          <a href="#" class="btn btn-yellow btn-lg">♥ Стани партньор</a>
+        </div>
+        <div class="partner-logo">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--yellow);"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/></svg>
+          <div class="partner-label">PARTNER</div>
+          <div class="partner-sub">LOGO</div>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-</main>
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="container" style="max-width: 1000px;">
+    <div class="section-header">
+      <span class="badge badge-cyan">Контакт</span>
+      <h2>Свържи се с <span class="text-grad">нас</span></h2>
+      <p>Имаш въпрос, идея или искаш да си партньор? Пиши ни.</p>
+    </div>
 
+    <div class="contact-grid">
+      <a href="mailto:hello@mehano.team" class="card contact-card">
+        <div class="contact-icon-wrap ci-cyan">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <h3>Имейл</h3>
+        <p>hello@mehano.team</p>
+      </a>
+      <div class="card contact-card">
+        <div class="contact-icon-wrap ci-purple">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l1.9 5.8h6.1l-4.9 3.6 1.9 5.8L12 14.6l-4.9 3.6 1.9-5.8L4 8.8h6.1z"/></svg>
+        </div>
+        <h3>Социални мрежи</h3>
+        <div class="socials">
+          <a href="#" class="social" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" class="social" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" class="social" aria-label="GitHub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="card contact-card">
+        <div class="contact-icon-wrap ci-green">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3>Локация</h3>
+        <p>София, България</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-  <p>© 2025 Механо · First Lego League · Изградено с ♥ и Python</p>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo-mark">М</div>
+      <strong>МЕХАНО</strong>
+      <span>· FLL 2025-26</span>
+    </div>
+    <div class="footer-tag">Built with <span class="heart">♥</span> by Mehano team</div>
+  </div>
 </footer>
 
 </body>
