@@ -1,0 +1,844 @@
+<!doctype html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Механо — FLL Отбор 2025-26</title>
+<meta name="description" content="Механо — FLL отбор 2025-26. Иновации, роботика, код и страст към инженерството." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg: #f6f8ff;
+    --bg-2: #eef1fb;
+    --surface: #ffffff;
+    --surface-2: #f3f5fc;
+    --text: #0f1838;
+    --text-muted: #5b6584;
+    --border: #e3e7f3;
+
+    --cyan: #06b6d4;
+    --blue: #3b82f6;
+    --purple: #6366f1;
+    --pink: #0ea5e9;
+    --green: #10b981;
+    --yellow: #f59e0b;
+    --teal: #14b8a6;
+    --navy: #1e40af;
+
+    --grad-hero: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #06b6d4 100%);
+    --grad-text: linear-gradient(135deg, #06b6d4, #3b82f6, #1e40af);
+
+    --shadow-sm: 0 4px 14px -6px rgba(15, 24, 56, 0.08);
+    --shadow-md: 0 12px 32px -12px rgba(15, 24, 56, 0.15);
+    --shadow-lg: 0 24px 60px -20px rgba(59, 130, 246, 0.25);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    background-image:
+      radial-gradient(ellipse at top left, rgba(59, 130, 246, 0.08), transparent 50%),
+      radial-gradient(ellipse at top right, rgba(6, 182, 212, 0.08), transparent 50%);
+    background-attachment: fixed;
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em; line-height: 1.1; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+  .section { padding: 6rem 0; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto; padding: 1rem 1.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo { display: flex; align-items: center; gap: 0.6rem; font-family: 'Space Grotesk'; font-weight: 700; }
+  .logo-mark {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: var(--grad-hero); color: white;
+    display: flex; align-items: center; justify-content: center; font-weight: 700;
+    transition: transform 0.3s;
+  }
+  .logo:hover .logo-mark { transform: scale(1.1); }
+  .nav-links { display: none; gap: 1.75rem; font-size: 0.9rem; font-weight: 500; color: var(--text-muted); }
+  .nav-links a:hover { color: var(--cyan); }
+  @media (min-width: 768px) { .nav-links { display: flex; } }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    font-family: inherit; font-weight: 600; font-size: 0.95rem;
+    padding: 0.7rem 1.4rem; border-radius: 12px; cursor: pointer;
+    border: none; transition: all 0.3s; text-decoration: none;
+  }
+  .btn-lg { padding: 0.95rem 1.8rem; font-size: 1rem; border-radius: 14px; }
+  .btn-xl { padding: 1.15rem 2.3rem; font-size: 1.05rem; border-radius: 16px; }
+  .btn-hero {
+    background: var(--grad-hero); color: white;
+    box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.5);
+    background-size: 200% 200%;
+  }
+  .btn-hero:hover { background-position: 100% 50%; transform: translateY(-2px); box-shadow: 0 15px 40px -10px rgba(139, 92, 246, 0.6); }
+  .btn-cyan { background: rgba(6, 182, 212, 0.1); color: var(--cyan); border: 1px solid rgba(6, 182, 212, 0.3); }
+  .btn-cyan:hover { background: var(--cyan); color: white; }
+  .btn-purple { background: rgba(139, 92, 246, 0.1); color: var(--purple); border: 1px solid rgba(139, 92, 246, 0.3); }
+  .btn-purple:hover { background: var(--purple); color: white; }
+  .btn-yellow { background: var(--yellow); color: white; box-shadow: 0 10px 25px -8px rgba(245, 158, 11, 0.5); }
+  .btn-yellow:hover { transform: translateY(-2px); }
+  .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .btn-outline:hover { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 20px rgba(6, 182, 212, 0.2); }
+  .btn-run {
+    background: var(--green); color: white; font-weight: 600;
+    animation: pulse-glow 2s infinite;
+  }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+    50% { box-shadow: 0 0 0 14px rgba(16, 185, 129, 0); }
+  }
+
+  /* BADGE */
+  .badge {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.35rem 0.85rem; border-radius: 999px;
+    font-size: 0.78rem; font-weight: 600; margin-bottom: 1rem;
+    border: 1px solid;
+  }
+  .badge-cyan { background: rgba(6, 182, 212, 0.1); color: var(--cyan); border-color: rgba(6, 182, 212, 0.3); }
+  .badge-purple { background: rgba(139, 92, 246, 0.1); color: var(--purple); border-color: rgba(139, 92, 246, 0.3); }
+  .badge-pink { background: rgba(236, 72, 153, 0.1); color: var(--pink); border-color: rgba(236, 72, 153, 0.3); }
+  .badge-green { background: rgba(16, 185, 129, 0.1); color: var(--green); border-color: rgba(16, 185, 129, 0.3); }
+  .badge-yellow { background: rgba(245, 158, 11, 0.12); color: var(--yellow); border-color: rgba(245, 158, 11, 0.3); }
+  .badge-glow { background: rgba(6, 182, 212, 0.1); color: var(--cyan); border-color: rgba(6, 182, 212, 0.3); box-shadow: 0 0 25px rgba(6, 182, 212, 0.25); }
+
+  /* CARD */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 1.75rem;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.4s;
+  }
+  .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+
+  /* TEXT GRADIENTS */
+  .text-grad {
+    background: var(--grad-text);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; position: relative; padding: 8rem 1.5rem 4rem;
+    background-image:
+      linear-gradient(rgba(59, 130, 246, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59, 130, 246, 0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  .blob {
+    position: absolute; border-radius: 50%; filter: blur(100px);
+    pointer-events: none; z-index: 0;
+  }
+  .blob-1 { width: 380px; height: 380px; top: 15%; left: -100px; background: rgba(139, 92, 246, 0.25); animation: float 6s ease-in-out infinite; }
+  .blob-2 { width: 380px; height: 380px; bottom: 15%; right: -100px; background: rgba(6, 182, 212, 0.25); animation: float 6s ease-in-out infinite 2s; }
+  .blob-3 { width: 500px; height: 500px; top: 30%; left: 50%; transform: translateX(-50%); background: rgba(236, 72, 153, 0.12); }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+  .hero-content { position: relative; z-index: 1; max-width: 900px; }
+  .hero h1 {
+    font-size: clamp(4.5rem, 14vw, 11rem);
+    font-weight: 700; margin: 1.5rem 0 1.5rem;
+    background: var(--grad-hero);
+    background-size: 200% 200%;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: gradient-shift 8s ease infinite;
+  }
+  @keyframes gradient-shift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+  .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 2.2rem; }
+  .hero-buttons { display: flex; flex-wrap: wrap; gap: 0.85rem; justify-content: center; }
+
+  .scroll-hint { margin-top: 4rem; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: rgba(91, 101, 132, 0.6); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em; }
+  .scroll-line { width: 1px; height: 48px; background: linear-gradient(to bottom, var(--cyan), transparent); }
+
+  /* SECTION HEADER */
+  .section-header { text-align: center; max-width: 700px; margin: 0 auto 4rem; }
+  .section-header h2 { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 700; margin-bottom: 1rem; }
+  .section-header p { color: var(--text-muted); font-size: 1.1rem; }
+
+  /* STATS */
+  .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 4rem; }
+  @media (min-width: 768px) { .stats { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; } }
+  .stat {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
+    padding: 1.5rem 1rem; text-align: center; transition: all 0.3s;
+    box-shadow: var(--shadow-sm);
+  }
+  .stat:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .stat-icon { width: 28px; height: 28px; margin: 0 auto 0.75rem; }
+  .stat-value { font-family: 'Space Grotesk'; font-weight: 700; font-size: 2.5rem; line-height: 1; margin-bottom: 0.4rem; }
+  .stat-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+
+  /* ABOUT GRID */
+  .grid-3 { display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
+  @media (min-width: 768px) { .grid-3 { grid-template-columns: repeat(3, 1fr); } }
+  .feature-icon {
+    width: 56px; height: 56px; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.25rem; color: white;
+    transition: transform 0.4s;
+  }
+  .card:hover .feature-icon { transform: scale(1.1) rotate(6deg); }
+  .icon-cyan { background: linear-gradient(135deg, var(--cyan), var(--blue)); }
+  .icon-purple { background: linear-gradient(135deg, var(--purple), var(--pink)); }
+  .icon-green { background: linear-gradient(135deg, var(--green), var(--cyan)); }
+  .feature-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.6rem; }
+  .feature-desc { color: var(--text-muted); }
+
+  /* CODE */
+  .code-block {
+    background: #1e1b4b; color: #e0e7ff;
+    border-radius: 20px; overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+  }
+  .code-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.85rem 1.25rem; background: rgba(0, 0, 0, 0.25);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-family: 'JetBrains Mono'; font-size: 0.75rem;
+  }
+  .dots { display: flex; gap: 0.45rem; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot-r { background: #f87171; } .dot-y { background: #fbbf24; } .dot-g { background: #34d399; }
+  .file-name { color: rgba(224, 231, 255, 0.6); }
+  .lang-tag { color: #67e8f9; font-weight: 600; }
+
+  pre.code-body {
+    padding: 1.5rem; overflow-x: auto;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.7;
+  }
+  .code-line { display: flex; gap: 1rem; padding: 0 0.5rem; }
+  .code-line:hover { background: rgba(255, 255, 255, 0.04); }
+  .ln { color: rgba(224, 231, 255, 0.3); width: 1.5rem; text-align: right; flex-shrink: 0; user-select: none; }
+  .tk-comment { color: rgba(224, 231, 255, 0.45); font-style: italic; }
+  .tk-string { color: #6ee7b7; }
+  .tk-keyword { color: #f9a8d4; font-weight: 600; }
+  .tk-fn { color: #67e8f9; }
+  .tk-class { color: #fde68a; }
+  .tk-num { color: #c4b5fd; }
+  .cursor { display: inline-block; width: 8px; height: 14px; background: var(--green); animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 2.5rem; }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+  .code-footer {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    padding: 1.25rem 1.5rem; gap: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.15);
+  }
+
+  /* PROJECT BLOCK */
+  .project-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+  .project-header {
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 0.85rem 1.25rem;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(59, 130, 246, 0.08));
+    border-bottom: 1px solid var(--border);
+  }
+  .project-body { padding: 2rem 2rem 1.5rem; }
+  .project-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.5rem; color: var(--purple); margin-bottom: 0.75rem;
+  }
+  .project-desc {
+    font-size: 1.05rem; color: var(--text); line-height: 1.7; margin-bottom: 1.5rem;
+  }
+  .project-section { margin-bottom: 1.25rem; padding-left: 1rem; border-left: 3px solid var(--cyan); }
+  .project-section h4 {
+    font-family: 'JetBrains Mono', monospace; font-size: 1rem;
+    color: var(--cyan); margin-bottom: 0.4rem;
+  }
+  .project-section p { color: var(--text-muted); font-size: 0.95rem; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+  .proj-tag {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+    padding: 0.35rem 0.75rem; border-radius: 999px;
+    background: rgba(6, 182, 212, 0.1); color: var(--cyan);
+    border: 1px solid rgba(6, 182, 212, 0.25);
+  }
+  .project-block .code-footer {
+    background: var(--surface-2);
+    border-top: 1px solid var(--border);
+  }
+  .project-block .branch { color: var(--text-muted); }
+  .branch { display: flex; align-items: center; gap: 0.5rem; color: rgba(224, 231, 255, 0.6); font-family: 'JetBrains Mono'; font-size: 0.75rem; }
+  .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  /* DOCS */
+  .grid-4 { display: grid; gap: 1.25rem; grid-template-columns: 1fr; margin-bottom: 3rem; }
+  @media (min-width: 640px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .grid-4 { grid-template-columns: repeat(4, 1fr); } }
+  .doc-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1rem; transition: transform 0.3s;
+  }
+  .card:hover .doc-icon { transform: scale(1.1); }
+  .di-cyan { background: rgba(6, 182, 212, 0.12); color: var(--cyan); border: 1px solid rgba(6, 182, 212, 0.3); }
+  .di-purple { background: rgba(139, 92, 246, 0.12); color: var(--purple); border: 1px solid rgba(139, 92, 246, 0.3); }
+  .di-pink { background: rgba(236, 72, 153, 0.12); color: var(--pink); border: 1px solid rgba(236, 72, 153, 0.3); }
+  .di-yellow { background: rgba(245, 158, 11, 0.12); color: var(--yellow); border: 1px solid rgba(245, 158, 11, 0.3); }
+  .doc-title { font-family: 'Space Grotesk'; font-weight: 700; font-size: 1.1rem; margin-bottom: 0.25rem; }
+  .doc-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; }
+  .doc-link { font-size: 0.85rem; font-weight: 600; opacity: 0; transition: opacity 0.3s; display: flex; align-items: center; gap: 0.3rem; }
+  .card:hover .doc-link { opacity: 1; }
+  .center { text-align: center; }
+
+  /* TEAM */
+  .team-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: 640px) { .team-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1024px) { .team-grid { grid-template-columns: repeat(4, 1fr); } }
+  .member { text-align: center; padding: 1.4rem 1rem; }
+  .avatar-wrap { position: relative; width: 80px; height: 80px; margin: 0 auto 1rem; }
+  .avatar-glow { position: absolute; inset: 0; border-radius: 50%; filter: blur(14px); opacity: 0.5; transition: opacity 0.3s; }
+  .member:hover .avatar-glow { opacity: 0.85; }
+  .avatar {
+    position: relative; width: 100%; height: 100%;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Grotesk'; font-weight: 700; font-size: 1.75rem; color: white;
+  }
+  .num-badge {
+    position: absolute; bottom: -2px; right: -2px;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: white; border: 2px solid var(--green);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono'; font-size: 0.6rem; color: var(--green); font-weight: 600;
+  }
+  .member-name { font-family: 'Space Grotesk'; font-weight: 600; font-size: 1.05rem; }
+  .member-role { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-top: 0.3rem; }
+
+  /* PARTNER */
+  .partner-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 24px;
+    padding: 3rem 2rem; position: relative; overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+  .partner-blob-1 { position: absolute; top: 0; right: 0; width: 220px; height: 220px; background: rgba(245, 158, 11, 0.2); border-radius: 50%; filter: blur(80px); }
+  .partner-blob-2 { position: absolute; bottom: 0; left: 0; width: 220px; height: 220px; background: rgba(236, 72, 153, 0.2); border-radius: 50%; filter: blur(80px); }
+  .partner-inner { position: relative; display: grid; gap: 2rem; align-items: center; }
+  @media (min-width: 768px) { .partner-inner { grid-template-columns: 1fr auto; } }
+  .partner-card h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 1rem; }
+  .partner-card p { color: var(--text-muted); margin-bottom: 1.5rem; max-width: 520px; }
+  .partner-logo {
+    width: 180px; height: 180px; border-radius: 24px;
+    background: var(--surface); border: 2px solid rgba(245, 158, 11, 0.3);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem;
+    transition: transform 0.3s;
+    margin: 0 auto;
+  }
+  .partner-logo:hover { transform: scale(1.05); }
+  .partner-label { font-family: 'Space Grotesk'; font-weight: 700; font-size: 1.1rem; }
+  .partner-sub { font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--text-muted); }
+
+  /* CONTACT */
+  .contact-grid { display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
+  @media (min-width: 768px) { .contact-grid { grid-template-columns: repeat(3, 1fr); } }
+  .ci-pink { background: rgba(236, 72, 153, 0.12); color: var(--pink); border: 1px solid rgba(236, 72, 153, 0.3); }
+
+  /* PROJECT PLACE */
+  .project-place-card {
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    padding: 2.5rem 1.75rem; gap: 1rem;
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.06), rgba(139, 92, 246, 0.06));
+    border: 1px solid rgba(236, 72, 153, 0.2);
+  }
+  @media (min-width: 768px) {
+    .project-place-card { flex-direction: row; text-align: left; padding: 2.5rem; gap: 2rem; }
+  }
+  .pp-icon-wrap {
+    width: 80px; height: 80px; border-radius: 20px; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    color: white; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 10px 30px -10px rgba(236, 72, 153, 0.5);
+  }
+  .pp-body h3 { font-family: 'Space Grotesk'; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .pp-address { font-size: 0.95rem; color: var(--purple); font-weight: 500; margin-bottom: 0.6rem; }
+  .pp-desc { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; }
+  .contact-card { text-align: center; padding: 1.75rem 1.25rem; }
+  .contact-icon-wrap {
+    width: 56px; height: 56px; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1rem;
+  }
+  .ci-cyan { background: rgba(6, 182, 212, 0.12); color: var(--cyan); border: 1px solid rgba(6, 182, 212, 0.3); }
+  .ci-purple { background: rgba(139, 92, 246, 0.12); color: var(--purple); border: 1px solid rgba(139, 92, 246, 0.3); }
+  .ci-green { background: rgba(16, 185, 129, 0.12); color: var(--green); border: 1px solid rgba(16, 185, 129, 0.3); }
+  .contact-card h3 { font-family: 'Space Grotesk'; font-weight: 600; margin-bottom: 0.4rem; }
+  .contact-card p { font-size: 0.9rem; color: var(--text-muted); }
+  .socials { display: flex; gap: 0.5rem; justify-content: center; margin-top: 0.6rem; }
+  .social {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: var(--surface-2); color: var(--text-muted);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s;
+  }
+  .social:hover { background: var(--purple); color: white; transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border); margin-top: 3rem;
+  }
+  .footer-inner {
+    max-width: 1200px; margin: 0 auto; padding: 2.5rem 1.5rem;
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;
+    color: var(--text-muted); font-size: 0.88rem;
+  }
+  .footer-brand { display: flex; align-items: center; gap: 0.5rem; }
+  .footer-brand .logo-mark { width: 28px; height: 28px; border-radius: 8px; font-size: 0.85rem; }
+  .footer-brand strong { color: var(--text); font-family: 'Space Grotesk'; }
+  .footer-tag { font-family: 'JetBrains Mono'; font-size: 0.75rem; }
+  .heart { color: var(--pink); }
+
+  /* COLOR HELPERS for stats */
+  .c-cyan { color: var(--cyan); }
+  .c-yellow { color: var(--yellow); }
+  .c-pink { color: var(--pink); }
+  .c-green { color: var(--green); }
+
+  /* Avatar gradients */
+  .av-1 { background: linear-gradient(135deg, var(--cyan), var(--blue)); }
+  .av-1g { background: linear-gradient(135deg, var(--cyan), var(--blue)); }
+  .av-2 { background: linear-gradient(135deg, var(--purple), var(--pink)); }
+  .av-3 { background: linear-gradient(135deg, var(--green), var(--cyan)); }
+  .av-4 { background: linear-gradient(135deg, var(--yellow), var(--pink)); }
+  .av-5 { background: linear-gradient(135deg, var(--blue), var(--purple)); }
+  .av-6 { background: linear-gradient(135deg, var(--pink), var(--purple)); }
+  .av-7 { background: linear-gradient(135deg, var(--green), var(--yellow)); }
+  .av-8 { background: linear-gradient(135deg, var(--cyan), var(--purple)); }
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#hero" class="logo">
+      <div class="logo-mark">М</div>
+      <span>МЕХАНО</span>
+    </a>
+    <div class="nav-links">
+      <a href="#about">За нас</a>
+      <a href="#code">Код</a>
+      <a href="#project">Проект</a>
+      <a href="#docs">Документи</a>
+      <a href="#team">Отбор</a>
+      <a href="#project-place">Място</a>
+      <a href="#contact">Контакт</a>
+    </div>
+    <a href="#contact" class="btn btn-cyan" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Свържи се</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <div class="hero-content">
+    <span class="badge badge-glow">✨ FLL Отбор 2025-26</span>
+    <h1>МЕХАНО</h1>
+    <p>Млад FIRST LEGO League отбор от инженери, мислители и мечтатели. Изграждаме роботи, решаваме проблеми и оставяме следа.</p>
+    <div class="hero-buttons">
+      <a href="#docs" class="btn btn-hero btn-lg">📄 Документи</a>
+      <a href="#code" class="btn btn-purple btn-lg">💻 Код</a>
+      <a href="#about" class="btn btn-outline btn-lg">Научи повече →</a>
+    </div>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge badge-cyan">За нас</span>
+      <h2>Кои сме <span class="text-grad">ние</span></h2>
+      <p>Отбор от осем младежи, обединени от страст към инженерството и иновациите.</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <svg class="stat-icon c-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div class="stat-value c-cyan">8</div>
+        <div class="stat-label">Члена</div>
+      </div>
+      <div class="stat">
+        <svg class="stat-icon c-yellow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+        <div class="stat-value c-yellow">2</div>
+        <div class="stat-label">Сезона</div>
+      </div>
+      <div class="stat">
+        <svg class="stat-icon c-pink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <div class="stat-value c-pink">100%</div>
+        <div class="stat-label">Отдаденост</div>
+      </div>
+      <div class="stat">
+        <svg class="stat-icon c-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.178 8c5.096 0 5.096 8 0 8-5.095 0-7.133-8-12.739-8-4.585 0-4.585 8 0 8 5.606 0 7.644-8 12.739-8z"/></svg>
+        <div class="stat-value c-green">∞</div>
+        <div class="stat-label">Идеи</div>
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <div class="feature-icon icon-cyan">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="2" x2="9" y2="4"/><line x1="15" y1="2" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="22"/><line x1="15" y1="20" x2="15" y2="22"/><line x1="20" y1="9" x2="22" y2="9"/><line x1="20" y1="14" x2="22" y2="14"/><line x1="2" y1="9" x2="4" y2="9"/><line x1="2" y1="14" x2="4" y2="14"/></svg>
+        </div>
+        <h3 class="feature-title">Дизайн на робот</h3>
+        <p class="feature-desc">Проектираме, конструираме и програмираме LEGO® роботи, оптимизирани за прецизност и скорост.</p>
+      </div>
+      <div class="card">
+        <div class="feature-icon icon-purple">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>
+        </div>
+        <h3 class="feature-title">Иновационен проект</h3>
+        <p class="feature-desc">Решаваме реални проблеми с креативни инженерни идеи, вдъхновени от темата на сезона.</p>
+      </div>
+      <div class="card">
+        <div class="feature-icon icon-green">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 class="feature-title">Основни ценности</h3>
+        <p class="feature-desc">Уважение, откритост, въздействие, приобщаване, работа в екип и забавление — нашата ДНК.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CODE -->
+<section id="code" class="section">
+  <div class="container" style="max-width: 900px;">
+    <div class="section-header">
+      <span class="badge badge-green">Код</span>
+      <h2>Нашият <span class="text-grad">код</span> на победата</h2>
+      <p>Чист Python за SPIKE Prime. Open-source, модулен, оптимизиран.</p>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header">
+        <div class="dots"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div>
+        <span class="file-name">mehano_bot.py</span>
+        <span class="lang-tag">PYTHON 3</span>
+      </div>
+      <pre class="code-body"><code><span class="code-line"><span class="ln">1</span><span><span class="tk-comment"># mehano_bot.py — autonomous mission runner</span></span></span>
+<span class="code-line"><span class="ln">2</span><span><span class="tk-keyword">from</span> spike <span class="tk-keyword">import</span> <span class="tk-class">PrimeHub</span>, <span class="tk-class">Motor</span>, <span class="tk-class">ColorSensor</span></span></span>
+<span class="code-line"><span class="ln">3</span><span><span class="tk-keyword">from</span> spike.control <span class="tk-keyword">import</span> wait_for_seconds</span></span>
+<span class="code-line"><span class="ln">4</span><span> </span></span>
+<span class="code-line"><span class="ln">5</span><span>hub = <span class="tk-class">PrimeHub</span>()</span></span>
+<span class="code-line"><span class="ln">6</span><span>left = <span class="tk-class">Motor</span>(<span class="tk-string">'A'</span>)</span></span>
+<span class="code-line"><span class="ln">7</span><span>right = <span class="tk-class">Motor</span>(<span class="tk-string">'B'</span>)</span></span>
+<span class="code-line"><span class="ln">8</span><span>arm = <span class="tk-class">Motor</span>(<span class="tk-string">'C'</span>)</span></span>
+<span class="code-line"><span class="ln">9</span><span>sensor = <span class="tk-class">ColorSensor</span>(<span class="tk-string">'E'</span>)</span></span>
+<span class="code-line"><span class="ln">10</span><span> </span></span>
+<span class="code-line"><span class="ln">11</span><span><span class="tk-keyword">def</span> <span class="tk-fn">run_mission_one</span>():</span></span>
+<span class="code-line"><span class="ln">12</span><span>    <span class="tk-comment">"""Първа мисия: енергиен модул"""</span></span></span>
+<span class="code-line"><span class="ln">13</span><span>    hub.light_matrix.<span class="tk-fn">show_image</span>(<span class="tk-string">'HEART'</span>)</span></span>
+<span class="code-line"><span class="ln">14</span><span>    left.<span class="tk-fn">start_at_power</span>(<span class="tk-num">50</span>)</span></span>
+<span class="code-line"><span class="ln">15</span><span>    right.<span class="tk-fn">start_at_power</span>(<span class="tk-num">50</span>)</span></span>
+<span class="code-line"><span class="ln">16</span><span> </span></span>
+<span class="code-line"><span class="ln">17</span><span>    <span class="tk-keyword">while</span> sensor.<span class="tk-fn">get_color</span>() != <span class="tk-string">'red'</span>:</span></span>
+<span class="code-line"><span class="ln">18</span><span>        <span class="tk-fn">wait_for_seconds</span>(<span class="tk-num">0.05</span>)</span></span>
+<span class="code-line"><span class="ln">19</span><span> </span></span>
+<span class="code-line"><span class="ln">20</span><span>    left.<span class="tk-fn">stop</span>()</span></span>
+<span class="code-line"><span class="ln">21</span><span>    right.<span class="tk-fn">stop</span>()</span></span>
+<span class="code-line"><span class="ln">22</span><span>    arm.<span class="tk-fn">run_for_degrees</span>(<span class="tk-num">360</span>, speed=<span class="tk-num">80</span>)</span></span>
+<span class="code-line"><span class="ln">23</span><span>    <span class="tk-fn">print</span>(<span class="tk-string">"✅ Mission complete — points secured!"</span>)</span></span>
+<span class="code-line"><span class="ln">24</span><span> </span></span>
+<span class="code-line"><span class="ln">25</span><span><span class="tk-keyword">if</span> __name__ == <span class="tk-string">'__main__'</span>:</span></span>
+<span class="code-line"><span class="ln">26</span><span>    <span class="tk-fn">run_mission_one</span>()<span class="cursor"></span></span></span></code></pre>
+      <div class="code-footer">
+        <div class="branch"><span class="live-dot"></span>main · 47 commits · MIT</div>
+        <a href="https://github.com" target="_blank" rel="noopener" class="btn btn-run btn-lg">▶ Run on GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT -->
+<section id="project" class="section">
+  <div class="container" style="max-width: 900px;">
+    <div class="section-header">
+      <span class="badge badge-purple">Проект</span>
+      <h2>Нашият <span class="text-grad">иновационен</span> проект</h2>
+      <p>Решение, което прави света около нас по-добро място.</p>
+    </div>
+
+    <div class="project-block">
+      <div class="project-header">
+        <div class="dots"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div>
+        <span class="file-name">project_brief.md</span>
+        <span class="lang-tag">MARKDOWN</span>
+      </div>
+      <div class="project-body">
+        <h3 class="project-title"># Заглавие на проекта</h3>
+        <p class="project-desc">
+          Тук опишете накратко вашия иновационен проект — каква е идентифицираната
+          проблематика, кого засяга и как вашето решение я адресира.
+        </p>
+
+        <div class="project-section">
+          <h4>## Проблем</h4>
+          <p>Опишете проблема, който сте идентифицирали в общността.</p>
+        </div>
+
+        <div class="project-section">
+          <h4>## Решение</h4>
+          <p>Опишете предложеното от вас иновативно решение и как работи.</p>
+        </div>
+
+        <div class="project-section">
+          <h4>## Въздействие</h4>
+          <p>Кого помага вашият проект и как ще промени техния живот.</p>
+        </div>
+
+        <div class="project-tags">
+          <span class="proj-tag">#иновация</span>
+          <span class="proj-tag">#FLL</span>
+          <span class="proj-tag">#общност</span>
+          <span class="proj-tag">#устойчивост</span>
+        </div>
+      </div>
+      <div class="code-footer">
+        <div class="branch"><span class="live-dot"></span>v1.0 · в разработка</div>
+        <a href="#docs" class="btn btn-purple btn-lg">📄 Виж документацията</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCS -->
+<section id="docs" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge badge-purple">Документи</span>
+      <h2>Архив на <span class="text-grad">отбора</span></h2>
+      <p>Цялата ни работа на едно място — открита и достъпна.</p>
+    </div>
+
+    <div class="grid-4">
+      <a href="#" class="card">
+        <div class="doc-icon di-cyan">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div class="doc-title">Правила</div>
+        <div class="doc-desc">Официален rulebook</div>
+        <div class="doc-link c-cyan">Отвори ↗</div>
+      </a>
+      <a href="#" class="card">
+        <div class="doc-icon di-purple">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <div class="doc-title">Стратегия .docx</div>
+        <div class="doc-desc">Match plan</div>
+        <div class="doc-link" style="color: var(--purple);">Отвори ↗</div>
+      </a>
+      <a href="#" class="card">
+        <div class="doc-icon di-pink">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+        </div>
+        <div class="doc-title">Стратегия — карта</div>
+        <div class="doc-desc">Визуален план</div>
+        <div class="doc-link c-pink">Отвори ↗</div>
+      </a>
+      <a href="#" class="card">
+        <div class="doc-icon di-yellow">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        </div>
+        <div class="doc-title">Видеа</div>
+        <div class="doc-desc">Тренировъчни записи</div>
+        <div class="doc-link c-yellow">Отвори ↗</div>
+      </a>
+    </div>
+
+    <div class="center">
+      <a href="https://drive.google.com" target="_blank" rel="noopener" class="btn btn-hero btn-xl">📁 Отвори Google Drive →</a>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge badge-pink">Отбор</span>
+      <h2>Хората зад <span class="text-grad">Механо</span></h2>
+      <p>Осем уникални умове. Една обща мисия.</p>
+    </div>
+
+    <div class="team-grid">
+      <div class="card member">
+        <div class="avatar-wrap"><div class="avatar-glow av-1"></div><div class="avatar av-1">А</div><div class="num-badge">01</div></div>
+        <div class="member-name">Алекс</div><div class="member-role">Капитан / Програмист</div>
+      </div>
+      <div class="card member">
+        <div class="avatar-wrap"><div class="avatar-glow av-2"></div><div class="avatar av-2">М</div><div class="num-badge">02</div></div>
+        <div class="member-name">Мария</div><div class="member-role">Лидер иновации</div>
+      </div>
+      <div class="card member">
+        <div class="avatar-wrap"><div class="avatar-glow av-3"></div><div class="avatar av-3">И</div><div class="num-badge">03</div></div>
+        <div class="member-name">Иван</div><div class="member-role">Главен конструктор</div>
+      </div>
+      <div class="card member">
+        <div class="avatar-wrap"><div class="avatar-glow av-4"></div><div class="avatar av-4">В</div><div class="num-badge">04</div></div>
+        <div class="member-name">Виктория</div><div class="member-role">Програмист</div>
+      </div>
+      <div class="card member">
+        <div class="avatar-wrap"><div class="avatar-glow av-5"></div><div class="avatar av-5">С</div><div class="num-badge">05</div></div>
+        <div class="member-name">Стефан</div><div class="member-role">Робот дизайн</div>
+      </div>
+      <div class="card member">
+        <div class="avatar-wrap"><div class="avatar-glow av-6"></div><div class="avatar av-6">Н</div><div class="num-badge">06</div></div>
+        <div class="member-name">Никол</div><div class="member-role">Презентатор</div>
+      </div>
+      <div class="card member">
+        <div class="avatar-wrap"><div class="avatar-glow av-7"></div><div class="avatar av-7">Г</div><div class="num-badge">07</div></div>
+        <div class="member-name">Георги</div><div class="member-role">Тестване / QA</div>
+      </div>
+      <div class="card member">
+        <div class="avatar-wrap"><div class="avatar-glow av-8"></div><div class="avatar av-8">Е</div><div class="num-badge">08</div></div>
+        <div class="member-name">Елена</div><div class="member-role">Документация</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNER -->
+<section id="partner" class="section">
+  <div class="container" style="max-width: 1000px;">
+    <div class="partner-card">
+      <div class="partner-blob-1"></div>
+      <div class="partner-blob-2"></div>
+      <div class="partner-inner">
+        <div>
+          <span class="badge badge-yellow">Официален партньор</span>
+          <h2>Заедно правим <span class="text-grad">бъдещето</span></h2>
+          <p>Благодарим на нашия официален партньор за подкрепата, ресурсите и доверието. Вашият принос превръща мечтите ни в реалност.</p>
+          <a href="#" class="btn btn-yellow btn-lg">♥ Стани партньор</a>
+        </div>
+        <div class="partner-logo">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--yellow);"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/></svg>
+          <div class="partner-label">PARTNER</div>
+          <div class="partner-sub">LOGO</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="container" style="max-width: 1000px;">
+    <div class="section-header">
+      <span class="badge badge-cyan">Контакт</span>
+      <h2>Свържи се с <span class="text-grad">нас</span></h2>
+      <p>Имаш въпрос, идея или искаш да си партньор? Пиши ни.</p>
+    </div>
+
+    <div class="contact-grid">
+      <a href="mailto:hello@mehano.team" class="card contact-card">
+        <div class="contact-icon-wrap ci-cyan">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <h3>Имейл</h3>
+        <p>hello@mehano.team</p>
+      </a>
+      <div class="card contact-card">
+        <div class="contact-icon-wrap ci-purple">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l1.9 5.8h6.1l-4.9 3.6 1.9 5.8L12 14.6l-4.9 3.6 1.9-5.8L4 8.8h6.1z"/></svg>
+        </div>
+        <h3>Социални мрежи</h3>
+        <div class="socials">
+          <a href="https://www.instagram.com/mehano.fll" target="_blank" rel="noopener" class="social" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://www.facebook.com/mehano.fll" target="_blank" rel="noopener" class="social" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+      <a href="https://maps.google.com/?q=София+България" target="_blank" rel="noopener" class="card contact-card">
+        <div class="contact-icon-wrap ci-green">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3>Локация</h3>
+        <p>София, България</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT PLACE -->
+<section id="project-place" class="section">
+  <div class="container" style="max-width: 1100px;">
+    <div class="section-header">
+      <span class="badge badge-pink">Място на проекта</span>
+      <h2>Къде се случва <span class="text-grad">магията</span></h2>
+      <p>Тук се събираме, проектираме и програмираме нашия робот.</p>
+    </div>
+
+    <div class="card project-place-card">
+      <div class="pp-icon-wrap">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M9 13h.01M9 17h.01M15 9h.01M15 13h.01M15 17h.01"/></svg>
+      </div>
+      <div class="pp-body">
+        <h3>СУ "Никола Йонков Вапцаров"</h3>
+        <p class="pp-address">ул. Примерна 12, София, България</p>
+        <p class="pp-desc">Нашата база — училищната STEM лаборатория, където се ражда всеки прототип, всяка линия код и всяка нова идея.</p>
+        <a href="https://maps.google.com/?q=СУ+Никола+Йонков+Вапцаров+София" target="_blank" rel="noopener" class="btn btn-cyan btn-lg" style="margin-top: 18px;">📍 Виж на картата</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo-mark">М</div>
+      <strong>МЕХАНО</strong>
+      <span>· FLL 2025-26</span>
+    </div>
+    <div class="footer-tag">Built with <span class="heart">♥</span> by Mehano team</div>
+  </div>
+</footer>
+
+</body>
+</html>
