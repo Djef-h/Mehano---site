@@ -22,15 +22,13 @@
 
     --cyan: #06b6d4;
     --blue: #3b82f6;
-    --purple: #6366f1;
-    --pink: #0ea5e9;
+    --purple: #8b5cf6;
+    --pink: #ec4899;
     --green: #10b981;
     --yellow: #f59e0b;
-    --teal: #14b8a6;
-    --navy: #1e40af;
 
-    --grad-hero: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #06b6d4 100%);
-    --grad-text: linear-gradient(135deg, #06b6d4, #3b82f6, #1e40af);
+    --grad-hero: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+    --grad-text: linear-gradient(135deg, #06b6d4, #8b5cf6, #ec4899);
 
     --shadow-sm: 0 4px 14px -6px rgba(15, 24, 56, 0.08);
     --shadow-md: 0 12px 32px -12px rgba(15, 24, 56, 0.15);
@@ -43,7 +41,7 @@
     font-family: 'Inter', system-ui, sans-serif;
     background: var(--bg);
     background-image:
-      radial-gradient(ellipse at top left, rgba(59, 130, 246, 0.08), transparent 50%),
+      radial-gradient(ellipse at top left, rgba(139, 92, 246, 0.08), transparent 50%),
       radial-gradient(ellipse at top right, rgba(6, 182, 212, 0.08), transparent 50%);
     background-attachment: fixed;
     color: var(--text);
@@ -252,47 +250,6 @@
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     background: rgba(0, 0, 0, 0.15);
   }
-
-  /* PROJECT BLOCK */
-  .project-block {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-  }
-  .project-header {
-    display: flex; align-items: center; gap: 0.75rem;
-    padding: 0.85rem 1.25rem;
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(59, 130, 246, 0.08));
-    border-bottom: 1px solid var(--border);
-  }
-  .project-body { padding: 2rem 2rem 1.5rem; }
-  .project-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 1.5rem; color: var(--purple); margin-bottom: 0.75rem;
-  }
-  .project-desc {
-    font-size: 1.05rem; color: var(--text); line-height: 1.7; margin-bottom: 1.5rem;
-  }
-  .project-section { margin-bottom: 1.25rem; padding-left: 1rem; border-left: 3px solid var(--cyan); }
-  .project-section h4 {
-    font-family: 'JetBrains Mono', monospace; font-size: 1rem;
-    color: var(--cyan); margin-bottom: 0.4rem;
-  }
-  .project-section p { color: var(--text-muted); font-size: 0.95rem; }
-  .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
-  .proj-tag {
-    font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
-    padding: 0.35rem 0.75rem; border-radius: 999px;
-    background: rgba(6, 182, 212, 0.1); color: var(--cyan);
-    border: 1px solid rgba(6, 182, 212, 0.25);
-  }
-  .project-block .code-footer {
-    background: var(--surface-2);
-    border-top: 1px solid var(--border);
-  }
-  .project-block .branch { color: var(--text-muted); }
   .branch { display: flex; align-items: center; gap: 0.5rem; color: rgba(224, 231, 255, 0.6); font-family: 'JetBrains Mono'; font-size: 0.75rem; }
   .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse 1.5s infinite; }
   @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
@@ -366,27 +323,6 @@
   /* CONTACT */
   .contact-grid { display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
   @media (min-width: 768px) { .contact-grid { grid-template-columns: repeat(3, 1fr); } }
-  .ci-pink { background: rgba(236, 72, 153, 0.12); color: var(--pink); border: 1px solid rgba(236, 72, 153, 0.3); }
-
-  /* PROJECT PLACE */
-  .project-place-card {
-    display: flex; flex-direction: column; align-items: center; text-align: center;
-    padding: 2.5rem 1.75rem; gap: 1rem;
-    background: linear-gradient(135deg, rgba(236, 72, 153, 0.06), rgba(139, 92, 246, 0.06));
-    border: 1px solid rgba(236, 72, 153, 0.2);
-  }
-  @media (min-width: 768px) {
-    .project-place-card { flex-direction: row; text-align: left; padding: 2.5rem; gap: 2rem; }
-  }
-  .pp-icon-wrap {
-    width: 80px; height: 80px; border-radius: 20px; flex-shrink: 0;
-    background: linear-gradient(135deg, var(--pink), var(--purple));
-    color: white; display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 10px 30px -10px rgba(236, 72, 153, 0.5);
-  }
-  .pp-body h3 { font-family: 'Space Grotesk'; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.4rem; }
-  .pp-address { font-size: 0.95rem; color: var(--purple); font-weight: 500; margin-bottom: 0.6rem; }
-  .pp-desc { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; }
   .contact-card { text-align: center; padding: 1.75rem 1.25rem; }
   .contact-icon-wrap {
     width: 56px; height: 56px; border-radius: 16px;
@@ -453,10 +389,8 @@
     <div class="nav-links">
       <a href="#about">За нас</a>
       <a href="#code">Код</a>
-      <a href="#project">Проект</a>
       <a href="#docs">Документи</a>
       <a href="#team">Отбор</a>
-      <a href="#project-place">Място</a>
       <a href="#contact">Контакт</a>
     </div>
     <a href="#contact" class="btn btn-cyan" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Свържи се</a>
@@ -587,58 +521,6 @@
       <div class="code-footer">
         <div class="branch"><span class="live-dot"></span>main · 47 commits · MIT</div>
         <a href="https://github.com" target="_blank" rel="noopener" class="btn btn-run btn-lg">▶ Run on GitHub</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECT -->
-<section id="project" class="section">
-  <div class="container" style="max-width: 900px;">
-    <div class="section-header">
-      <span class="badge badge-purple">Проект</span>
-      <h2>Нашият <span class="text-grad">иновационен</span> проект</h2>
-      <p>Решение, което прави света около нас по-добро място.</p>
-    </div>
-
-    <div class="project-block">
-      <div class="project-header">
-        <div class="dots"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div>
-        <span class="file-name">project_brief.md</span>
-        <span class="lang-tag">MARKDOWN</span>
-      </div>
-      <div class="project-body">
-        <h3 class="project-title"># Заглавие на проекта</h3>
-        <p class="project-desc">
-          Тук опишете накратко вашия иновационен проект — каква е идентифицираната
-          проблематика, кого засяга и как вашето решение я адресира.
-        </p>
-
-        <div class="project-section">
-          <h4>## Проблем</h4>
-          <p>Опишете проблема, който сте идентифицирали в общността.</p>
-        </div>
-
-        <div class="project-section">
-          <h4>## Решение</h4>
-          <p>Опишете предложеното от вас иновативно решение и как работи.</p>
-        </div>
-
-        <div class="project-section">
-          <h4>## Въздействие</h4>
-          <p>Кого помага вашият проект и как ще промени техния живот.</p>
-        </div>
-
-        <div class="project-tags">
-          <span class="proj-tag">#иновация</span>
-          <span class="proj-tag">#FLL</span>
-          <span class="proj-tag">#общност</span>
-          <span class="proj-tag">#устойчивост</span>
-        </div>
-      </div>
-      <div class="code-footer">
-        <div class="branch"><span class="live-dot"></span>v1.0 · в разработка</div>
-        <a href="#docs" class="btn btn-purple btn-lg">📄 Виж документацията</a>
       </div>
     </div>
   </div>
@@ -786,43 +668,23 @@
         </div>
         <h3>Социални мрежи</h3>
         <div class="socials">
-          <a href="https://www.instagram.com/mehano.fll" target="_blank" rel="noopener" class="social" aria-label="Instagram">
+          <a href="#" class="social" aria-label="Instagram">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
           </a>
-          <a href="https://www.facebook.com/mehano.fll" target="_blank" rel="noopener" class="social" aria-label="Facebook">
+          <a href="#" class="social" aria-label="Facebook">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" class="social" aria-label="GitHub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
           </a>
         </div>
       </div>
-      <a href="https://maps.google.com/?q=София+България" target="_blank" rel="noopener" class="card contact-card">
+      <div class="card contact-card">
         <div class="contact-icon-wrap ci-green">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
         </div>
         <h3>Локация</h3>
         <p>София, България</p>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECT PLACE -->
-<section id="project-place" class="section">
-  <div class="container" style="max-width: 1100px;">
-    <div class="section-header">
-      <span class="badge badge-pink">Място на проекта</span>
-      <h2>Къде се случва <span class="text-grad">магията</span></h2>
-      <p>Тук се събираме, проектираме и програмираме нашия робот.</p>
-    </div>
-
-    <div class="card project-place-card">
-      <div class="pp-icon-wrap">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M9 13h.01M9 17h.01M15 9h.01M15 13h.01M15 17h.01"/></svg>
-      </div>
-      <div class="pp-body">
-        <h3>СУ "Никола Йонков Вапцаров"</h3>
-        <p class="pp-address">ул. Примерна 12, София, България</p>
-        <p class="pp-desc">Нашата база — училищната STEM лаборатория, където се ражда всеки прототип, всяка линия код и всяка нова идея.</p>
-        <a href="https://maps.google.com/?q=СУ+Никола+Йонков+Вапцаров+София" target="_blank" rel="noopener" class="btn btn-cyan btn-lg" style="margin-top: 18px;">📍 Виж на картата</a>
       </div>
     </div>
   </div>
