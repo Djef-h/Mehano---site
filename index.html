@@ -877,9 +877,9 @@
 
           // Ако не е празен линк, го отваря след съобщението
           if (href && !isPlaceholder && !href.startsWith('#')) {
-            setTimeout(() => window.open(href, '_blank', 'noopener'), 10000);
+            setTimeout(() => window.open(href, '_blank', 'noopener'), 5000);
           }
-        }, 900);
+        }, 2000);
       });
     });
   })();
