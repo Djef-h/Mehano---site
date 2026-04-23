@@ -689,7 +689,7 @@
     </div>
 
     <div class="center">
-      <a href="https://drive.google.com/drive/folders/1BMmuRd7ZGSQsrvKBKLrJahfAfoSEpMI3?dmr=1&ec=wgc-drive-globalnav-goto" data-load-link class="btn btn-hero btn-xl">📁 Отвори Google Drive →</a>
+      <a href="https://drive.google.com/drive/folders/1BMmuRd7ZGSQsrvKBKLrJahfAfoSEpMI3?dmr=1&ec=wgc-drive-globalnav-goto"  data-load-link data-msg="Отваряне на сайта на Механото... 🏫"class="btn btn-hero btn-xl">📁 Отвори Google Drive →</a>
     </div>
   </div>
 </section>
@@ -844,11 +844,10 @@
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
 <script>
-  // Loading state + link reveal for placeholder buttons.
-  // Replace href="#REPLACE_ME_*" with real URLs and the buttons will open them normally.
   (function () {
     const toast = document.getElementById('toast');
     let toastTimer;
+
     function showToast(msg) {
       toast.textContent = msg;
       toast.classList.add('show');
@@ -856,20 +855,28 @@
       toastTimer = setTimeout(() => toast.classList.remove('show'), 3500);
     }
 
-    document.querySelectorAll('a[data-load-link]').forEach(link => {
+    document.querySelectorAll('a[data-load-link], .btn').forEach(link => {
       link.addEventListener('click', function (e) {
         const href = link.getAttribute('href') || '';
         const isPlaceholder = href.startsWith('#REPLACE_ME');
+        const customMsg = link.getAttribute('data-msg'); // Взема уникалния текст
 
-        // Always show loading animation briefly
+        // Спираме стандартното действие, за да покажем анимацията
         e.preventDefault();
         link.classList.add('is-loading');
 
         setTimeout(() => {
           link.classList.remove('is-loading');
-          if (isPlaceholder) {
+
+          // ПРИНТИРАНЕ НА ТЕКСТА:
+          if (customMsg) {
+            showToast(customMsg); // Ако имаш data-msg, принтира него
+          } else if (isPlaceholder) {
             showToast('🔗 Линкът ще бъде добавен скоро: ' + href);
-          } else {
+          }
+
+          // Ако не е празен линк, го отваря след съобщението
+          if (href && !isPlaceholder && !href.startsWith('#')) {
             window.open(href, '_blank', 'noopener');
           }
         }, 900);
@@ -877,6 +884,5 @@
     });
   })();
 </script>
-
 </body>
 </html>
