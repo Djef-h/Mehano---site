@@ -587,7 +587,49 @@
         <span class="file-name">mehano_bot.py</span>
         <span class="lang-tag">PYTHON 3</span>
       </div>
-
+   <pre class="code-body"><div class="code-line"><span class="ln">1</span><span class="tk-comment"># ⚙️ МЕХАНО v2.0 — Секретен алгоритъм (не показвай на съдиите)</span></div>
+<div class="code-line"><span class="ln">2</span><span class="tk-keyword">import</span> <span class="tk-class">spike</span><span class="tk-string">, food, random, dreams, panic</span></div>
+<div class="code-line"><span class="ln">3</span><span class="tk-keyword">from</span> <span class="tk-class">mehano</span> <span class="tk-keyword">import</span> <span class="tk-fn">надежда, воля, храна</span></div>
+<div class="code-line"><span class="ln">4</span></div>
+<div class="code-line"><span class="ln">5</span><span class="tk-class">РОБОТ</span>         = <span class="tk-string">"Робо-9000"</span>   <span class="tk-comment"># най-умният робот в Бургас</span></div>
+<div class="code-line"><span class="ln">6</span><span class="tk-class">ХРАНА_ИЗЯДЕНА</span> = <span class="tk-num">47</span>            <span class="tk-comment"># точно колкото commits</span></div>
+<div class="code-line"><span class="ln">7</span><span class="tk-class">ВЕРОЯТНОСТ_ПОБЕДА</span> = <span class="tk-num">0.999</span>    <span class="tk-comment"># останалото е за всеки случай</span></div>
+<div class="code-line"><span class="ln">8</span><span class="tk-class">МЕНТОР_СПИ</span>    = <span class="tk-class">True</span>          <span class="tk-comment"># винаги True след 22:00</span></div>
+<div class="code-line"><span class="ln">9</span></div>
+<div class="code-line"><span class="ln">10</span><span class="tk-keyword">def</span> <span class="tk-fn">зареди_робота</span>():</div>
+<div class="code-line"><span class="ln">11</span>    <span class="tk-keyword">if</span> <span class="tk-fn">food.is_empty</span>():</div>
+<div class="code-line"><span class="ln">12</span>        <span class="tk-keyword">raise</span> <span class="tk-class">CriticalError</span>(<span class="tk-string">"Екипът не може без храна 🍔"</span>)</div>
+<div class="code-line"><span class="ln">13</span>    <span class="tk-fn">print</span>(<span class="tk-string">"Робо-9000 се събужда..."</span>)</div>
+<div class="code-line"><span class="ln">14</span>    <span class="tk-fn">spike.motor_a.run</span>(speed=<span class="tk-num">100</span>)  <span class="tk-comment"># пълна газ, няма нерви</span></div>
+<div class="code-line"><span class="ln">15</span>    <span class="tk-keyword">return</span> <span class="tk-string">"🤖 Готов за битка"</span></div>
+<div class="code-line"><span class="ln">16</span></div>
+<div class="code-line"><span class="ln">17</span><span class="tk-keyword">def</span> <span class="tk-fn">изпълни_мисия</span>(мисия, опити=<span class="tk-num">3</span>):</div>
+<div class="code-line"><span class="ln">18</span>    <span class="tk-keyword">for</span> i <span class="tk-keyword">in</span> <span class="tk-fn">range</span>(опити):</div>
+<div class="code-line"><span class="ln">19</span>        <span class="tk-keyword">try</span>:</div>
+<div class="code-line"><span class="ln">20</span>            <span class="tk-fn">робот.направи_нещо_умно</span>(мисия)</div>
+<div class="code-line"><span class="ln">21</span>            <span class="tk-fn">print</span>(<span class="tk-string">f"Мисия {мисия} — успех! 🎉"</span>)</div>
+<div class="code-line"><span class="ln">22</span>            <span class="tk-keyword">break</span></div>
+<div class="code-line"><span class="ln">23</span>        <span class="tk-keyword">except</span> <span class="tk-class">LegoPадна</span>:</div>
+<div class="code-line"><span class="ln">24</span>            <span class="tk-fn">print</span>(<span class="tk-string">"Не видяха... надявам се 🙈"</span>)</div>
+<div class="code-line"><span class="ln">25</span>        <span class="tk-keyword">except</span> <span class="tk-class">РоботЗаспа</span>:</div>
+<div class="code-line"><span class="ln">26</span>            <span class="tk-fn">panic.execute</span>()  <span class="tk-comment"># събуди ментора</span></div>
+<div class="code-line"><span class="ln">27</span>        <span class="tk-keyword">except</span> <span class="tk-class">Exception</span> <span class="tk-keyword">as</span> e:</div>
+<div class="code-line"><span class="ln">28</span>            <span class="tk-fn">print</span>(<span class="tk-string">f"Хм. {e}. Питаме отбора."</span>)</div>
+<div class="code-line"><span class="ln">29</span></div>
+<div class="code-line"><span class="ln">30</span><span class="tk-keyword">def</span> <span class="tk-fn">спечели_турнира</span>():</div>
+<div class="code-line"><span class="ln">31</span>    <span class="tk-fn">зареди_робота</span>()</div>
+<div class="code-line"><span class="ln">32</span>    мисии = [<span class="tk-num">9</span>, <span class="tk-num">10</span>, <span class="tk-num">13</span>]</div>
+<div class="code-line"><span class="ln">33</span>    <span class="tk-keyword">for</span> мисия <span class="tk-keyword">in</span> мисии:</div>
+<div class="code-line"><span class="ln">34</span>        <span class="tk-fn">изпълни_мисия</span>(мисия)</div>
+<div class="code-line"><span class="ln">35</span>    <span class="tk-keyword">if</span> <span class="tk-fn">random.random</span>() &lt; <span class="tk-class">ВЕРОЯТНОСТ_ПОБЕДА</span>:</div>
+<div class="code-line"><span class="ln">36</span>        <span class="tk-keyword">return</span> <span class="tk-string">"🏆 Трофей получен. Поръчваме храна."</span></div>
+<div class="code-line"><span class="ln">37</span>    <span class="tk-keyword">else</span>:</div>
+<div class="code-line"><span class="ln">38</span>        <span class="tk-keyword">return</span> <span class="tk-string">"😤 Следващата година е наша."</span></div>
+<div class="code-line"><span class="ln">39</span></div>
+<div class="code-line"><span class="ln">40</span><span class="tk-comment"># TODO: да попитаме ментора дали това е легално</span></div>
+<div class="code-line"><span class="ln">41</span><span class="tk-comment"># FIXME: Робо-9000 пак отиде наляво вместо надясно</span></div>
+<div class="code-line"><span class="ln">42</span><span class="tk-fn">print</span>(<span class="tk-fn">спечели_турнира</span>())<span class="cursor"></span></div></pre>
+       
 <div class="code-footer">
         <div class="branch"><span class="live-dot"></span>main · 47 commits · MIT</div>
         <a href="https://github.com/Djef-h/First-lego-league---mehano-/blob/main/fll.py" data-load-link data-msg="Отваряне на кода в GitHub... 🚀" class="btn btn-run btn-lg">▶ Run</a>
