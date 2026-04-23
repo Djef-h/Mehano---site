@@ -587,33 +587,8 @@
         <span class="file-name">mehano_bot.py</span>
         <span class="lang-tag">PYTHON 3</span>
       </div>
-      <pre class="code-body"><code><span class="code-line"><span class="ln">1</span><span><span class="tk-comment"># mehano_bot.py — autonomous mission runner</span></span></span>
-<span class="code-line"><span class="ln">2</span><span><span class="tk-keyword">from</span> spike <span class="tk-keyword">import</span> <span class="tk-class">PrimeHub</span>, <span class="tk-class">Motor</span>, <span class="tk-class">ColorSensor</span></span></span>
-<span class="code-line"><span class="ln">3</span><span><span class="tk-keyword">from</span> spike.control <span class="tk-keyword">import</span> wait_for_seconds</span></span>
-<span class="code-line"><span class="ln">4</span><span> </span></span>
-<span class="code-line"><span class="ln">5</span><span>hub = <span class="tk-class">PrimeHub</span>()</span></span>
-<span class="code-line"><span class="ln">6</span><span>left = <span class="tk-class">Motor</span>(<span class="tk-string">'A'</span>)</span></span>
-<span class="code-line"><span class="ln">7</span><span>right = <span class="tk-class">Motor</span>(<span class="tk-string">'B'</span>)</span></span>
-<span class="code-line"><span class="ln">8</span><span>arm = <span class="tk-class">Motor</span>(<span class="tk-string">'C'</span>)</span></span>
-<span class="code-line"><span class="ln">9</span><span>sensor = <span class="tk-class">ColorSensor</span>(<span class="tk-string">'E'</span>)</span></span>
-<span class="code-line"><span class="ln">10</span><span> </span></span>
-<span class="code-line"><span class="ln">11</span><span><span class="tk-keyword">def</span> <span class="tk-fn">run_mission_one</span>():</span></span>
-<span class="code-line"><span class="ln">12</span><span>    <span class="tk-comment">"""Първа мисия: енергиен модул"""</span></span></span>
-<span class="code-line"><span class="ln">13</span><span>    hub.light_matrix.<span class="tk-fn">show_image</span>(<span class="tk-string">'HEART'</span>)</span></span>
-<span class="code-line"><span class="ln">14</span><span>    left.<span class="tk-fn">start_at_power</span>(<span class="tk-num">50</span>)</span></span>
-<span class="code-line"><span class="ln">15</span><span>    right.<span class="tk-fn">start_at_power</span>(<span class="tk-num">50</span>)</span></span>
-<span class="code-line"><span class="ln">16</span><span> </span></span>
-<span class="code-line"><span class="ln">17</span><span>    <span class="tk-keyword">while</span> sensor.<span class="tk-fn">get_color</span>() != <span class="tk-string">'red'</span>:</span></span>
-<span class="code-line"><span class="ln">18</span><span>        <span class="tk-fn">wait_for_seconds</span>(<span class="tk-num">0.05</span>)</span></span>
-<span class="code-line"><span class="ln">19</span><span> </span></span>
-<span class="code-line"><span class="ln">20</span><span>    left.<span class="tk-fn">stop</span>()</span></span>
-<span class="code-line"><span class="ln">21</span><span>    right.<span class="tk-fn">stop</span>()</span></span>
-<span class="code-line"><span class="ln">22</span><span>    arm.<span class="tk-fn">run_for_degrees</span>(<span class="tk-num">360</span>, speed=<span class="tk-num">80</span>)</span></span>
-<span class="code-line"><span class="ln">23</span><span>    <span class="tk-fn">print</span>(<span class="tk-string">"✅ Mission complete — points secured!"</span>)</span></span>
-<span class="code-line"><span class="ln">24</span><span> </span></span>
-<span class="code-line"><span class="ln">25</span><span><span class="tk-keyword">if</span> __name__ == <span class="tk-string">'__main__'</span>:</span></span>
-<span class="code-line"><span class="ln">26</span><span>    <span class="tk-fn">run_mission_one</span>()<span class="cursor"></span></span></span></code></pre>
-      <div class="code-footer">
+
+<div class="code-footer">
         <div class="branch"><span class="live-dot"></span>main · 47 commits · MIT</div>
         <a href="https://github.com/Djef-h/First-lego-league---mehano-/blob/main/fll.py" data-load-link class="btn btn-run btn-lg">▶ Run</a>
       </div>
