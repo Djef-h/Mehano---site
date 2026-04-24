@@ -75,7 +75,6 @@
   }
   .logo:hover { opacity: 0.85; }
 
-  /* ✅ LOGO MARK — снимка */
   .logo-mark {
     width: 36px; height: 36px; border-radius: 10px;
     overflow: hidden; flex-shrink: 0;
@@ -247,7 +246,11 @@
   .icon-purple { background: linear-gradient(135deg, var(--purple), var(--pink)); }
   .icon-green { background: linear-gradient(135deg, var(--green), var(--cyan)); }
   .feature-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.6rem; }
-  .feature-desc { color: var(--text-muted); }
+  .feature-desc { color: var(--text-muted); margin-bottom: 1.25rem; }
+
+  /* Feature card buttons */
+  .feature-btns { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: auto; }
+  .btn-sm { padding: 0.5rem 1rem; font-size: 0.82rem; border-radius: 10px; }
 
   /* CODE */
   .code-block {
@@ -456,7 +459,6 @@
   }
   .footer-brand { display: flex; align-items: center; gap: 0.6rem; }
 
-  /* ✅ FOOTER LOGO — снимка */
   .footer-logo-img {
     width: 32px; height: 32px; border-radius: 8px;
     overflow: hidden; flex-shrink: 0;
@@ -501,7 +503,6 @@
 <nav>
   <div class="nav-inner">
     <a href="#hero" class="logo">
-      <!-- ✅ Снимка на логото в навигацията -->
       <div class="logo-mark">
         <img
           src="https://scontent.fsof9-1.fna.fbcdn.net/v/t39.30808-6/475967058_122103989282752743_8280670784437931498_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=iummlJ37nFAQ7kNvwGCCXDy&_nc_oc=Adphg8hgdNRN-n0oO2JOlkFi5zno5xp8BH5bZLIuDrWMX6w83IMB-Zi3HkdZ9cxy6K0&_nc_zt=23&_nc_ht=scontent.fsof9-1.fna&_nc_gid=-xF0cwIaIaJNGRp9gys_KQ&oh=00_Af1fuH1wlT8k37O42xOrFAvw8skhAhafIOoKywTB0O867Q&oe=69F101B5"
@@ -578,12 +579,23 @@
     </div>
 
     <div class="grid-3">
-      <div class="card">
+      <!-- Дизайн на робот — с два нови бутона -->
+      <div class="card" style="display: flex; flex-direction: column;">
         <div class="feature-icon icon-cyan">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="2" x2="9" y2="4"/><line x1="15" y1="2" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="22"/><line x1="15" y1="20" x2="15" y2="22"/><line x1="20" y1="9" x2="22" y2="9"/><line x1="20" y1="14" x2="22" y2="14"/><line x1="2" y1="9" x2="4" y2="9"/><line x1="2" y1="14" x2="4" y2="14"/></svg>
         </div>
         <h3 class="feature-title">Дизайн на робот</h3>
         <p class="feature-desc">Проектираме, конструираме и програмираме LEGO® роботи, оптимизирани за прецизност и скорост.</p>
+        <div class="feature-btns">
+          <a href="https://canva.link/491v3cl21s1koi3" data-load-link data-msg="Отваряне на презентацията... 🎨" class="btn btn-cyan btn-sm">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            ПРЕЗЕНТАЦИЯ
+          </a>
+          <a href="https://drive.google.com/drive/folders/1SoWDqH_odCqcLkXzXpdhtHkOlf-KHDih?usp=drive_link" data-load-link data-msg="Отваряне на папката... 📁" class="btn btn-purple btn-sm">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            ПАПКА
+          </a>
+        </div>
       </div>
       <div class="card">
         <div class="feature-icon icon-purple">
@@ -910,7 +922,6 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <!-- ✅ Снимка на логото в footer-а -->
       <div class="footer-logo-img">
         <img
           src="https://scontent.fsof9-1.fna.fbcdn.net/v/t39.30808-6/475967058_122103989282752743_8280670784437931498_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=iummlJ37nFAQ7kNvwGCCXDy&_nc_oc=Adphg8hgdNRN-n0oO2JOlkFi5zno5xp8BH5bZLIuDrWMX6w83IMB-Zi3HkdZ9cxy6K0&_nc_zt=23&_nc_ht=scontent.fsof9-1.fna&_nc_gid=-xF0cwIaIaJNGRp9gys_KQ&oh=00_Af1fuH1wlT8k37O42xOrFAvw8skhAhafIOoKywTB0O867Q&oe=69F101B5"
