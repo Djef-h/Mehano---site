@@ -74,6 +74,1609 @@
     transition: opacity 0.2s;
   }
   .logo:hover { opacity: 0.85; }
+  .logo-mark {
+    width: 36px; height: 36px; border-radius: 10px;
+    overflow: hidden; flex-shrink: 0;
+    transition: transform 0.3s;
+    box-shadow: 0 2px 8px rgba(30, 64, 175, 0.25);
+  }
+  .logo:hover .logo-mark { transform: scale(1.08); }
+  .logo-mark img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .nav-links { display: none; gap: 1.75rem; font-size: 0.9rem; font-weight: 500; color: var(--text-muted); }
+  .nav-links a:hover { color: var(--cyan); }
+  @media (min-width: 768px) { .nav-links { display: flex; } }
+
+  .nav-right { display: flex; align-items: center; gap: 0.6rem; }
+
+  /* LANGUAGE SWITCHER */
+  .lang-switcher { position: relative; display: inline-block; }
+  .lang-btn-nav {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 0.45rem 0.9rem; border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text); font-family: inherit; font-size: 0.85rem; font-weight: 500;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .lang-btn-nav:hover { border-color: var(--cyan); color: var(--cyan); }
+  .lang-btn-nav .flag-ico { font-size: 16px; line-height: 1; }
+  .lang-btn-nav .chev {
+    width: 12px; height: 12px; transition: transform 0.2s;
+    color: var(--text-muted);
+  }
+  .lang-btn-nav.open .chev { transform: rotate(180deg); }
+
+  .lang-dropdown {
+    display: none;
+    position: absolute;
+    right: 0; top: calc(100% + 8px);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    min-width: 210px;
+    max-height: 380px;
+    overflow-y: auto;
+    z-index: 200;
+    box-shadow: 0 12px 40px rgba(15,24,56,0.15);
+  }
+  .lang-dropdown.open { display: block; }
+  .lang-group-label {
+    padding: 8px 14px 4px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+  .lang-opt {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 14px; cursor: pointer; font-size: 0.85rem;
+    color: var(--text); transition: background 0.1s;
+  }
+  .lang-opt:hover { background: var(--surface-2); }
+  .lang-opt.active { color: var(--cyan); font-weight: 600; }
+  .lang-opt .lo-flag { font-size: 16px; }
+  .lang-opt .lo-name { flex: 1; }
+  .lang-opt .lo-native { font-size: 0.75rem; color: var(--text-muted); }
+  .lang-opt .lo-check {
+    width: 14px; height: 14px; color: var(--cyan);
+    opacity: 0; flex-shrink: 0;
+  }
+  .lang-opt.active .lo-check { opacity: 1; }
+  .lang-divider { height: 1px; background: var(--border); margin: 4px 0; }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    font-family: inherit; font-weight: 600; font-size: 0.95rem;
+    padding: 0.7rem 1.4rem; border-radius: 12px; cursor: pointer;
+    border: none; transition: all 0.3s; text-decoration: none;
+  }
+  .btn-lg { padding: 0.95rem 1.8rem; font-size: 1rem; border-radius: 14px; }
+  .btn-xl { padding: 1.15rem 2.3rem; font-size: 1.05rem; border-radius: 16px; }
+  .btn-hero {
+    background: var(--grad-hero); color: white;
+    box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.5);
+    background-size: 200% 200%;
+  }
+  .btn-hero:hover { background-position: 100% 50%; transform: translateY(-2px); box-shadow: 0 15px 40px -10px rgba(139, 92, 246, 0.6); }
+  .btn-cyan { background: rgba(6, 182, 212, 0.1); color: var(--cyan); border: 1px solid rgba(6, 182, 212, 0.3); }
+  .btn-cyan:hover { background: var(--cyan); color: white; }
+  .btn-purple { background: rgba(139, 92, 246, 0.1); color: var(--purple); border: 1px solid rgba(139, 92, 246, 0.3); }
+  .btn-purple:hover { background: var(--purple); color: white; }
+  .btn-yellow { background: var(--yellow); color: white; box-shadow: 0 10px 25px -8px rgba(245, 158, 11, 0.5); }
+  .btn-yellow:hover { transform: translateY(-2px); }
+  .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .btn-outline:hover { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 20px rgba(6, 182, 212, 0.2); }
+  .btn-run {
+    background: var(--green); color: white; font-weight: 600;
+    animation: pulse-glow 2s infinite;
+  }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+    50% { box-shadow: 0 0 0 14px rgba(16, 185, 129, 0); }
+  }
+  .btn.is-loading { pointer-events: none; opacity: 0.85; position: relative; }
+  .btn.is-loading > * { visibility: hidden; }
+  .btn.is-loading::after {
+    content: ""; position: absolute;
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2.5px solid rgba(255,255,255,0.35);
+    border-top-color: #fff;
+    animation: btn-spin 0.7s linear infinite;
+    visibility: visible;
+  }
+  .btn-cyan.is-loading::after, .btn-purple.is-loading::after, .btn-outline.is-loading::after {
+    border-color: rgba(15, 24, 56, 0.2);
+    border-top-color: var(--cyan);
+  }
+  @keyframes btn-spin { to { transform: rotate(360deg); } }
+
+  /* TOAST */
+  .toast {
+    position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--text); color: white;
+    padding: 0.85rem 1.4rem; border-radius: 12px;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
+    box-shadow: var(--shadow-lg); z-index: 100;
+    opacity: 0; transition: all 0.3s; pointer-events: none;
+    max-width: 90vw; word-break: break-all; text-align: center;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* BADGE */
+  .badge {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.35rem 0.85rem; border-radius: 999px;
+    font-size: 0.78rem; font-weight: 600; margin-bottom: 1rem;
+    border: 1px solid;
+  }
+  .badge-cyan { background: rgba(6, 182, 212, 0.1); color: var(--cyan); border-color: rgba(6, 182, 212, 0.3); }
+  .badge-purple { background: rgba(139, 92, 246, 0.1); color: var(--purple); border-color: rgba(139, 92, 246, 0.3); }
+  .badge-pink { background: rgba(236, 72, 153, 0.1); color: var(--pink); border-color: rgba(236, 72, 153, 0.3); }
+  .badge-green { background: rgba(16, 185, 129, 0.1); color: var(--green); border-color: rgba(16, 185, 129, 0.3); }
+  .badge-yellow { background: rgba(245, 158, 11, 0.12); color: var(--yellow); border-color: rgba(245, 158, 11, 0.3); }
+  .badge-glow { background: rgba(6, 182, 212, 0.1); color: var(--cyan); border-color: rgba(6, 182, 212, 0.3); box-shadow: 0 0 25px rgba(6, 182, 212, 0.25); }
+
+  /* CARD */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 1.75rem;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.4s;
+  }
+  .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+
+  .text-grad {
+    background: var(--grad-text);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; position: relative; padding: 8rem 1.5rem 4rem;
+    background-image:
+      linear-gradient(rgba(59, 130, 246, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59, 130, 246, 0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  .blob {
+    position: absolute; border-radius: 50%; filter: blur(100px);
+    pointer-events: none; z-index: 0;
+  }
+  .blob-1 { width: 380px; height: 380px; top: 15%; left: -100px; background: rgba(139, 92, 246, 0.25); animation: float 6s ease-in-out infinite; }
+  .blob-2 { width: 380px; height: 380px; bottom: 15%; right: -100px; background: rgba(6, 182, 212, 0.25); animation: float 6s ease-in-out infinite 2s; }
+  .blob-3 { width: 500px; height: 500px; top: 30%; left: 50%; transform: translateX(-50%); background: rgba(236, 72, 153, 0.12); }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+  .hero-content { position: relative; z-index: 1; max-width: 900px; }
+  .hero h1 {
+    font-size: clamp(4.5rem, 14vw, 11rem);
+    font-weight: 700; margin: 1.5rem 0 1.5rem;
+    background: var(--grad-hero);
+    background-size: 200% 200%;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: gradient-shift 8s ease infinite;
+  }
+  @keyframes gradient-shift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+  .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 2.2rem; }
+  .hero-buttons { display: flex; flex-wrap: wrap; gap: 0.85rem; justify-content: center; }
+
+  .scroll-hint { margin-top: 4rem; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: rgba(91, 101, 132, 0.6); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em; }
+  .scroll-line { width: 1px; height: 48px; background: linear-gradient(to bottom, var(--cyan), transparent); }
+
+  /* SECTION HEADER */
+  .section-header { text-align: center; max-width: 700px; margin: 0 auto 4rem; }
+  .section-header h2 { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 700; margin-bottom: 1rem; }
+  .section-header p { color: var(--text-muted); font-size: 1.1rem; }
+
+  /* STATS */
+  .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 4rem; }
+  @media (min-width: 768px) { .stats { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; } }
+  .stat {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
+    padding: 1.5rem 1rem; text-align: center; transition: all 0.3s;
+    box-shadow: var(--shadow-sm);
+  }
+  .stat:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .stat-icon { width: 28px; height: 28px; margin: 0 auto 0.75rem; }
+  .stat-value { font-family: 'Space Grotesk'; font-weight: 700; font-size: 2.5rem; line-height: 1; margin-bottom: 0.4rem; }
+  .stat-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+
+  /* ABOUT GRID */
+  .grid-3 { display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
+  @media (min-width: 768px) { .grid-3 { grid-template-columns: repeat(3, 1fr); } }
+  .feature-icon {
+    width: 56px; height: 56px; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.25rem; color: white;
+    transition: transform 0.4s;
+  }
+  .card:hover .feature-icon { transform: scale(1.1) rotate(6deg); }
+  .icon-cyan { background: linear-gradient(135deg, var(--cyan), var(--blue)); }
+  .icon-purple { background: linear-gradient(135deg, var(--purple), var(--pink)); }
+  .icon-green { background: linear-gradient(135deg, var(--green), var(--cyan)); }
+  .feature-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.6rem; }
+  .feature-desc { color: var(--text-muted); margin-bottom: 1.25rem; }
+  .feature-btns { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: auto; }
+  .btn-sm { padding: 0.5rem 1rem; font-size: 0.82rem; border-radius: 10px; }
+
+  /* CODE */
+  .code-block {
+    background: #1e1b4b; color: #e0e7ff;
+    border-radius: 20px; overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+  }
+  .code-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.85rem 1.25rem; background: rgba(0, 0, 0, 0.25);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-family: 'JetBrains Mono'; font-size: 0.75rem;
+  }
+  .dots { display: flex; gap: 0.45rem; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot-r { background: #f87171; } .dot-y { background: #fbbf24; } .dot-g { background: #34d399; }
+  .file-name { color: rgba(224, 231, 255, 0.6); }
+  .lang-tag { color: #67e8f9; font-weight: 600; }
+  pre.code-body {
+    padding: 1.5rem; overflow-x: auto;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.7;
+  }
+  .code-line { display: flex; gap: 1rem; padding: 0 0.5rem; }
+  .code-line:hover { background: rgba(255, 255, 255, 0.04); }
+  .ln { color: rgba(224, 231, 255, 0.3); width: 1.5rem; text-align: right; flex-shrink: 0; user-select: none; }
+  .tk-comment { color: rgba(224, 231, 255, 0.45); font-style: italic; }
+  .tk-string { color: #6ee7b7; }
+  .tk-keyword { color: #f9a8d4; font-weight: 600; }
+  .tk-fn { color: #67e8f9; }
+  .tk-class { color: #fde68a; }
+  .tk-num { color: #c4b5fd; }
+  .cursor { display: inline-block; width: 8px; height: 14px; background: var(--green); animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 2.5rem; }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+  .code-footer {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    padding: 1.25rem 1.5rem; gap: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.15);
+  }
+
+  /* PROJECT BLOCK */
+  .project-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+  .project-header {
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 0.85rem 1.25rem;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(59, 130, 246, 0.08));
+    border-bottom: 1px solid var(--border);
+  }
+  .project-body { padding: 2rem 2rem 1.5rem; }
+  .project-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.5rem; color: var(--purple); margin-bottom: 0.75rem;
+  }
+  .project-desc { font-size: 1.05rem; color: var(--text); line-height: 1.7; margin-bottom: 1.5rem; }
+  .project-section { margin-bottom: 1.25rem; padding-left: 1rem; border-left: 3px solid var(--cyan); }
+  .project-section h4 { font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--cyan); margin-bottom: 0.4rem; }
+  .project-section p { color: var(--text-muted); font-size: 0.95rem; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+  .proj-tag {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+    padding: 0.35rem 0.75rem; border-radius: 999px;
+    background: rgba(6, 182, 212, 0.1); color: var(--cyan);
+    border: 1px solid rgba(6, 182, 212, 0.25);
+  }
+  .project-block .code-footer { background: var(--surface-2); border-top: 1px solid var(--border); }
+  .project-block .branch { color: var(--text-muted); }
+  .branch { display: flex; align-items: center; gap: 0.5rem; color: rgba(224, 231, 255, 0.6); font-family: 'JetBrains Mono'; font-size: 0.75rem; }
+  .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  /* DOCS */
+  .grid-4 { display: grid; gap: 1.25rem; grid-template-columns: 1fr; margin-bottom: 3rem; }
+  @media (min-width: 640px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .grid-4 { grid-template-columns: repeat(4, 1fr); } }
+  .doc-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1rem; transition: transform 0.3s;
+  }
+  .card:hover .doc-icon { transform: scale(1.1); }
+  .di-cyan { background: rgba(6, 182, 212, 0.12); color: var(--cyan); border: 1px solid rgba(6, 182, 212, 0.3); }
+  .di-purple { background: rgba(139, 92, 246, 0.12); color: var(--purple); border: 1px solid rgba(139, 92, 246, 0.3); }
+  .di-pink { background: rgba(236, 72, 153, 0.12); color: var(--pink); border: 1px solid rgba(236, 72, 153, 0.3); }
+  .di-yellow { background: rgba(245, 158, 11, 0.12); color: var(--yellow); border: 1px solid rgba(245, 158, 11, 0.3); }
+  .doc-title { font-family: 'Space Grotesk'; font-weight: 700; font-size: 1.1rem; margin-bottom: 0.25rem; }
+  .doc-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; }
+  .doc-link { font-size: 0.85rem; font-weight: 600; opacity: 0; transition: opacity 0.3s; display: flex; align-items: center; gap: 0.3rem; }
+  .card:hover .doc-link { opacity: 1; }
+  .center { text-align: center; }
+
+  /* TEAM */
+  .team-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: 640px) { .team-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1024px) { .team-grid { grid-template-columns: repeat(4, 1fr); } }
+  .member { text-align: center; padding: 1.4rem 1rem; }
+  .avatar-wrap { position: relative; width: 80px; height: 80px; margin: 0 auto 1rem; }
+  .avatar-glow { position: absolute; inset: 0; border-radius: 50%; filter: blur(14px); opacity: 0.5; transition: opacity 0.3s; }
+  .member:hover .avatar-glow { opacity: 0.85; }
+  .avatar {
+    position: relative; width: 100%; height: 100%;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Grotesk'; font-weight: 700; font-size: 1.75rem; color: white;
+  }
+  .num-badge {
+    position: absolute; bottom: -2px; right: -2px;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: white; border: 2px solid var(--green);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono'; font-size: 0.6rem; color: var(--green); font-weight: 600;
+  }
+  .member-name { font-family: 'Space Grotesk'; font-weight: 600; font-size: 1.05rem; }
+  .member-role { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-top: 0.3rem; }
+
+  /* PARTNER */
+  .partner-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 24px;
+    padding: 3rem 2rem; position: relative; overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+  .partner-blob-1 { position: absolute; top: 0; right: 0; width: 220px; height: 220px; background: rgba(245, 158, 11, 0.2); border-radius: 50%; filter: blur(80px); }
+  .partner-blob-2 { position: absolute; bottom: 0; left: 0; width: 220px; height: 220px; background: rgba(236, 72, 153, 0.2); border-radius: 50%; filter: blur(80px); }
+  .partner-inner { position: relative; display: grid; gap: 2rem; align-items: center; }
+  @media (min-width: 768px) { .partner-inner { grid-template-columns: 1fr auto; } }
+  .partner-card h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 1rem; }
+  .partner-card p { color: var(--text-muted); margin-bottom: 1.5rem; max-width: 520px; }
+  .partner-logo {
+    width: 180px; height: 180px; border-radius: 24px;
+    background: var(--surface); border: 2px solid rgba(245, 158, 11, 0.3);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem;
+    transition: transform 0.3s; margin: 0 auto;
+  }
+  .partner-logo:hover { transform: scale(1.05); }
+
+  /* CONTACT */
+  .contact-grid { display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
+  @media (min-width: 768px) { .contact-grid { grid-template-columns: repeat(3, 1fr); } }
+  .contact-card { text-align: center; padding: 1.75rem 1.25rem; }
+  .contact-icon-wrap {
+    width: 56px; height: 56px; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1rem;
+  }
+  .ci-cyan { background: rgba(6, 182, 212, 0.12); color: var(--cyan); border: 1px solid rgba(6, 182, 212, 0.3); }
+  .ci-purple { background: rgba(139, 92, 246, 0.12); color: var(--purple); border: 1px solid rgba(139, 92, 246, 0.3); }
+  .ci-green { background: rgba(16, 185, 129, 0.12); color: var(--green); border: 1px solid rgba(16, 185, 129, 0.3); }
+  .contact-card h3 { font-family: 'Space Grotesk'; font-weight: 600; margin-bottom: 0.4rem; }
+  .contact-card p { font-size: 0.9rem; color: var(--text-muted); }
+  .socials { display: flex; gap: 0.5rem; justify-content: center; margin-top: 0.6rem; }
+  .social {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: var(--surface-2); color: var(--text-muted);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s;
+  }
+  .social:hover { background: var(--purple); color: white; transform: translateY(-2px); }
+
+  /* PROJECT PLACE */
+  .project-place-card {
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    padding: 2.5rem 1.75rem; gap: 1rem;
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.06), rgba(139, 92, 246, 0.06));
+    border: 1px solid rgba(236, 72, 153, 0.2);
+  }
+  @media (min-width: 768px) {
+    .project-place-card { flex-direction: row; text-align: left; padding: 2.5rem; gap: 2rem; }
+  }
+  .pp-body h3 { font-family: 'Space Grotesk'; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .pp-address { font-size: 0.95rem; color: var(--purple); font-weight: 500; margin-bottom: 0.6rem; }
+  .pp-desc { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; }
+  .pp-logo-img {
+    width: 160px; height: 160px; border-radius: 22px;
+    overflow: hidden; flex-shrink: 0;
+    box-shadow: 0 8px 30px rgba(245,158,11,0.25);
+  }
+  .pp-logo-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* FOOTER */
+  footer { border-top: 1px solid var(--border); margin-top: 3rem; }
+  .footer-inner {
+    max-width: 1200px; margin: 0 auto; padding: 2.5rem 1.5rem;
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;
+    color: var(--text-muted); font-size: 0.88rem;
+  }
+  .footer-brand { display: flex; align-items: center; gap: 0.6rem; }
+  .footer-logo-img {
+    width: 32px; height: 32px; border-radius: 8px;
+    overflow: hidden; flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(30, 64, 175, 0.2);
+  }
+  .footer-logo-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .footer-brand strong { color: var(--text); font-family: 'Space Grotesk'; }
+  .footer-tag { font-family: 'JetBrains Mono'; font-size: 0.75rem; }
+  .heart { color: var(--pink); }
+
+  .c-cyan { color: var(--cyan); }
+  .c-yellow { color: var(--yellow); }
+  .c-pink { color: var(--pink); }
+  .c-green { color: var(--green); }
+
+  .av-1 { background: linear-gradient(135deg, var(--cyan), var(--blue)); }
+  .av-2 { background: linear-gradient(135deg, var(--purple), var(--pink)); }
+  .av-3 { background: linear-gradient(135deg, var(--green), var(--cyan)); }
+  .av-4 { background: linear-gradient(135deg, var(--yellow), var(--pink)); }
+  .av-5 { background: linear-gradient(135deg, var(--blue), var(--purple)); }
+  .av-6 { background: linear-gradient(135deg, var(--pink), var(--purple)); }
+  .av-7 { background: linear-gradient(135deg, var(--green), var(--yellow)); }
+  .av-8 { background: linear-gradient(135deg, var(--cyan), var(--purple)); }
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#hero" class="logo">
+      <div class="logo-mark">
+        <img src="https://scontent.fsof9-1.fna.fbcdn.net/v/t39.30808-6/475967058_122103989282752743_8280670784437931498_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=iummlJ37nFAQ7kNvwGCCXDy&_nc_oc=Adphg8hgdNRN-n0oO2JOlkFi5zno5xp8BH5bZLIuDrWMX6w83IMB-Zi3HkdZ9cxy6K0&_nc_zt=23&_nc_ht=scontent.fsof9-1.fna&_nc_gid=-xF0cwIaIaJNGRp9gys_KQ&oh=00_Af1fuH1wlT8k37O42xOrFAvw8skhAhafIOoKywTB0O867Q&oe=69F101B5" alt="Механо лого" />
+      </div>
+      <span id="logo-text">МЕХАНО</span>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="#about" data-i18n="nav-about">За нас</a>
+      <a href="#code" data-i18n="nav-code">Код</a>
+      <a href="#project" data-i18n="nav-project">Проект</a>
+      <a href="#docs" data-i18n="nav-docs">Документи</a>
+      <a href="#team" data-i18n="nav-team">Отбор</a>
+      <a href="#project-place" data-i18n="nav-place">Място</a>
+      <a href="#contact" data-i18n="nav-contact">Контакт</a>
+    </div>
+    <div class="nav-right">
+      <!-- LANGUAGE SWITCHER -->
+      <div class="lang-switcher" id="langSwitcher">
+        <button class="lang-btn-nav" id="langToggleBtn" onclick="toggleLangDropdown()">
+          <span class="flag-ico" id="navFlag">🇧🇬</span>
+          <span id="navLangName">БГ</span>
+          <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="4,6 8,10 12,6"/>
+          </svg>
+        </button>
+        <div class="lang-dropdown" id="langDropdown"></div>
+      </div>
+      <a href="#contact" class="btn btn-cyan" style="padding: 0.5rem 1rem; font-size: 0.85rem;" data-msg-key="contact-toast" data-msg="Преминаване към контакт... 📬" data-i18n-msg="contact-toast">
+        <span data-i18n="nav-cta">Свържи се</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="hero-content">
+    <span class="badge badge-glow" data-i18n="hero-badge">✨ FLL Отбор 2025-26</span>
+    <h1 data-i18n="hero-title">МЕХАНО</h1>
+    <p data-i18n="hero-desc">Млад FIRST LEGO League отбор от инженери, мислители и мечтатели. Изграждаме роботи, решаваме проблеми и оставяме следа.</p>
+    <div class="hero-buttons">
+      <a href="#docs" class="btn btn-hero btn-lg" data-msg="Зареждане на документите... 📄"><span data-i18n="hero-btn-docs">📄 Документи</span></a>
+      <a href="#code" class="btn btn-purple btn-lg" data-msg="Зареждане на кода... 💻"><span data-i18n="hero-btn-code">💻 Код</span></a>
+      <a href="#about" class="btn btn-outline btn-lg" data-msg="Зареждане на секцията... 🔍"><span data-i18n="hero-btn-more">Научи повече →</span></a>
+    </div>
+    <div class="scroll-hint">
+      <span data-i18n="scroll">Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge badge-cyan" data-i18n="about-badge">За нас</span>
+      <h2><span data-i18n="about-title-1">Кои сме</span> <span class="text-grad" data-i18n="about-title-2">ние</span></h2>
+      <p data-i18n="about-sub">Отбор от седем младежи, обединени от страст към инженерството и иновациите.</p>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <svg class="stat-icon c-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div class="stat-value c-cyan">7</div>
+        <div class="stat-label" data-i18n="stat-members">Члена</div>
+      </div>
+      <div class="stat">
+        <svg class="stat-icon c-yellow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+        <div class="stat-value c-yellow">2</div>
+        <div class="stat-label" data-i18n="stat-seasons">Сезона</div>
+      </div>
+      <div class="stat">
+        <svg class="stat-icon c-pink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <div class="stat-value c-pink">100%</div>
+        <div class="stat-label" data-i18n="stat-passion">Отдаденост</div>
+      </div>
+      <div class="stat">
+        <svg class="stat-icon c-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.178 8c5.096 0 5.096 8 0 8-5.095 0-7.133-8-12.739-8-4.585 0-4.585 8 0 8 5.606 0 7.644-8 12.739-8z"/></svg>
+        <div class="stat-value c-green">∞</div>
+        <div class="stat-label" data-i18n="stat-ideas">Идеи</div>
+      </div>
+    </div>
+    <div class="grid-3">
+      <div class="card" style="display:flex;flex-direction:column;">
+        <div class="feature-icon icon-cyan">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="2" x2="9" y2="4"/><line x1="15" y1="2" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="22"/><line x1="15" y1="20" x2="15" y2="22"/><line x1="20" y1="9" x2="22" y2="9"/><line x1="20" y1="14" x2="22" y2="14"/><line x1="2" y1="9" x2="4" y2="9"/><line x1="2" y1="14" x2="4" y2="14"/></svg>
+        </div>
+        <h3 class="feature-title" data-i18n="feat1-title">Дизайн на робот</h3>
+        <p class="feature-desc" data-i18n="feat1-desc">Проектираме, конструираме и програмираме LEGO® роботи, оптимизирани за прецизност и скорост.</p>
+        <div class="feature-btns">
+          <a href="https://canva.link/491v3cl21s1koi3" data-load-link data-msg="Отваряне на презентацията... 🎨" class="btn btn-cyan btn-sm">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <span data-i18n="btn-presentation">ПРЕЗЕНТАЦИЯ</span>
+          </a>
+          <a href="https://drive.google.com/drive/folders/1SoWDqH_odCqcLkXzXpdhtHkOlf-KHDih?usp=drive_link" data-load-link data-msg="Отваряне на папката... 📁" class="btn btn-purple btn-sm">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            <span data-i18n="btn-folder">ПАПКА</span>
+          </a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="feature-icon icon-purple">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>
+        </div>
+        <h3 class="feature-title" data-i18n="feat2-title">Иновативен проект</h3>
+        <p class="feature-desc" data-i18n="feat2-desc">Решаваме реални проблеми с креативни инженерни идеи, вдъхновени от темата на сезона.</p>
+        <div class="feature-btns">
+          <a href="https://www.youtube.com/watch?v=vKIvQ5kc4ow&feature=youtu.be" data-load-link data-msg="Отваряне на видеото... 🎬" class="btn btn-cyan btn-sm">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <span data-i18n="btn-video">Видео</span>
+          </a>
+        </div>
+        <div class="feature-btns" style="margin-top:0.4rem;">
+          <a href="https://github.com/Djef-h/ASOA2.0" data-load-link data-msg="Отваряне на кода... 💻" class="btn btn-cyan btn-sm">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <span data-i18n="btn-code">Код</span>
+          </a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="feature-icon icon-green">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 class="feature-title" data-i18n="feat3-title">Основни ценности</h3>
+        <p class="feature-desc" data-i18n="feat3-desc">Уважение, откритост, въздействие, приобщаване, работа в екип и забавление — нашата ДНК.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CODE -->
+<section id="code" class="section">
+  <div class="container" style="max-width:900px;">
+    <div class="section-header">
+      <span class="badge badge-green" data-i18n="code-badge">Код</span>
+      <h2><span data-i18n="code-title-1">Нашият</span> <span class="text-grad" data-i18n="code-title-2">код</span> <span data-i18n="code-title-3">на победата</span></h2>
+      <p data-i18n="code-sub">Чист Python за SPIKE Prime. Open-source, модулен, оптимизиран.</p>
+    </div>
+    <div class="code-block">
+      <div class="code-header">
+        <div class="dots"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div>
+        <span class="file-name">mehano_bot.py</span>
+        <span class="lang-tag">PYTHON 3</span>
+      </div>
+      <pre class="code-body"><div class="code-line"><span class="ln">1</span><span class="tk-comment"># ⚙️ МЕХАНО v2.0 — Секретен алгоритъм (не показвай на съдиите)</span></div>
+<div class="code-line"><span class="ln">2</span><span class="tk-keyword">import</span> <span class="tk-class">spike</span><span class="tk-string">, food, random, dreams, panic</span></div>
+<div class="code-line"><span class="ln">3</span><span class="tk-keyword">from</span> <span class="tk-class">mehano</span> <span class="tk-keyword">import</span> <span class="tk-fn">надежда, воля, храна</span></div>
+<div class="code-line"><span class="ln">4</span></div>
+<div class="code-line"><span class="ln">5</span><span class="tk-class">РОБОТ</span>         = <span class="tk-string">"Робо"</span>   <span class="tk-comment"># най-умният робот в Бургас</span></div>
+<div class="code-line"><span class="ln">6</span><span class="tk-class">ХРАНА_ИЗЯДЕНА</span> = <span class="tk-num">47</span>            <span class="tk-comment"># точно колкото commits</span></div>
+<div class="code-line"><span class="ln">7</span><span class="tk-class">ВЕРОЯТНОСТ_ПОБЕДА</span> = <span class="tk-num">0.999</span>    <span class="tk-comment"># останалото е за всеки случай</span></div>
+<div class="code-line"><span class="ln">8</span><span class="tk-class">МЕНТОР_СПИ</span>    = <span class="tk-class">True</span>          <span class="tk-comment"># винаги True след 22:00</span></div>
+<div class="code-line"><span class="ln">9</span></div>
+<div class="code-line"><span class="ln">10</span><span class="tk-keyword">def</span> <span class="tk-fn">зареди_робота</span>():</div>
+<div class="code-line"><span class="ln">11</span>    <span class="tk-keyword">if</span> <span class="tk-fn">food.is_empty</span>():</div>
+<div class="code-line"><span class="ln">12</span>        <span class="tk-keyword">raise</span> <span class="tk-class">CriticalError</span>(<span class="tk-string">"Екипът не може без храна 🍔"</span>)</div>
+<div class="code-line"><span class="ln">13</span>    <span class="tk-fn">print</span>(<span class="tk-string">"Робо-9000 се събужда..."</span>)</div>
+<div class="code-line"><span class="ln">14</span>    <span class="tk-fn">spike.motor_a.run</span>(speed=<span class="tk-num">100</span>)  <span class="tk-comment"># пълна газ, няма нерви</span></div>
+<div class="code-line"><span class="ln">15</span>    <span class="tk-keyword">return</span> <span class="tk-string">"🤖 Готов за битка"</span></div>
+<div class="code-line"><span class="ln">16</span></div>
+<div class="code-line"><span class="ln">17</span><span class="tk-keyword">def</span> <span class="tk-fn">изпълни_мисия</span>(мисия, опити=<span class="tk-num">3</span>):</div>
+<div class="code-line"><span class="ln">18</span>    <span class="tk-keyword">for</span> i <span class="tk-keyword">in</span> <span class="tk-fn">range</span>(опити):</div>
+<div class="code-line"><span class="ln">19</span>        <span class="tk-keyword">try</span>:</div>
+<div class="code-line"><span class="ln">20</span>            <span class="tk-fn">робот.направи_нещо_умно</span>(мисия)</div>
+<div class="code-line"><span class="ln">21</span>            <span class="tk-fn">print</span>(<span class="tk-string">f"Мисия {мисия} — успех! 🎉"</span>)</div>
+<div class="code-line"><span class="ln">22</span>            <span class="tk-keyword">break</span></div>
+<div class="code-line"><span class="ln">23</span>        <span class="tk-keyword">except</span> <span class="tk-class">LegoPадна</span>:</div>
+<div class="code-line"><span class="ln">24</span>            <span class="tk-fn">print</span>(<span class="tk-string">"Не видяха... надявам се 🙈"</span>)</div>
+<div class="code-line"><span class="ln">25</span>        <span class="tk-keyword">except</span> <span class="tk-class">РоботЗаспа</span>:</div>
+<div class="code-line"><span class="ln">26</span>            <span class="tk-fn">panic.execute</span>()  <span class="tk-comment"># събуди ментора</span></div>
+<div class="code-line"><span class="ln">27</span>        <span class="tk-keyword">except</span> <span class="tk-class">Exception</span> <span class="tk-keyword">as</span> e:</div>
+<div class="code-line"><span class="ln">28</span>            <span class="tk-fn">print</span>(<span class="tk-string">f"Хм. {e}. Питаме отбора."</span>)</div>
+<div class="code-line"><span class="ln">29</span></div>
+<div class="code-line"><span class="ln">30</span><span class="tk-keyword">def</span> <span class="tk-fn">спечели_турнира</span>():</div>
+<div class="code-line"><span class="ln">31</span>    <span class="tk-fn">зареди_робота</span>()</div>
+<div class="code-line"><span class="ln">32</span>    мисии = [<span class="tk-num">9</span>, <span class="tk-num">10</span>, <span class="tk-num">13</span>]</div>
+<div class="code-line"><span class="ln">33</span>    <span class="tk-keyword">for</span> мисия <span class="tk-keyword">in</span> мисии:</div>
+<div class="code-line"><span class="ln">34</span>        <span class="tk-fn">изпълни_мисия</span>(мисия)</div>
+<div class="code-line"><span class="ln">35</span>    <span class="tk-keyword">if</span> <span class="tk-fn">random.random</span>() &lt; <span class="tk-class">ВЕРОЯТНОСТ_ПОБЕДА</span>:</div>
+<div class="code-line"><span class="ln">36</span>        <span class="tk-keyword">return</span> <span class="tk-string">"🏆 Трофей получен. Поръчваме храна."</span></div>
+<div class="code-line"><span class="ln">37</span>    <span class="tk-keyword">else</span>:</div>
+<div class="code-line"><span class="ln">38</span>        <span class="tk-keyword">return</span> <span class="tk-string">"😤"</span></div>
+<div class="code-line"><span class="ln">39</span></div>
+<div class="code-line"><span class="ln">40</span><span class="tk-comment"># TODO: да попитаме ментора дали това е легално</span></div>
+<div class="code-line"><span class="ln">41</span><span class="tk-comment"># FIXME: Робо-9000 пак отиде наляво вместо надясно</span></div>
+<div class="code-line"><span class="ln">42</span><span class="tk-fn">print</span>(<span class="tk-fn">спечели_турнира</span>())<span class="cursor"></span></div></pre>
+      <div class="code-footer">
+        <div class="branch"><span class="live-dot"></span>main · 47 commits · MIT</div>
+        <a href="https://github.com/Djef-h/First-lego-league---mehano-/blob/main/fll.py" data-load-link data-msg="Отваряне на кода в GitHub... 🚀" class="btn btn-run btn-lg">▶ Run</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT -->
+<section id="project" class="section">
+  <div class="container" style="max-width:900px;">
+    <div class="section-header">
+      <span class="badge badge-purple" data-i18n="proj-badge">Проект</span>
+      <h2><span data-i18n="proj-title-1">Нашият</span> <span class="text-grad" data-i18n="proj-title-2">иновативен</span> <span data-i18n="proj-title-3">проект</span></h2>
+      <p data-i18n="proj-sub">Решение, което прави света около нас по-добро място.</p>
+    </div>
+    <div class="project-block">
+      <div class="project-header">
+        <div class="dots"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div>
+        <span class="file-name">project.md</span>
+        <span class="lang-tag"></span>
+      </div>
+      <div class="project-body">
+        <h3 class="project-title" data-i18n="proj-name">Автоматизирана система за обесоляване на артефакти</h3>
+        <div class="project-section">
+          <h4>## <span data-i18n="proj-s1-title">Проблем</span></h4>
+          <p data-i18n="proj-s1-desc">Традиционното обезсоляване на морски артефакти е бавен, изцяло ръчен и неточен процес, който изисква консерваторите да пътуват стотици километри за рутинни измервания, рискувайки необратимото разрушаване на ценни находки поради закъснели реакции.</p>
+        </div>
+        <div class="project-section">
+          <h4>## <span data-i18n="proj-s2-title">Решение</span></h4>
+          <p data-i18n="proj-s2-desc">Системата ASOA 2.0 автоматизира мониторинга и управлението на дезалинацията чрез IoT платформа и научен алгоритъм за засичане на „плато", който самостоятелно взима решения за смяна на водата и позволява на експертите да следят процеса в реално време от разстояние.</p>
+        </div>
+        <div class="project-section">
+          <h4>## <span data-i18n="proj-s3-title">Въздействие</span></h4>
+          <p data-i18n="proj-s3-desc">Внедряването на ASOA 2.0 съкращава времето за консервация с месеци, минимизира човешките грешки и разходите за логистика, като гарантира успешното спасяване и дигитализиране на световното подводно културно наследство за бъдещите поколения.</p>
+        </div>
+      </div>
+      <div class="code-footer">
+        <div class="branch"><span class="live-dot"></span>v2.0</div>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+          <a href="https://drive.google.com/drive/folders/1JfkDEAHzE26PmlVjOceU90hMgJUhKxNV?dmr=1&ec=wgc-drive-globalnav-goto" data-load-link data-msg="В МЕХАНО проектът никога не е „завършен"..." class="btn btn-purple btn-lg"><span data-i18n="proj-btn-docs">📄 Виж документацията</span></a>
+          <a href="https://asoa-2-0.vercel.app/" data-load-link data-msg="Отваряне на сайта на проекта... 🌐" class="btn btn-purple btn-lg"><span data-i18n="proj-btn-site">Виж сайта</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCS -->
+<section id="docs" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge badge-purple" data-i18n="docs-badge">Документи</span>
+      <h2><span data-i18n="docs-title-1">Архив на</span> <span class="text-grad" data-i18n="docs-title-2">отбора</span></h2>
+      <p data-i18n="docs-sub">Цялата ни работа на едно място — открита и достъпна.</p>
+    </div>
+    <div class="grid-4">
+      <a href="https://drive.google.com/drive/folders/1pkNxtbc_5aT8RLkeyaWXmX5R3W2jLFLT?dmr=1&ec=wgc-drive-globalnav-goto" data-load-link data-msg="Отваряне на Златните правила... 📖" class="card">
+        <div class="doc-icon di-cyan">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div class="doc-title" data-i18n="doc1-title">Златните правила на Механо</div>
+        <div class="doc-link c-cyan" data-i18n="doc-open">Отвори ↗</div>
+      </a>
+      <a href="https://drive.google.com/drive/folders/19Tqg8oOmj24J8g9Azah4YjSm_EUY7NfH?dmr=1&ec=wgc-drive-globalnav-goto" data-load-link data-msg="„Този път ще стане!"..." class="card">
+        <div class="doc-icon di-purple">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <div class="doc-title" data-i18n="doc2-title">Инструкции на робота</div>
+        <div class="doc-link" style="color:var(--purple);" data-i18n="doc-open">Отвори ↗</div>
+      </a>
+      <a href="https://docs.google.com/document/d/1UVPokITjS_qrf5jUWPVRBeSxqiv0j6vT/edit" data-load-link data-msg="Роботът работи перфектно пред отбора..." class="card">
+        <div class="doc-icon di-pink">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+        </div>
+        <div class="doc-title" data-i18n="doc3-title">Инженерна тетрадка</div>
+        <div class="doc-link c-pink" data-i18n="doc-open">Отвори ↗</div>
+      </a>
+      <a href="https://drive.google.com/drive/folders/1jevfHf_yTP0FisgBv4sSLYA5WUY4JVP2?dmr=1&ec=wgc-drive-globalnav-goto" data-load-link class="card">
+        <div class="doc-icon di-yellow">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        </div>
+        <div class="doc-title" data-i18n="doc4-title">3D модели</div>
+        <div class="doc-link c-yellow" data-i18n="doc-open">Отвори ↗</div>
+      </a>
+    </div>
+    <div class="center">
+      <a href="https://drive.google.com/drive/folders/1jevfHf_yTP0FisgBv4sSLYA5WUY4JVP2?dmr=1&ec=wgc-drive-globalnav-goto" data-load-link data-msg="Подреденото работно място приспива мозъка..." class="btn btn-hero btn-xl"><span data-i18n="docs-drive-btn">📁 Отвори Google Drive →</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge badge-pink" data-i18n="team-badge">Отбор</span>
+      <h2><span data-i18n="team-title-1">Хората зад</span> <span class="text-grad" data-i18n="team-title-2">Механо</span></h2>
+      <p data-i18n="team-sub">Седем уникални умове. Една обща мисия.</p>
+    </div>
+    <div class="team-grid">
+      <div class="card member"><div class="avatar-wrap"><div class="avatar-glow av-1"></div><div class="avatar av-1">БГ</div><div class="num-badge">01</div></div><div class="member-name">инж. Бояна Георгиева</div><div class="member-role" data-i18n="role-mentor">Ментор</div></div>
+      <div class="card member"><div class="avatar-wrap"><div class="avatar-glow av-1"></div><div class="avatar av-1">НЧ</div><div class="num-badge">02</div></div><div class="member-name">инж. Никола Чанев</div><div class="member-role" data-i18n="role-mentor">Ментор</div></div>
+      <div class="card member"><div class="avatar-wrap"><div class="avatar-glow av-1"></div><div class="avatar av-1">ДХ</div><div class="num-badge">03</div></div><div class="member-name">Джефер Ходжов</div><div class="member-role" data-i18n="role-programmer">Програмист</div></div>
+      <div class="card member"><div class="avatar-wrap"><div class="avatar-glow av-2"></div><div class="avatar av-2">БЦ</div><div class="num-badge">04</div></div><div class="member-name">Борис Царев</div><div class="member-role" data-i18n="role-tech">Техник</div></div>
+      <div class="card member"><div class="avatar-wrap"><div class="avatar-glow av-3"></div><div class="avatar av-3">ДЖ</div><div class="num-badge">05</div></div><div class="member-name">Дейвид Желязков</div><div class="member-role" data-i18n="role-builder">Конструктор</div></div>
+      <div class="card member"><div class="avatar-wrap"><div class="avatar-glow av-4"></div><div class="avatar av-4">ДХ</div><div class="num-badge">06</div></div><div class="member-name">Данаил Хитров</div><div class="member-role" data-i18n="role-programmer">Програмист</div></div>
+      <div class="card member"><div class="avatar-wrap"><div class="avatar-glow av-5"></div><div class="avatar av-5">ИП</div><div class="num-badge">07</div></div><div class="member-name">Иван Пашов</div><div class="member-role" data-i18n="role-builder">Конструктор</div></div>
+      <div class="card member"><div class="avatar-wrap"><div class="avatar-glow av-6"></div><div class="avatar av-6">ДЙ</div><div class="num-badge">08</div></div><div class="member-name">Дилян Йорданов</div><div class="member-role" data-i18n="role-3d">3D моделиране</div></div>
+      <div class="card member"><div class="avatar-wrap"><div class="avatar-glow av-7"></div><div class="avatar av-7">КП</div><div class="num-badge">09</div></div><div class="member-name">Кристиан Петков</div><div class="member-role" data-i18n="role-research">Проучване</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNER -->
+<section id="partner" class="section">
+  <div class="container" style="max-width:1000px;">
+    <div class="partner-card">
+      <div class="partner-blob-1"></div>
+      <div class="partner-blob-2"></div>
+      <div class="partner-inner">
+        <div>
+          <span class="badge badge-yellow" data-i18n="partner-badge">Официален партньор</span>
+          <h2><span data-i18n="partner-title-1">Заедно правим</span> <span class="text-grad" data-i18n="partner-title-2">бъдещето</span></h2>
+          <p data-i18n="partner-desc">За отбора — Отборът Power Vortex е от Шумен – град с богата история, известен като мястото, откъдето започва българската държава. Градът съчетава традиции и развитие в образованието и технологиите. Отборът представя своето училище – СУ „Панайот Волов", с голяма мотивация, екипен дух и стремеж към развитие и иновации. Благодарим на нашия официален партньор за подкрепата, ресурсите и доверието. Вашият принос превръща мечтите ни в реалност.</p>
+        </div>
+        <div class="partner-logo">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjF3SpfjXqbx87N9uiRVUJVyjJ_mr0uG714w&s" alt="Power Vortex" style="width:160px;height:160px;object-fit:cover;border-radius:22px;box-shadow:0 8px 30px rgba(245,158,11,0.25);" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="container" style="max-width:1000px;">
+    <div class="section-header">
+      <span class="badge badge-cyan" data-i18n="contact-badge">Контакт</span>
+      <h2><span data-i18n="contact-title-1">Свържи се с</span> <span class="text-grad" data-i18n="contact-title-2">нас</span></h2>
+      <p data-i18n="contact-sub">Имаш въпрос, идея или искаш да си партньор? Пиши ни.</p>
+    </div>
+    <div class="contact-grid">
+      <a href="mailto:teamehano@gmail.com" class="card contact-card">
+        <div class="contact-icon-wrap ci-cyan">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <h3 data-i18n="contact-email-title">Имейл</h3>
+        <p>teamehano@gmail.com</p>
+      </a>
+      <div class="card contact-card">
+        <div class="contact-icon-wrap ci-purple">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l1.9 5.8h6.1l-4.9 3.6 1.9 5.8L12 14.6l-4.9 3.6 1.9-5.8L4 8.8h6.1z"/></svg>
+        </div>
+        <h3 data-i18n="contact-social-title">Социални мрежи</h3>
+        <div class="socials">
+          <a href="https://www.instagram.com/team.mehano/?hl=bg" target="_blank" rel="noopener" class="social" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://www.facebook.com/share/1baHPgzvYh/" target="_blank" rel="noopener" class="social" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+      <a href="https://pgmee.com/wp/" target="_blank" rel="noopener" class="card contact-card">
+        <div class="contact-icon-wrap ci-green">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3 data-i18n="contact-location-title">Локация</h3>
+        <p data-i18n="contact-location-val">Бургас, България</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT PLACE -->
+<section id="project-place" class="section">
+  <div class="container" style="max-width:1100px;">
+    <div class="section-header">
+      <span class="badge badge-pink" data-i18n="place-badge">Място на проекта</span>
+      <h2><span data-i18n="place-title-1">Къде се случва</span> <span class="text-grad" data-i18n="place-title-2">магията</span></h2>
+      <p data-i18n="place-sub">Тук се събираме, проектираме и програмираме нашия робот.</p>
+    </div>
+    <div class="card project-place-card">
+      <div class="pp-logo-img">
+        <img src="https://yt3.googleusercontent.com/ytc/AIdro_mmsK8C3BWwe2jIt-Gk-ebvjI1R1j9qMB2X__AD2eQN-Q=s900-c-k-c0x00ffffff-no-rj" alt="ПГМЕЕ лого" />
+      </div>
+      <div class="pp-body">
+        <h3 data-i18n="place-school">Професионална гимназия по механоелектроника и електроника</h3>
+        <p class="pp-address" data-i18n="place-address">ул. Стефан Стамболов 67</p>
+        <p class="pp-desc" data-i18n="place-desc">Нашата база — училищната STEM лаборатория, където се ражда всеки прототип, всяка линия код и всяка нова идея.</p>
+        <a href="https://www.google.com/maps/place/%D0%9F%D1%80%D0%BE%D1%84%D0%B5%D1%81%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D0%BD%D0%B0+%D0%B3%D0%B8%D0%BC%D0%BD%D0%B0%D0%B7%D0%B8%D1%8F+%D0%BF%D0%BE+%D0%BC%D0%B5%D1%85%D0%B0%D0%BD%D0%BE%D0%B5%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D0%BA%D0%B0+%D0%B8+%D0%B5%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%BD%D0%B8%D0%BA%D0%B0/@42.5069916,27.4692173,17z" target="_blank" rel="noopener" data-load-link data-msg="Отваряне на Google Maps... 📍" class="btn btn-cyan btn-lg" style="margin-top:18px;"><span data-i18n="place-map-btn">📍 Виж на картата</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo-img">
+        <img src="https://scontent.fsof9-1.fna.fbcdn.net/v/t39.30808-6/475967058_122103989282752743_8280670784437931498_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=iummlJ37nFAQ7kNvwGCCXDy&_nc_oc=Adphg8hgdNRN-n0oO2JOlkFi5zno5xp8BH5bZLIuDrWMX6w83IMB-Zi3HkdZ9cxy6K0&_nc_zt=23&_nc_ht=scontent.fsof9-1.fna&_nc_gid=-xF0cwIaIaJNGRp9gys_KQ&oh=00_Af1fuH1wlT8k37O42xOrFAvw8skhAhafIOoKywTB0O867Q&oe=69F101B5" alt="Механо лого" />
+      </div>
+      <strong>МЕХАНО</strong>
+      <span>· FLL 2025-26</span>
+    </div>
+    <div class="footer-tag"><span class="heart">♥</span> <span data-i18n="footer-tag">Механо Отбор 2025-26</span></div>
+  </div>
+</footer>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+// ============================================================
+// TRANSLATIONS — 16 езика
+// ============================================================
+const TRANSLATIONS = {
+  bg: {
+    "nav-about":"За нас","nav-code":"Код","nav-project":"Проект","nav-docs":"Документи",
+    "nav-team":"Отбор","nav-place":"Място","nav-contact":"Контакт","nav-cta":"Свържи се",
+    "hero-badge":"✨ FLL Отбор 2025-26","hero-title":"МЕХАНО",
+    "hero-desc":"Млад FIRST LEGO League отбор от инженери, мислители и мечтатели. Изграждаме роботи, решаваме проблеми и оставяме следа.",
+    "hero-btn-docs":"📄 Документи","hero-btn-code":"💻 Код","hero-btn-more":"Научи повече →","scroll":"Scroll",
+    "about-badge":"За нас","about-title-1":"Кои сме","about-title-2":"ние",
+    "about-sub":"Отбор от седем младежи, обединени от страст към инженерството и иновациите.",
+    "stat-members":"Члена","stat-seasons":"Сезона","stat-passion":"Отдаденост","stat-ideas":"Идеи",
+    "feat1-title":"Дизайн на робот","feat1-desc":"Проектираме, конструираме и програмираме LEGO® роботи, оптимизирани за прецизност и скорост.",
+    "feat2-title":"Иновативен проект","feat2-desc":"Решаваме реални проблеми с креативни инженерни идеи, вдъхновени от темата на сезона.",
+    "feat3-title":"Основни ценности","feat3-desc":"Уважение, откритост, въздействие, приобщаване, работа в екип и забавление — нашата ДНК.",
+    "btn-presentation":"ПРЕЗЕНТАЦИЯ","btn-folder":"ПАПКА","btn-video":"Видео","btn-code":"Код",
+    "code-badge":"Код","code-title-1":"Нашият","code-title-2":"код","code-title-3":"на победата",
+    "code-sub":"Чист Python за SPIKE Prime. Open-source, модулен, оптимизиран.",
+    "proj-badge":"Проект","proj-title-1":"Нашият","proj-title-2":"иновативен","proj-title-3":"проект",
+    "proj-sub":"Решение, което прави света около нас по-добро място.",
+    "proj-name":"Автоматизирана система за обесоляване на артефакти",
+    "proj-s1-title":"Проблем","proj-s1-desc":"Традиционното обезсоляване на морски артефакти е бавен, изцяло ръчен и неточен процес, който изисква консерваторите да пътуват стотици километри за рутинни измервания, рискувайки необратимото разрушаване на ценни находки поради закъснели реакции.",
+    "proj-s2-title":"Решение","proj-s2-desc":"Системата ASOA 2.0 автоматизира мониторинга и управлението на дезалинацията чрез IoT платформа и научен алгоритъм за засичане на „плато", който самостоятелно взима решения за смяна на водата и позволява на експертите да следят процеса в реално време от разстояние.",
+    "proj-s3-title":"Въздействие","proj-s3-desc":"Внедряването на ASOA 2.0 съкращава времето за консервация с месеци, минимизира човешките грешки и разходите за логистика, като гарантира успешното спасяване и дигитализиране на световното подводно културно наследство за бъдещите поколения.",
+    "proj-btn-docs":"📄 Виж документацията","proj-btn-site":"Виж сайта",
+    "docs-badge":"Документи","docs-title-1":"Архив на","docs-title-2":"отбора",
+    "docs-sub":"Цялата ни работа на едно място — открита и достъпна.",
+    "doc1-title":"Златните правила на Механо","doc2-title":"Инструкции на робота",
+    "doc3-title":"Инженерна тетрадка","doc4-title":"3D модели","doc-open":"Отвори ↗",
+    "docs-drive-btn":"📁 Отвори Google Drive →",
+    "team-badge":"Отбор","team-title-1":"Хората зад","team-title-2":"Механо",
+    "team-sub":"Седем уникални умове. Една обща мисия.",
+    "role-mentor":"Ментор","role-programmer":"Програмист","role-tech":"Техник",
+    "role-builder":"Конструктор","role-3d":"3D моделиране","role-research":"Проучване",
+    "partner-badge":"Официален партньор","partner-title-1":"Заедно правим","partner-title-2":"бъдещето",
+    "partner-desc":"За отбора — Отборът Power Vortex е от Шумен – град с богата история, известен като мястото, откъдето започва българската държава. Отборът представя своето училище – СУ „Панайот Волов", с голяма мотивация и екипен дух. Благодарим на нашия официален партньор за подкрепата, ресурсите и доверието.",
+    "contact-badge":"Контакт","contact-title-1":"Свържи се с","contact-title-2":"нас",
+    "contact-sub":"Имаш въпрос, идея или искаш да си партньор? Пиши ни.",
+    "contact-email-title":"Имейл","contact-social-title":"Социални мрежи",
+    "contact-location-title":"Локация","contact-location-val":"Бургас, България",
+    "place-badge":"Място на проекта","place-title-1":"Къде се случва","place-title-2":"магията",
+    "place-sub":"Тук се събираме, проектираме и програмираме нашия робот.",
+    "place-school":"Професионална гимназия по механоелектроника и електроника",
+    "place-address":"ул. Стефан Стамболов 67",
+    "place-desc":"Нашата база — училищната STEM лаборатория, където се ражда всеки прототип, всяка линия код и всяка нова идея.",
+    "place-map-btn":"📍 Виж на картата","footer-tag":"Механо Отбор 2025-26",
+    "contact-toast":"Преминаване към контакт... 📬"
+  },
+  en: {
+    "nav-about":"About","nav-code":"Code","nav-project":"Project","nav-docs":"Documents",
+    "nav-team":"Team","nav-place":"Location","nav-contact":"Contact","nav-cta":"Get in touch",
+    "hero-badge":"✨ FLL Team 2025-26","hero-title":"MEHANO",
+    "hero-desc":"A young FIRST LEGO League team of engineers, thinkers and dreamers. We build robots, solve problems and leave a mark.",
+    "hero-btn-docs":"📄 Documents","hero-btn-code":"💻 Code","hero-btn-more":"Learn more →","scroll":"Scroll",
+    "about-badge":"About us","about-title-1":"Who","about-title-2":"we are",
+    "about-sub":"A team of seven young people united by a passion for engineering and innovation.",
+    "stat-members":"Members","stat-seasons":"Seasons","stat-passion":"Dedication","stat-ideas":"Ideas",
+    "feat1-title":"Robot Design","feat1-desc":"We design, build and program LEGO® robots optimized for precision and speed.",
+    "feat2-title":"Innovative Project","feat2-desc":"We solve real problems with creative engineering ideas inspired by the season's theme.",
+    "feat3-title":"Core Values","feat3-desc":"Respect, openness, impact, inclusion, teamwork and fun — our DNA.",
+    "btn-presentation":"PRESENTATION","btn-folder":"FOLDER","btn-video":"Video","btn-code":"Code",
+    "code-badge":"Code","code-title-1":"Our","code-title-2":"winning","code-title-3":"code",
+    "code-sub":"Clean Python for SPIKE Prime. Open-source, modular, optimized.",
+    "proj-badge":"Project","proj-title-1":"Our","proj-title-2":"innovative","proj-title-3":"project",
+    "proj-sub":"A solution that makes the world around us a better place.",
+    "proj-name":"Automated Artifact Desalination System",
+    "proj-s1-title":"Problem","proj-s1-desc":"Traditional desalination of marine artifacts is a slow, entirely manual and inaccurate process requiring conservators to travel hundreds of kilometers for routine measurements, risking irreversible damage to valuable finds due to delayed reactions.",
+    "proj-s2-title":"Solution","proj-s2-desc":"The ASOA 2.0 system automates monitoring and desalination management via an IoT platform and a scientific 'plateau detection' algorithm that independently makes water-change decisions and allows experts to monitor the process in real time remotely.",
+    "proj-s3-title":"Impact","proj-s3-desc":"Implementing ASOA 2.0 reduces conservation time by months, minimizes human error and logistics costs, ensuring successful rescue and digitization of the world's underwater cultural heritage for future generations.",
+    "proj-btn-docs":"📄 View documentation","proj-btn-site":"View website",
+    "docs-badge":"Documents","docs-title-1":"Team","docs-title-2":"archive",
+    "docs-sub":"All our work in one place — open and accessible.",
+    "doc1-title":"Mehano's Golden Rules","doc2-title":"Robot Instructions",
+    "doc3-title":"Engineering Notebook","doc4-title":"3D Models","doc-open":"Open ↗",
+    "docs-drive-btn":"📁 Open Google Drive →",
+    "team-badge":"Team","team-title-1":"The people behind","team-title-2":"Mehano",
+    "team-sub":"Seven unique minds. One shared mission.",
+    "role-mentor":"Mentor","role-programmer":"Programmer","role-tech":"Technician",
+    "role-builder":"Builder","role-3d":"3D Modeling","role-research":"Research",
+    "partner-badge":"Official Partner","partner-title-1":"Together we build","partner-title-2":"the future",
+    "partner-desc":"Team Power Vortex is from Shumen — a city with a rich history. The team represents their school, SU 'Panayot Volov', with great motivation and team spirit. We thank our official partner for their support, resources and trust.",
+    "contact-badge":"Contact","contact-title-1":"Get in touch","contact-title-2":"with us",
+    "contact-sub":"Have a question, idea or want to partner? Write to us.",
+    "contact-email-title":"Email","contact-social-title":"Social Media",
+    "contact-location-title":"Location","contact-location-val":"Burgas, Bulgaria",
+    "place-badge":"Project location","place-title-1":"Where the","place-title-2":"magic happens",
+    "place-sub":"This is where we meet, design and program our robot.",
+    "place-school":"Professional High School of Mechatronics and Electronics",
+    "place-address":"Stefan Stambolov St. 67",
+    "place-desc":"Our base — the school STEM laboratory, where every prototype, every line of code and every new idea is born.",
+    "place-map-btn":"📍 View on map","footer-tag":"Mehano Team 2025-26",
+    "contact-toast":"Going to contact... 📬"
+  },
+  de: {
+    "nav-about":"Über uns","nav-code":"Code","nav-project":"Projekt","nav-docs":"Dokumente",
+    "nav-team":"Team","nav-place":"Standort","nav-contact":"Kontakt","nav-cta":"Kontaktieren",
+    "hero-badge":"✨ FLL Team 2025-26","hero-title":"MEHANO",
+    "hero-desc":"Ein junges FIRST LEGO League Team aus Ingenieuren, Denkern und Träumern. Wir bauen Roboter, lösen Probleme und hinterlassen Spuren.",
+    "hero-btn-docs":"📄 Dokumente","hero-btn-code":"💻 Code","hero-btn-more":"Mehr erfahren →","scroll":"Scroll",
+    "about-badge":"Über uns","about-title-1":"Wer","about-title-2":"wir sind",
+    "about-sub":"Ein Team aus sieben jungen Menschen, vereint durch Leidenschaft für Technik und Innovation.",
+    "stat-members":"Mitglieder","stat-seasons":"Saisons","stat-passion":"Hingabe","stat-ideas":"Ideen",
+    "feat1-title":"Roboter-Design","feat1-desc":"Wir entwerfen, bauen und programmieren LEGO® Roboter, optimiert für Präzision und Geschwindigkeit.",
+    "feat2-title":"Innovatives Projekt","feat2-desc":"Wir lösen reale Probleme mit kreativen Ingenieurideen, inspiriert vom Thema der Saison.",
+    "feat3-title":"Grundwerte","feat3-desc":"Respekt, Offenheit, Wirkung, Inklusion, Teamarbeit und Spaß — unsere DNA.",
+    "btn-presentation":"PRÄSENTATION","btn-folder":"ORDNER","btn-video":"Video","btn-code":"Code",
+    "code-badge":"Code","code-title-1":"Unser","code-title-2":"Sieges","code-title-3":"Code",
+    "code-sub":"Sauberes Python für SPIKE Prime. Open-Source, modular, optimiert.",
+    "proj-badge":"Projekt","proj-title-1":"Unser","proj-title-2":"innovatives","proj-title-3":"Projekt",
+    "proj-sub":"Eine Lösung, die die Welt um uns besser macht.",
+    "proj-name":"Automatisiertes Artefakt-Entsalzungssystem",
+    "proj-s1-title":"Problem","proj-s1-desc":"Die traditionelle Entsalzung mariner Artefakte ist ein langsamer, manueller und ungenauer Prozess, der Konservatoren zwingt, hunderte Kilometer für Routinemessungen zu reisen.",
+    "proj-s2-title":"Lösung","proj-s2-desc":"Das ASOA 2.0-System automatisiert die Überwachung der Entsalzung über eine IoT-Plattform und einen wissenschaftlichen Algorithmus zur Plateauerkennung.",
+    "proj-s3-title":"Auswirkung","proj-s3-desc":"ASOA 2.0 verkürzt die Konservierungszeit um Monate, minimiert menschliche Fehler und sichert das Unterwasser-Kulturerbe für zukünftige Generationen.",
+    "proj-btn-docs":"📄 Dokumentation ansehen","proj-btn-site":"Website ansehen",
+    "docs-badge":"Dokumente","docs-title-1":"Team","docs-title-2":"Archiv",
+    "docs-sub":"Unsere gesamte Arbeit an einem Ort — offen und zugänglich.",
+    "doc1-title":"Mehanos Goldene Regeln","doc2-title":"Roboteranweisungen",
+    "doc3-title":"Ingenieurtagebuch","doc4-title":"3D-Modelle","doc-open":"Öffnen ↗",
+    "docs-drive-btn":"📁 Google Drive öffnen →",
+    "team-badge":"Team","team-title-1":"Die Menschen hinter","team-title-2":"Mehano",
+    "team-sub":"Sieben einzigartige Köpfe. Eine gemeinsame Mission.",
+    "role-mentor":"Mentor","role-programmer":"Programmierer","role-tech":"Techniker",
+    "role-builder":"Konstrukteur","role-3d":"3D-Modellierung","role-research":"Forschung",
+    "partner-badge":"Offizieller Partner","partner-title-1":"Gemeinsam gestalten wir","partner-title-2":"die Zukunft",
+    "partner-desc":"Team Power Vortex kommt aus Schumen. Wir danken unserem offiziellen Partner für die Unterstützung, Ressourcen und das Vertrauen.",
+    "contact-badge":"Kontakt","contact-title-1":"Kontaktiere","contact-title-2":"uns",
+    "contact-sub":"Hast du eine Frage, Idee oder möchtest Partner werden? Schreib uns.",
+    "contact-email-title":"E-Mail","contact-social-title":"Soziale Medien",
+    "contact-location-title":"Standort","contact-location-val":"Burgas, Bulgarien",
+    "place-badge":"Projektstandort","place-title-1":"Wo die","place-title-2":"Magie geschieht",
+    "place-sub":"Hier treffen wir uns, entwerfen und programmieren unseren Roboter.",
+    "place-school":"Berufliches Gymnasium für Mechatronik und Elektronik",
+    "place-address":"Stefan Stambolov Str. 67",
+    "place-desc":"Unsere Basis — das schuleigene STEM-Labor, wo jeder Prototyp, jede Codezeile und jede neue Idee entsteht.",
+    "place-map-btn":"📍 Auf Karte ansehen","footer-tag":"Mehano Team 2025-26",
+    "contact-toast":"Weiterleitung zu Kontakt... 📬"
+  },
+  el: {
+    "nav-about":"Σχετικά","nav-code":"Κώδικας","nav-project":"Έργο","nav-docs":"Έγγραφα",
+    "nav-team":"Ομάδα","nav-place":"Τοποθεσία","nav-contact":"Επαφή","nav-cta":"Επικοινωνία",
+    "hero-badge":"✨ FLL Ομάδα 2025-26","hero-title":"ΜΕΧΑΝΟ",
+    "hero-desc":"Μια νέα ομάδα FIRST LEGO League από μηχανικούς, στοχαστές και ονειροπόλους. Χτίζουμε ρομπότ, λύνουμε προβλήματα και αφήνουμε αποτύπωμα.",
+    "hero-btn-docs":"📄 Έγγραφα","hero-btn-code":"💻 Κώδικας","hero-btn-more":"Μάθε περισσότερα →","scroll":"Κύλιση",
+    "about-badge":"Σχετικά με εμάς","about-title-1":"Ποιοι","about-title-2":"είμαστε",
+    "about-sub":"Ομάδα επτά νέων που ενώνει το πάθος για μηχανική και καινοτομία.",
+    "stat-members":"Μέλη","stat-seasons":"Σεζόν","stat-passion":"Αφοσίωση","stat-ideas":"Ιδέες",
+    "feat1-title":"Σχεδιασμός Ρομπότ","feat1-desc":"Σχεδιάζουμε, κατασκευάζουμε και προγραμματίζουμε LEGO® ρομπότ βελτιστοποιημένα για ακρίβεια και ταχύτητα.",
+    "feat2-title":"Καινοτόμο Έργο","feat2-desc":"Λύνουμε πραγματικά προβλήματα με δημιουργικές ιδέες εμπνευσμένες από το θέμα της σεζόν.",
+    "feat3-title":"Βασικές Αξίες","feat3-desc":"Σεβασμός, ανοιχτοσύνη, αντίκτυπος, συμπερίληψη, ομαδική εργασία και διασκέδαση — το DNA μας.",
+    "btn-presentation":"ΠΑΡΟΥΣΙΑΣΗ","btn-folder":"ΦΑΚΕΛΟΣ","btn-video":"Βίντεο","btn-code":"Κώδικας",
+    "code-badge":"Κώδικας","code-title-1":"Ο","code-title-2":"νικητήριος","code-title-3":"κώδικάς μας",
+    "code-sub":"Καθαρή Python για SPIKE Prime. Ανοικτού κώδικα, αρθρωτός, βελτιστοποιημένος.",
+    "proj-badge":"Έργο","proj-title-1":"Το","proj-title-2":"καινοτόμο","proj-title-3":"έργο μας",
+    "proj-sub":"Μια λύση που κάνει τον κόσμο γύρω μας καλύτερο μέρος.",
+    "proj-name":"Αυτοματοποιημένο Σύστημα Αφαλάτωσης Αντικειμένων",
+    "proj-s1-title":"Πρόβλημα","proj-s1-desc":"Η παραδοσιακή αφαλάτωση θαλάσσιων αντικειμένων είναι μια αργή, εξ ολοκλήρου χειροκίνητη και ανακριβής διαδικασία.",
+    "proj-s2-title":"Λύση","proj-s2-desc":"Το σύστημα ASOA 2.0 αυτοματοποιεί την παρακολούθηση μέσω πλατφόρμας IoT και επιστημονικού αλγορίθμου ανίχνευσης πλατό.",
+    "proj-s3-title":"Αντίκτυπος","proj-s3-desc":"Η υιοθέτηση του ASOA 2.0 μειώνει τον χρόνο συντήρησης κατά μήνες και διασφαλίζει την προστασία της υποθαλάσσιας πολιτιστικής κληρονομιάς.",
+    "proj-btn-docs":"📄 Δείτε την τεκμηρίωση","proj-btn-site":"Δείτε τον ιστότοπο",
+    "docs-badge":"Έγγραφα","docs-title-1":"Αρχείο","docs-title-2":"ομάδας",
+    "docs-sub":"Όλη η δουλειά μας σε ένα μέρος — ανοικτή και προσβάσιμη.",
+    "doc1-title":"Χρυσοί Κανόνες Mechano","doc2-title":"Οδηγίες Ρομπότ",
+    "doc3-title":"Τετράδιο Μηχανικής","doc4-title":"3D Μοντέλα","doc-open":"Άνοιγμα ↗",
+    "docs-drive-btn":"📁 Άνοιγμα Google Drive →",
+    "team-badge":"Ομάδα","team-title-1":"Οι άνθρωποι πίσω από το","team-title-2":"Mechano",
+    "team-sub":"Επτά μοναδικά μυαλά. Μια κοινή αποστολή.",
+    "role-mentor":"Μέντορας","role-programmer":"Προγραμματιστής","role-tech":"Τεχνικός",
+    "role-builder":"Κατασκευαστής","role-3d":"3D Μοντελοποίηση","role-research":"Έρευνα",
+    "partner-badge":"Επίσημος Συνεργάτης","partner-title-1":"Μαζί χτίζουμε","partner-title-2":"το μέλλον",
+    "partner-desc":"Η ομάδα Power Vortex είναι από τη Σούμεν. Ευχαριστούμε τον επίσημο συνεργάτη μας για την υποστήριξη και την εμπιστοσύνη.",
+    "contact-badge":"Επαφή","contact-title-1":"Επικοινωνήστε","contact-title-2":"μαζί μας",
+    "contact-sub":"Έχεις ερώτηση, ιδέα ή θέλεις να γίνεις συνεργάτης; Γράψε μας.",
+    "contact-email-title":"Email","contact-social-title":"Κοινωνικά Δίκτυα",
+    "contact-location-title":"Τοποθεσία","contact-location-val":"Μπουργκάς, Βουλγαρία",
+    "place-badge":"Τοποθεσία Έργου","place-title-1":"Εκεί που γίνεται","place-title-2":"η μαγεία",
+    "place-sub":"Εδώ συναντιόμαστε, σχεδιάζουμε και προγραμματίζουμε το ρομπότ μας.",
+    "place-school":"Επαγγελματικό Λύκειο Μηχατρονικής και Ηλεκτρονικής",
+    "place-address":"Οδός Στέφαν Σταμπόλοφ 67",
+    "place-desc":"Η βάση μας — το STEM εργαστήριο του σχολείου, όπου γεννιέται κάθε πρωτότυπο, κάθε γραμμή κώδικα και κάθε νέα ιδέα.",
+    "place-map-btn":"📍 Δείτε στον χάρτη","footer-tag":"Ομάδα Mechano 2025-26",
+    "contact-toast":"Μετάβαση στις επαφές... 📬"
+  },
+  zh: {
+    "nav-about":"关于我们","nav-code":"代码","nav-project":"项目","nav-docs":"文件",
+    "nav-team":"团队","nav-place":"地点","nav-contact":"联系","nav-cta":"联系我们",
+    "hero-badge":"✨ FLL 队伍 2025-26","hero-title":"机械诺",
+    "hero-desc":"一支由工程师、思想家和梦想家组成的年轻 FIRST LEGO League 队伍。我们构建机器人、解决问题、留下印记。",
+    "hero-btn-docs":"📄 文件","hero-btn-code":"💻 代码","hero-btn-more":"了解更多 →","scroll":"滚动",
+    "about-badge":"关于我们","about-title-1":"我们","about-title-2":"是谁",
+    "about-sub":"七名年轻人组成的团队，因对工程和创新的热情而团结在一起。",
+    "stat-members":"成员","stat-seasons":"赛季","stat-passion":"专注","stat-ideas":"创意",
+    "feat1-title":"机器人设计","feat1-desc":"我们设计、构建和编程针对精度和速度优化的 LEGO® 机器人。",
+    "feat2-title":"创新项目","feat2-desc":"我们用受赛季主题启发的创意工程想法解决现实问题。",
+    "feat3-title":"核心价值观","feat3-desc":"尊重、开放、影响、包容、团队合作和乐趣——我们的DNA。",
+    "btn-presentation":"演示文稿","btn-folder":"文件夹","btn-video":"视频","btn-code":"代码",
+    "code-badge":"代码","code-title-1":"我们的","code-title-2":"制胜","code-title-3":"代码",
+    "code-sub":"适用于 SPIKE Prime 的干净 Python。开源、模块化、优化。",
+    "proj-badge":"项目","proj-title-1":"我们的","proj-title-2":"创新","proj-title-3":"项目",
+    "proj-sub":"让我们周围的世界变得更美好的解决方案。",
+    "proj-name":"自动化文物脱盐系统",
+    "proj-s1-title":"问题","proj-s1-desc":"传统的海洋文物脱盐是一个缓慢、完全手动且不精确的过程，需要文物保护者行驶数百公里进行例行测量。",
+    "proj-s2-title":"解决方案","proj-s2-desc":"ASOA 2.0 系统通过物联网平台和科学的"平台检测"算法自动化监控和脱盐管理。",
+    "proj-s3-title":"影响","proj-s3-desc":"ASOA 2.0 的实施将保护时间缩短数月，最大限度地减少人为错误，确保为后代成功保护水下文化遗产。",
+    "proj-btn-docs":"📄 查看文档","proj-btn-site":"查看网站",
+    "docs-badge":"文件","docs-title-1":"团队","docs-title-2":"档案",
+    "docs-sub":"我们所有的工作都在一个地方——开放且可访问。",
+    "doc1-title":"机械诺黄金法则","doc2-title":"机器人说明",
+    "doc3-title":"工程笔记本","doc4-title":"3D 模型","doc-open":"打开 ↗",
+    "docs-drive-btn":"📁 打开 Google Drive →",
+    "team-badge":"团队","team-title-1":"机械诺背后的","team-title-2":"人们",
+    "team-sub":"七个独特的思维。一个共同的使命。",
+    "role-mentor":"导师","role-programmer":"程序员","role-tech":"技术员",
+    "role-builder":"建造者","role-3d":"3D 建模","role-research":"研究",
+    "partner-badge":"官方合作伙伴","partner-title-1":"我们共同创造","partner-title-2":"未来",
+    "partner-desc":"Power Vortex 队伍来自舒门市。感谢我们的官方合作伙伴提供的支持、资源和信任。",
+    "contact-badge":"联系","contact-title-1":"联系","contact-title-2":"我们",
+    "contact-sub":"有问题、想法或想成为合作伙伴？给我们写信。",
+    "contact-email-title":"电子邮件","contact-social-title":"社交媒体",
+    "contact-location-title":"位置","contact-location-val":"保加利亚布尔加斯",
+    "place-badge":"项目地点","place-title-1":"魔法","place-title-2":"发生的地方",
+    "place-sub":"这里是我们相聚、设计和编程机器人的地方。",
+    "place-school":"机电一体化与电子专业高中",
+    "place-address":"斯特凡·斯坦博洛夫街 67 号",
+    "place-desc":"我们的基地——学校 STEM 实验室，每个原型、每行代码和每个新想法都在这里诞生。",
+    "place-map-btn":"📍 在地图上查看","footer-tag":"机械诺队伍 2025-26",
+    "contact-toast":"正在跳转联系页面... 📬"
+  },
+  ja: {
+    "nav-about":"私たちについて","nav-code":"コード","nav-project":"プロジェクト","nav-docs":"書類",
+    "nav-team":"チーム","nav-place":"場所","nav-contact":"連絡先","nav-cta":"お問い合わせ",
+    "hero-badge":"✨ FLL チーム 2025-26","hero-title":"メカノ",
+    "hero-desc":"エンジニア、思想家、夢想家からなる若いFIRST LEGO Leagueチーム。ロボットを作り、問題を解決し、足跡を残します。",
+    "hero-btn-docs":"📄 ドキュメント","hero-btn-code":"💻 コード","hero-btn-more":"もっと詳しく →","scroll":"スクロール",
+    "about-badge":"私たちについて","about-title-1":"私たちは","about-title-2":"誰ですか",
+    "about-sub":"工学と革新への情熱で結ばれた7人の若者チーム。",
+    "stat-members":"メンバー","stat-seasons":"シーズン","stat-passion":"献身","stat-ideas":"アイデア",
+    "feat1-title":"ロボットデザイン","feat1-desc":"精度と速度に最適化されたLEGO®ロボットを設計、構築、プログラムします。",
+    "feat2-title":"革新的プロジェクト","feat2-desc":"シーズンのテーマに触発されたクリエイティブなエンジニアリングアイデアで実際の問題を解決します。",
+    "feat3-title":"コアバリュー","feat3-desc":"尊重、開放性、影響力、包摂、チームワーク、楽しさ — 私たちのDNA。",
+    "btn-presentation":"プレゼンテーション","btn-folder":"フォルダ","btn-video":"ビデオ","btn-code":"コード",
+    "code-badge":"コード","code-title-1":"私たちの","code-title-2":"勝利の","code-title-3":"コード",
+    "code-sub":"SPIKE Prime用のクリーンなPython。オープンソース、モジュラー、最適化済み。",
+    "proj-badge":"プロジェクト","proj-title-1":"私たちの","proj-title-2":"革新的な","proj-title-3":"プロジェクト",
+    "proj-sub":"私たちの周りの世界をより良い場所にするソリューション。",
+    "proj-name":"自動化アーティファクト脱塩システム",
+    "proj-s1-title":"問題","proj-s1-desc":"海洋遺物の従来の脱塩は、遅く、完全に手動で不正確なプロセスです。",
+    "proj-s2-title":"解決策","proj-s2-desc":"ASOA 2.0システムは、IoTプラットフォームと科学的なプラトー検出アルゴリズムを通じて脱塩の監視と管理を自動化します。",
+    "proj-s3-title":"影響","proj-s3-desc":"ASOA 2.0の実装により保存時間が数ヶ月短縮され、人為的ミスが最小化されます。",
+    "proj-btn-docs":"📄 ドキュメントを見る","proj-btn-site":"サイトを見る",
+    "docs-badge":"書類","docs-title-1":"チーム","docs-title-2":"アーカイブ",
+    "docs-sub":"私たちのすべての作業が一か所に — オープンでアクセス可能。",
+    "doc1-title":"メカノのゴールデンルール","doc2-title":"ロボット説明書",
+    "doc3-title":"エンジニアリングノート","doc4-title":"3Dモデル","doc-open":"開く ↗",
+    "docs-drive-btn":"📁 Google Driveを開く →",
+    "team-badge":"チーム","team-title-1":"メカノを支える","team-title-2":"人々",
+    "team-sub":"7つのユニークな頭脳。一つの共通ミッション。",
+    "role-mentor":"メンター","role-programmer":"プログラマー","role-tech":"技術者",
+    "role-builder":"ビルダー","role-3d":"3Dモデリング","role-research":"リサーチ",
+    "partner-badge":"公式パートナー","partner-title-1":"共に創る","partner-title-2":"未来",
+    "partner-desc":"Power Vortexチームはシュメン市出身です。サポート、リソース、信頼に感謝します。",
+    "contact-badge":"連絡先","contact-title-1":"お問い合わせ","contact-title-2":"ください",
+    "contact-sub":"質問、アイデア、パートナーシップについてはご連絡ください。",
+    "contact-email-title":"メール","contact-social-title":"ソーシャルメディア",
+    "contact-location-title":"場所","contact-location-val":"ブルガス、ブルガリア",
+    "place-badge":"プロジェクト場所","place-title-1":"魔法が","place-title-2":"起きる場所",
+    "place-sub":"ここで集まり、設計し、ロボットをプログラムします。",
+    "place-school":"メカトロニクス・電子専門高校",
+    "place-address":"ステファン・スタンボロフ通り67番地",
+    "place-desc":"私たちの拠点 — すべてのプロトタイプ、コードの行、新しいアイデアが生まれる学校のSTEM実験室。",
+    "place-map-btn":"📍 地図で見る","footer-tag":"メカノチーム 2025-26",
+    "contact-toast":"連絡先へ移動中... 📬"
+  },
+  fr: {
+    "nav-about":"À propos","nav-code":"Code","nav-project":"Projet","nav-docs":"Documents",
+    "nav-team":"Équipe","nav-place":"Lieu","nav-contact":"Contact","nav-cta":"Nous contacter",
+    "hero-badge":"✨ Équipe FLL 2025-26","hero-title":"MEHANO",
+    "hero-desc":"Une jeune équipe FIRST LEGO League composée d'ingénieurs, de penseurs et de rêveurs. Nous construisons des robots, résolvons des problèmes et laissons notre empreinte.",
+    "hero-btn-docs":"📄 Documents","hero-btn-code":"💻 Code","hero-btn-more":"En savoir plus →","scroll":"Défiler",
+    "about-badge":"À propos","about-title-1":"Qui","about-title-2":"sommes-nous",
+    "about-sub":"Une équipe de sept jeunes réunis par la passion de l'ingénierie et de l'innovation.",
+    "stat-members":"Membres","stat-seasons":"Saisons","stat-passion":"Dévouement","stat-ideas":"Idées",
+    "feat1-title":"Conception de robot","feat1-desc":"Nous concevons, construisons et programmons des robots LEGO® optimisés pour la précision et la vitesse.",
+    "feat2-title":"Projet innovant","feat2-desc":"Nous résolvons des problèmes réels avec des idées d'ingénierie créatives inspirées du thème de la saison.",
+    "feat3-title":"Valeurs fondamentales","feat3-desc":"Respect, ouverture, impact, inclusion, travail d'équipe et amusement — notre ADN.",
+    "btn-presentation":"PRÉSENTATION","btn-folder":"DOSSIER","btn-video":"Vidéo","btn-code":"Code",
+    "code-badge":"Code","code-title-1":"Notre","code-title-2":"code","code-title-3":"gagnant",
+    "code-sub":"Python propre pour SPIKE Prime. Open-source, modulaire, optimisé.",
+    "proj-badge":"Projet","proj-title-1":"Notre","proj-title-2":"projet","proj-title-3":"innovant",
+    "proj-sub":"Une solution qui rend le monde autour de nous meilleur.",
+    "proj-name":"Système automatisé de désalination d'artefacts",
+    "proj-s1-title":"Problème","proj-s1-desc":"La désalination traditionnelle des artefacts marins est un processus lent, entièrement manuel et imprécis.",
+    "proj-s2-title":"Solution","proj-s2-desc":"Le système ASOA 2.0 automatise la surveillance de la désalination via une plateforme IoT et un algorithme de détection de plateau.",
+    "proj-s3-title":"Impact","proj-s3-desc":"L'implémentation d'ASOA 2.0 réduit le temps de conservation de plusieurs mois et assure la préservation du patrimoine culturel subaquatique.",
+    "proj-btn-docs":"📄 Voir la documentation","proj-btn-site":"Voir le site",
+    "docs-badge":"Documents","docs-title-1":"Archive","docs-title-2":"de l'équipe",
+    "docs-sub":"Tout notre travail en un seul endroit — ouvert et accessible.",
+    "doc1-title":"Les règles d'or de Mehano","doc2-title":"Instructions du robot",
+    "doc3-title":"Carnet d'ingénierie","doc4-title":"Modèles 3D","doc-open":"Ouvrir ↗",
+    "docs-drive-btn":"📁 Ouvrir Google Drive →",
+    "team-badge":"Équipe","team-title-1":"Les personnes derrière","team-title-2":"Mehano",
+    "team-sub":"Sept esprits uniques. Une mission commune.",
+    "role-mentor":"Mentor","role-programmer":"Programmeur","role-tech":"Technicien",
+    "role-builder":"Constructeur","role-3d":"Modélisation 3D","role-research":"Recherche",
+    "partner-badge":"Partenaire officiel","partner-title-1":"Ensemble nous construisons","partner-title-2":"l'avenir",
+    "partner-desc":"L'équipe Power Vortex vient de Choumen. Nous remercions notre partenaire officiel pour son soutien, ses ressources et sa confiance.",
+    "contact-badge":"Contact","contact-title-1":"Contactez","contact-title-2":"nous",
+    "contact-sub":"Une question, une idée ou vous souhaitez devenir partenaire ? Écrivez-nous.",
+    "contact-email-title":"Email","contact-social-title":"Réseaux sociaux",
+    "contact-location-title":"Localisation","contact-location-val":"Bourgas, Bulgarie",
+    "place-badge":"Lieu du projet","place-title-1":"Là où la","place-title-2":"magie opère",
+    "place-sub":"C'est ici que nous nous réunissons, concevons et programmons notre robot.",
+    "place-school":"Lycée professionnel de mécatronique et d'électronique",
+    "place-address":"Rue Stefan Stambolov 67",
+    "place-desc":"Notre base — le laboratoire STEM de l'école, où naît chaque prototype, chaque ligne de code et chaque nouvelle idée.",
+    "place-map-btn":"📍 Voir sur la carte","footer-tag":"Équipe Mehano 2025-26",
+    "contact-toast":"Accès à la page contact... 📬"
+  },
+  es: {
+    "nav-about":"Sobre nosotros","nav-code":"Código","nav-project":"Proyecto","nav-docs":"Documentos",
+    "nav-team":"Equipo","nav-place":"Ubicación","nav-contact":"Contacto","nav-cta":"Contáctanos",
+    "hero-badge":"✨ Equipo FLL 2025-26","hero-title":"MEHANO",
+    "hero-desc":"Un joven equipo de FIRST LEGO League formado por ingenieros, pensadores y soñadores. Construimos robots, resolvemos problemas y dejamos huella.",
+    "hero-btn-docs":"📄 Documentos","hero-btn-code":"💻 Código","hero-btn-more":"Saber más →","scroll":"Desplazar",
+    "about-badge":"Sobre nosotros","about-title-1":"Quiénes","about-title-2":"somos",
+    "about-sub":"Un equipo de siete jóvenes unidos por la pasión por la ingeniería y la innovación.",
+    "stat-members":"Miembros","stat-seasons":"Temporadas","stat-passion":"Dedicación","stat-ideas":"Ideas",
+    "feat1-title":"Diseño de robot","feat1-desc":"Diseñamos, construimos y programamos robots LEGO® optimizados para precisión y velocidad.",
+    "feat2-title":"Proyecto innovador","feat2-desc":"Resolvemos problemas reales con ideas de ingeniería creativas inspiradas en el tema de la temporada.",
+    "feat3-title":"Valores fundamentales","feat3-desc":"Respeto, apertura, impacto, inclusión, trabajo en equipo y diversión — nuestro ADN.",
+    "btn-presentation":"PRESENTACIÓN","btn-folder":"CARPETA","btn-video":"Vídeo","btn-code":"Código",
+    "code-badge":"Código","code-title-1":"Nuestro","code-title-2":"código","code-title-3":"ganador",
+    "code-sub":"Python limpio para SPIKE Prime. Código abierto, modular, optimizado.",
+    "proj-badge":"Proyecto","proj-title-1":"Nuestro","proj-title-2":"proyecto","proj-title-3":"innovador",
+    "proj-sub":"Una solución que hace del mundo que nos rodea un lugar mejor.",
+    "proj-name":"Sistema automatizado de desalinización de artefactos",
+    "proj-s1-title":"Problema","proj-s1-desc":"La desalinización tradicional de artefactos marinos es un proceso lento, completamente manual e impreciso.",
+    "proj-s2-title":"Solución","proj-s2-desc":"El sistema ASOA 2.0 automatiza el monitoreo de la desalinización mediante una plataforma IoT y un algoritmo de detección de meseta.",
+    "proj-s3-title":"Impacto","proj-s3-desc":"La implementación de ASOA 2.0 reduce el tiempo de conservación en meses y garantiza la preservación del patrimonio cultural subacuático.",
+    "proj-btn-docs":"📄 Ver documentación","proj-btn-site":"Ver sitio web",
+    "docs-badge":"Documentos","docs-title-1":"Archivo","docs-title-2":"del equipo",
+    "docs-sub":"Todo nuestro trabajo en un solo lugar — abierto y accesible.",
+    "doc1-title":"Reglas de oro de Mehano","doc2-title":"Instrucciones del robot",
+    "doc3-title":"Cuaderno de ingeniería","doc4-title":"Modelos 3D","doc-open":"Abrir ↗",
+    "docs-drive-btn":"📁 Abrir Google Drive →",
+    "team-badge":"Equipo","team-title-1":"Las personas detrás de","team-title-2":"Mehano",
+    "team-sub":"Siete mentes únicas. Una misión común.",
+    "role-mentor":"Mentor","role-programmer":"Programador","role-tech":"Técnico",
+    "role-builder":"Constructor","role-3d":"Modelado 3D","role-research":"Investigación",
+    "partner-badge":"Socio oficial","partner-title-1":"Juntos construimos","partner-title-2":"el futuro",
+    "partner-desc":"El equipo Power Vortex es de Shumen. Gracias a nuestro socio oficial por el apoyo, los recursos y la confianza.",
+    "contact-badge":"Contacto","contact-title-1":"Ponte en contacto","contact-title-2":"con nosotros",
+    "contact-sub":"¿Tienes una pregunta, idea o quieres ser socio? Escríbenos.",
+    "contact-email-title":"Correo","contact-social-title":"Redes sociales",
+    "contact-location-title":"Ubicación","contact-location-val":"Burgas, Bulgaria",
+    "place-badge":"Lugar del proyecto","place-title-1":"Donde ocurre","place-title-2":"la magia",
+    "place-sub":"Aquí nos reunimos, diseñamos y programamos nuestro robot.",
+    "place-school":"Instituto Profesional de Mecatrónica y Electrónica",
+    "place-address":"Calle Stefan Stambolov 67",
+    "place-desc":"Nuestra base — el laboratorio STEM de la escuela, donde nace cada prototipo, cada línea de código y cada nueva idea.",
+    "place-map-btn":"📍 Ver en el mapa","footer-tag":"Equipo Mehano 2025-26",
+    "contact-toast":"Yendo a contacto... 📬"
+  },
+  ru: {
+    "nav-about":"О нас","nav-code":"Код","nav-project":"Проект","nav-docs":"Документы",
+    "nav-team":"Команда","nav-place":"Место","nav-contact":"Контакт","nav-cta":"Связаться",
+    "hero-badge":"✨ Команда FLL 2025-26","hero-title":"МЕХАНО",
+    "hero-desc":"Молодая команда FIRST LEGO League из инженеров, мыслителей и мечтателей. Строим роботов, решаем проблемы, оставляем след.",
+    "hero-btn-docs":"📄 Документы","hero-btn-code":"💻 Код","hero-btn-more":"Узнать больше →","scroll":"Прокрутить",
+    "about-badge":"О нас","about-title-1":"Кто","about-title-2":"мы",
+    "about-sub":"Команда из семи молодых людей, объединённых страстью к инженерии и инновациям.",
+    "stat-members":"Участники","stat-seasons":"Сезоны","stat-passion":"Преданность","stat-ideas":"Идеи",
+    "feat1-title":"Дизайн робота","feat1-desc":"Проектируем, строим и программируем LEGO® роботов, оптимизированных для точности и скорости.",
+    "feat2-title":"Инновационный проект","feat2-desc":"Решаем реальные проблемы с помощью творческих инженерных идей, вдохновлённых темой сезона.",
+    "feat3-title":"Основные ценности","feat3-desc":"Уважение, открытость, влияние, инклюзивность, командная работа и веселье — наша ДНК.",
+    "btn-presentation":"ПРЕЗЕНТАЦИЯ","btn-folder":"ПАПКА","btn-video":"Видео","btn-code":"Код",
+    "code-badge":"Код","code-title-1":"Наш","code-title-2":"победный","code-title-3":"код",
+    "code-sub":"Чистый Python для SPIKE Prime. Open-source, модульный, оптимизированный.",
+    "proj-badge":"Проект","proj-title-1":"Наш","proj-title-2":"инновационный","proj-title-3":"проект",
+    "proj-sub":"Решение, которое делает мир вокруг нас лучше.",
+    "proj-name":"Автоматизированная система обессоливания артефактов",
+    "proj-s1-title":"Проблема","proj-s1-desc":"Традиционное обессоливание морских артефактов — медленный, полностью ручной и неточный процесс.",
+    "proj-s2-title":"Решение","proj-s2-desc":"Система ASOA 2.0 автоматизирует мониторинг обессоливания через IoT-платформу и алгоритм обнаружения плато.",
+    "proj-s3-title":"Воздействие","proj-s3-desc":"Внедрение ASOA 2.0 сокращает время консервации на месяцы и обеспечивает сохранение подводного культурного наследия.",
+    "proj-btn-docs":"📄 Смотреть документацию","proj-btn-site":"Смотреть сайт",
+    "docs-badge":"Документы","docs-title-1":"Архив","docs-title-2":"команды",
+    "docs-sub":"Вся наша работа в одном месте — открытая и доступная.",
+    "doc1-title":"Золотые правила Механо","doc2-title":"Инструкции робота",
+    "doc3-title":"Инженерная тетрадь","doc4-title":"3D модели","doc-open":"Открыть ↗",
+    "docs-drive-btn":"📁 Открыть Google Drive →",
+    "team-badge":"Команда","team-title-1":"Люди за","team-title-2":"Механо",
+    "team-sub":"Семь уникальных умов. Одна общая миссия.",
+    "role-mentor":"Ментор","role-programmer":"Программист","role-tech":"Техник",
+    "role-builder":"Конструктор","role-3d":"3D моделирование","role-research":"Исследование",
+    "partner-badge":"Официальный партнёр","partner-title-1":"Вместе мы строим","partner-title-2":"будущее",
+    "partner-desc":"Команда Power Vortex из Шумена. Благодарим нашего официального партнёра за поддержку, ресурсы и доверие.",
+    "contact-badge":"Контакт","contact-title-1":"Свяжитесь","contact-title-2":"с нами",
+    "contact-sub":"Есть вопрос, идея или хотите стать партнёром? Напишите нам.",
+    "contact-email-title":"Электронная почта","contact-social-title":"Социальные сети",
+    "contact-location-title":"Местоположение","contact-location-val":"Бургас, Болгария",
+    "place-badge":"Место проекта","place-title-1":"Где происходит","place-title-2":"волшебство",
+    "place-sub":"Здесь мы собираемся, проектируем и программируем нашего робота.",
+    "place-school":"Профессиональная гимназия по мехатронике и электронике",
+    "place-address":"ул. Стефан Стамболов 67",
+    "place-desc":"Наша база — школьная STEM-лаборатория, где рождается каждый прототип, каждая строка кода и каждая новая идея.",
+    "place-map-btn":"📍 Посмотреть на карте","footer-tag":"Команда Механо 2025-26",
+    "contact-toast":"Переход к контакту... 📬"
+  },
+  tr: {
+    "nav-about":"Hakkında","nav-code":"Kod","nav-project":"Proje","nav-docs":"Belgeler",
+    "nav-team":"Takım","nav-place":"Konum","nav-contact":"İletişim","nav-cta":"İletişime geç",
+    "hero-badge":"✨ FLL Takımı 2025-26","hero-title":"MEHANO",
+    "hero-desc":"Mühendisler, düşünürler ve hayalperestlerden oluşan genç bir FIRST LEGO League takımı. Robot inşa eder, problem çözer ve iz bırakırız.",
+    "hero-btn-docs":"📄 Belgeler","hero-btn-code":"💻 Kod","hero-btn-more":"Daha fazla →","scroll":"Kaydır",
+    "about-badge":"Hakkımızda","about-title-1":"Biz","about-title-2":"kimiz",
+    "about-sub":"Mühendislik ve inovasyona olan tutkuyla birleşen yedi gençten oluşan takım.",
+    "stat-members":"Üyeler","stat-seasons":"Sezonlar","stat-passion":"Adanmışlık","stat-ideas":"Fikirler",
+    "feat1-title":"Robot Tasarımı","feat1-desc":"Hassasiyet ve hız için optimize edilmiş LEGO® robotlar tasarlar, inşa eder ve programlarız.",
+    "feat2-title":"Yenilikçi Proje","feat2-desc":"Sezonun temasından ilham alan yaratıcı mühendislik fikirleriyle gerçek sorunları çözüyoruz.",
+    "feat3-title":"Temel Değerler","feat3-desc":"Saygı, açıklık, etki, kapsayıcılık, takım çalışması ve eğlence — DNA'mız.",
+    "btn-presentation":"SUNUM","btn-folder":"KLASÖR","btn-video":"Video","btn-code":"Kod",
+    "code-badge":"Kod","code-title-1":"Bizim","code-title-2":"kazanan","code-title-3":"kodumuz",
+    "code-sub":"SPIKE Prime için temiz Python. Açık kaynak, modüler, optimize edilmiş.",
+    "proj-badge":"Proje","proj-title-1":"Bizim","proj-title-2":"yenilikçi","proj-title-3":"projemiz",
+    "proj-sub":"Etrafımızdaki dünyayı daha iyi bir yer yapan bir çözüm.",
+    "proj-name":"Otomatik Eser Tuzdan Arındırma Sistemi",
+    "proj-s1-title":"Sorun","proj-s1-desc":"Deniz eserlerinin geleneksel tuzdan arındırılması yavaş, tamamen manuel ve hatalı bir süreçtir.",
+    "proj-s2-title":"Çözüm","proj-s2-desc":"ASOA 2.0 sistemi, IoT platformu ve plato tespit algoritması aracılığıyla tuzdan arındırma izlemeyi otomatikleştirir.",
+    "proj-s3-title":"Etki","proj-s3-desc":"ASOA 2.0'ın uygulanması koruma süresini aylarca kısaltır ve su altı kültürel mirasının korunmasını sağlar.",
+    "proj-btn-docs":"📄 Belgeleri görüntüle","proj-btn-site":"Siteyi görüntüle",
+    "docs-badge":"Belgeler","docs-title-1":"Takım","docs-title-2":"arşivi",
+    "docs-sub":"Tüm çalışmamız tek bir yerde — açık ve erişilebilir.",
+    "doc1-title":"Mehano'nun Altın Kuralları","doc2-title":"Robot Talimatları",
+    "doc3-title":"Mühendislik Defteri","doc4-title":"3D Modeller","doc-open":"Aç ↗",
+    "docs-drive-btn":"📁 Google Drive'ı aç →",
+    "team-badge":"Takım","team-title-1":"Mehano'nun arkasındaki","team-title-2":"insanlar",
+    "team-sub":"Yedi benzersiz zihin. Bir ortak misyon.",
+    "role-mentor":"Mentor","role-programmer":"Programcı","role-tech":"Teknisyen",
+    "role-builder":"İnşaatçı","role-3d":"3D Modelleme","role-research":"Araştırma",
+    "partner-badge":"Resmi Ortak","partner-title-1":"Birlikte inşa ediyoruz","partner-title-2":"geleceği",
+    "partner-desc":"Power Vortex takımı Şumen'den. Desteği, kaynakları ve güveni için resmi ortağımıza teşekkürler.",
+    "contact-badge":"İletişim","contact-title-1":"Bize","contact-title-2":"ulaşın",
+    "contact-sub":"Sorunuz, fikriniz var ya da ortak olmak mı istiyorsunuz? Yazın bize.",
+    "contact-email-title":"E-posta","contact-social-title":"Sosyal Medya",
+    "contact-location-title":"Konum","contact-location-val":"Burgaz, Bulgaristan",
+    "place-badge":"Proje konumu","place-title-1":"Sihrin","place-title-2":"gerçekleştiği yer",
+    "place-sub":"Burada toplanır, tasarlar ve robotumuzu programlarız.",
+    "place-school":"Mekatronik ve Elektronik Meslek Lisesi",
+    "place-address":"Stefan Stambolov Cad. 67",
+    "place-desc":"Üssümüz — her prototip, her kod satırı ve her yeni fikrin doğduğu okul STEM laboratuvarı.",
+    "place-map-btn":"📍 Haritada görüntüle","footer-tag":"Mehano Takımı 2025-26",
+    "contact-toast":"İletişim sayfasına gidiliyor... 📬"
+  },
+  ar: {
+    "nav-about":"عنّا","nav-code":"الكود","nav-project":"المشروع","nav-docs":"المستندات",
+    "nav-team":"الفريق","nav-place":"الموقع","nav-contact":"التواصل","nav-cta":"تواصل معنا",
+    "hero-badge":"✨ فريق FLL 2025-26","hero-title":"ميكانو",
+    "hero-desc":"فريق شاب من FIRST LEGO League يضم مهندسين ومفكرين وحالمين. نبني روبوتات، نحل مشاكل، ونترك أثراً.",
+    "hero-btn-docs":"📄 المستندات","hero-btn-code":"💻 الكود","hero-btn-more":"اعرف أكثر ←","scroll":"تمرير",
+    "about-badge":"عنّا","about-title-1":"من","about-title-2":"نحن",
+    "about-sub":"فريق من سبعة شباب يجمعهم الشغف بالهندسة والابتكار.",
+    "stat-members":"أعضاء","stat-seasons":"مواسم","stat-passion":"تفانٍ","stat-ideas":"أفكار",
+    "feat1-title":"تصميم الروبوت","feat1-desc":"نصمم ونبني ونبرمج روبوتات LEGO® محسّنة للدقة والسرعة.",
+    "feat2-title":"مشروع مبتكر","feat2-desc":"نحل مشكلات حقيقية بأفكار هندسية إبداعية مستوحاة من موضوع الموسم.",
+    "feat3-title":"القيم الأساسية","feat3-desc":"الاحترام والانفتاح والتأثير والشمول والعمل الجماعي والمتعة — حمضنا النووي.",
+    "btn-presentation":"عرض تقديمي","btn-folder":"مجلد","btn-video":"فيديو","btn-code":"كود",
+    "code-badge":"الكود","code-title-1":"كودنا","code-title-2":"الفائز","code-title-3":"",
+    "code-sub":"Python نظيف لـ SPIKE Prime. مفتوح المصدر، معياري، محسّن.",
+    "proj-badge":"المشروع","proj-title-1":"مشروعنا","proj-title-2":"المبتكر","proj-title-3":"",
+    "proj-sub":"حل يجعل العالم من حولنا مكاناً أفضل.",
+    "proj-name":"نظام تحلية المياه للآثار الآلي",
+    "proj-s1-title":"المشكلة","proj-s1-desc":"إزالة الملح التقليدية من الآثار البحرية عملية بطيئة وإجراء يدوي كامل وغير دقيق.",
+    "proj-s2-title":"الحل","proj-s2-desc":"يعمل نظام ASOA 2.0 على أتمتة مراقبة التحلية عبر منصة إنترنت الأشياء وخوارزمية الكشف عن الهضبة.",
+    "proj-s3-title":"التأثير","proj-s3-desc":"يقلل تطبيق ASOA 2.0 من وقت الحفظ بأشهر ويضمن حماية التراث الثقافي تحت الماء للأجيال القادمة.",
+    "proj-btn-docs":"📄 عرض التوثيق","proj-btn-site":"عرض الموقع",
+    "docs-badge":"المستندات","docs-title-1":"أرشيف","docs-title-2":"الفريق",
+    "docs-sub":"جميع أعمالنا في مكان واحد — مفتوحة ومتاحة.",
+    "doc1-title":"القواعد الذهبية لميكانو","doc2-title":"تعليمات الروبوت",
+    "doc3-title":"دفتر الهندسة","doc4-title":"نماذج ثلاثية الأبعاد","doc-open":"فتح ↗",
+    "docs-drive-btn":"📁 فتح Google Drive →",
+    "team-badge":"الفريق","team-title-1":"الأشخاص وراء","team-title-2":"ميكانو",
+    "team-sub":"سبعة عقول فريدة. مهمة مشتركة واحدة.",
+    "role-mentor":"مرشد","role-programmer":"مبرمج","role-tech":"فني",
+    "role-builder":"مُنشئ","role-3d":"نمذجة ثلاثية الأبعاد","role-research":"بحث",
+    "partner-badge":"شريك رسمي","partner-title-1":"معاً نبني","partner-title-2":"المستقبل",
+    "partner-desc":"فريق Power Vortex من مدينة شومن. نشكر شريكنا الرسمي على الدعم والموارد والثقة.",
+    "contact-badge":"التواصل","contact-title-1":"تواصل","contact-title-2":"معنا",
+    "contact-sub":"لديك سؤال أو فكرة أو تريد أن تكون شريكاً؟ اكتب لنا.",
+    "contact-email-title":"البريد الإلكتروني","contact-social-title":"التواصل الاجتماعي",
+    "contact-location-title":"الموقع","contact-location-val":"بورغاس، بلغاريا",
+    "place-badge":"موقع المشروع","place-title-1":"حيث يحدث","place-title-2":"السحر",
+    "place-sub":"هنا نجتمع ونصمم ونبرمج روبوتنا.",
+    "place-school":"مدرسة الميكاترونيكس والإلكترونيات المهنية",
+    "place-address":"شارع ستيفان ستامبولوف 67",
+    "place-desc":"قاعدتنا — مختبر STEM المدرسي، حيث يولد كل نموذج أولي وكل سطر كود وكل فكرة جديدة.",
+    "place-map-btn":"📍 عرض على الخريطة","footer-tag":"فريق ميكانو 2025-26",
+    "contact-toast":"الانتقال إلى التواصل... 📬"
+  },
+  ko: {
+    "nav-about":"소개","nav-code":"코드","nav-project":"프로젝트","nav-docs":"문서",
+    "nav-team":"팀","nav-place":"위치","nav-contact":"연락처","nav-cta":"연락하기",
+    "hero-badge":"✨ FLL 팀 2025-26","hero-title":"메카노",
+    "hero-desc":"엔지니어, 사상가, 몽상가로 이루어진 젊은 FIRST LEGO League 팀. 우리는 로봇을 만들고, 문제를 해결하며, 흔적을 남깁니다.",
+    "hero-btn-docs":"📄 문서","hero-btn-code":"💻 코드","hero-btn-more":"더 알아보기 →","scroll":"스크롤",
+    "about-badge":"우리에 대해","about-title-1":"우리는","about-title-2":"누구인가",
+    "about-sub":"공학과 혁신에 대한 열정으로 뭉친 일곱 명의 젊은이 팀.",
+    "stat-members":"멤버","stat-seasons":"시즌","stat-passion":"헌신","stat-ideas":"아이디어",
+    "feat1-title":"로봇 설계","feat1-desc":"정밀도와 속도에 최적화된 LEGO® 로봇을 설계하고 만들고 프로그래밍합니다.",
+    "feat2-title":"혁신적 프로젝트","feat2-desc":"시즌 주제에서 영감을 받은 창의적인 엔지니어링 아이디어로 실제 문제를 해결합니다.",
+    "feat3-title":"핵심 가치","feat3-desc":"존중, 개방성, 영향력, 포용, 팀워크, 즐거움 — 우리의 DNA.",
+    "btn-presentation":"발표","btn-folder":"폴더","btn-video":"비디오","btn-code":"코드",
+    "code-badge":"코드","code-title-1":"우리의","code-title-2":"승리","code-title-3":"코드",
+    "code-sub":"SPIKE Prime용 깨끗한 Python. 오픈 소스, 모듈식, 최적화.",
+    "proj-badge":"프로젝트","proj-title-1":"우리의","proj-title-2":"혁신적인","proj-title-3":"프로젝트",
+    "proj-sub":"우리 주변 세계를 더 좋은 곳으로 만드는 솔루션.",
+    "proj-name":"자동화 유물 탈염 시스템",
+    "proj-s1-title":"문제","proj-s1-desc":"해양 유물의 전통적인 탈염은 느리고 완전히 수동적이며 부정확한 과정입니다.",
+    "proj-s2-title":"솔루션","proj-s2-desc":"ASOA 2.0 시스템은 IoT 플랫폼과 과학적 고원 감지 알고리즘을 통해 탈염 모니터링을 자동화합니다.",
+    "proj-s3-title":"영향","proj-s3-desc":"ASOA 2.0 구현은 보존 시간을 몇 달 단축하고 미래 세대를 위한 수중 문화유산 보호를 보장합니다.",
+    "proj-btn-docs":"📄 문서 보기","proj-btn-site":"사이트 보기",
+    "docs-badge":"문서","docs-title-1":"팀","docs-title-2":"아카이브",
+    "docs-sub":"우리의 모든 작업이 한 곳에 — 공개적이고 접근 가능합니다.",
+    "doc1-title":"메카노의 황금 규칙","doc2-title":"로봇 설명서",
+    "doc3-title":"엔지니어링 노트북","doc4-title":"3D 모델","doc-open":"열기 ↗",
+    "docs-drive-btn":"📁 Google Drive 열기 →",
+    "team-badge":"팀","team-title-1":"메카노 뒤의","team-title-2":"사람들",
+    "team-sub":"일곱 개의 독특한 마음. 하나의 공통 사명.",
+    "role-mentor":"멘토","role-programmer":"프로그래머","role-tech":"기술자",
+    "role-builder":"제작자","role-3d":"3D 모델링","role-research":"연구",
+    "partner-badge":"공식 파트너","partner-title-1":"함께 만드는","partner-title-2":"미래",
+    "partner-desc":"Power Vortex 팀은 슈멘 출신입니다. 지원, 자원, 신뢰에 감사드립니다.",
+    "contact-badge":"연락처","contact-title-1":"연락","contact-title-2":"하기",
+    "contact-sub":"질문, 아이디어 또는 파트너십에 대해 문의하세요.",
+    "contact-email-title":"이메일","contact-social-title":"소셜 미디어",
+    "contact-location-title":"위치","contact-location-val":"불가리아 부르가스",
+    "place-badge":"프로젝트 위치","place-title-1":"마법이","place-title-2":"일어나는 곳",
+    "place-sub":"여기서 모여 설계하고 로봇을 프로그래밍합니다.",
+    "place-school":"메카트로닉스 및 전자 전문 고등학교",
+    "place-address":"스테판 스탐볼로프 67번지",
+    "place-desc":"우리의 기지 — 모든 프로토타입, 모든 코드 라인, 모든 새로운 아이디어가 탄생하는 학교 STEM 실험실.",
+    "place-map-btn":"📍 지도에서 보기","footer-tag":"메카노 팀 2025-26",
+    "contact-toast":"연락처로 이동 중... 📬"
+  },
+  pl: {
+    "nav-about":"O nas","nav-code":"Kod","nav-project":"Projekt","nav-docs":"Dokumenty",
+    "nav-team":"Drużyna","nav-place":"Miejsce","nav-contact":"Kontakt","nav-cta":"Skontaktuj się",
+    "hero-badge":"✨ Drużyna FLL 2025-26","hero-title":"MEHANO",
+    "hero-desc":"Młoda drużyna FIRST LEGO League złożona z inżynierów, myślicieli i marzycieli. Budujemy roboty, rozwiązujemy problemy i zostawiamy ślad.",
+    "hero-btn-docs":"📄 Dokumenty","hero-btn-code":"💻 Kod","hero-btn-more":"Dowiedz się więcej →","scroll":"Przewiń",
+    "about-badge":"O nas","about-title-1":"Kim","about-title-2":"jesteśmy",
+    "about-sub":"Drużyna siedmiu młodych ludzi zjednoczonych pasją do inżynierii i innowacji.",
+    "stat-members":"Członkowie","stat-seasons":"Sezony","stat-passion":"Zaangażowanie","stat-ideas":"Pomysły",
+    "feat1-title":"Projekt robota","feat1-desc":"Projektujemy, budujemy i programujemy roboty LEGO® zoptymalizowane pod kątem precyzji i szybkości.",
+    "feat2-title":"Innowacyjny projekt","feat2-desc":"Rozwiązujemy prawdziwe problemy kreatywnymi pomysłami inżynierskimi inspirowanymi tematem sezonu.",
+    "feat3-title":"Podstawowe wartości","feat3-desc":"Szacunek, otwartość, wpływ, włączenie, praca zespołowa i zabawa — nasze DNA.",
+    "btn-presentation":"PREZENTACJA","btn-folder":"FOLDER","btn-video":"Wideo","btn-code":"Kod",
+    "code-badge":"Kod","code-title-1":"Nasz","code-title-2":"zwycięski","code-title-3":"kod",
+    "code-sub":"Czysty Python dla SPIKE Prime. Otwarty kod źródłowy, modularny, zoptymalizowany.",
+    "proj-badge":"Projekt","proj-title-1":"Nasz","proj-title-2":"innowacyjny","proj-title-3":"projekt",
+    "proj-sub":"Rozwiązanie, które sprawia, że świat wokół nas jest lepszym miejscem.",
+    "proj-name":"Automatyczny system odsalania artefaktów",
+    "proj-s1-title":"Problem","proj-s1-desc":"Tradycyjne odsalanie artefaktów morskich to powolny, całkowicie ręczny i niedokładny proces.",
+    "proj-s2-title":"Rozwiązanie","proj-s2-desc":"System ASOA 2.0 automatyzuje monitorowanie odsalania za pomocą platformy IoT i algorytmu wykrywania plateau.",
+    "proj-s3-title":"Wpływ","proj-s3-desc":"Wdrożenie ASOA 2.0 skraca czas konserwacji o miesiące i zapewnia ochronę podwodnego dziedzictwa kulturowego.",
+    "proj-btn-docs":"📄 Zobacz dokumentację","proj-btn-site":"Zobacz stronę",
+    "docs-badge":"Dokumenty","docs-title-1":"Archiwum","docs-title-2":"drużyny",
+    "docs-sub":"Cała nasza praca w jednym miejscu — otwarta i dostępna.",
+    "doc1-title":"Złote zasady Mehano","doc2-title":"Instrukcje robota",
+    "doc3-title":"Zeszyt inżynierski","doc4-title":"Modele 3D","doc-open":"Otwórz ↗",
+    "docs-drive-btn":"📁 Otwórz Google Drive →",
+    "team-badge":"Drużyna","team-title-1":"Ludzie za","team-title-2":"Mehano",
+    "team-sub":"Siedem unikalnych umysłów. Jedna wspólna misja.",
+    "role-mentor":"Mentor","role-programmer":"Programista","role-tech":"Technik",
+    "role-builder":"Konstruktor","role-3d":"Modelowanie 3D","role-research":"Badania",
+    "partner-badge":"Oficjalny partner","partner-title-1":"Razem tworzymy","partner-title-2":"przyszłość",
+    "partner-desc":"Drużyna Power Vortex pochodzi z Szumenu. Dziękujemy naszemu oficjalnemu partnerowi za wsparcie, zasoby i zaufanie.",
+    "contact-badge":"Kontakt","contact-title-1":"Skontaktuj się","contact-title-2":"z nami",
+    "contact-sub":"Masz pytanie, pomysł lub chcesz zostać partnerem? Napisz do nas.",
+    "contact-email-title":"E-mail","contact-social-title":"Media społecznościowe",
+    "contact-location-title":"Lokalizacja","contact-location-val":"Burgas, Bułgaria",
+    "place-badge":"Miejsce projektu","place-title-1":"Gdzie dzieje się","place-title-2":"magia",
+    "place-sub":"Tu spotykamy się, projektujemy i programujemy naszego robota.",
+    "place-school":"Liceum Zawodowe Mechatroniki i Elektroniki",
+    "place-address":"ul. Stefan Stambolov 67",
+    "place-desc":"Nasza baza — szkolne laboratorium STEM, gdzie rodzi się każdy prototyp, każda linia kodu i każdy nowy pomysł.",
+    "place-map-btn":"📍 Zobacz na mapie","footer-tag":"Drużyna Mehano 2025-26",
+    "contact-toast":"Przechodzenie do kontaktu... 📬"
+  },
+  uk: {
+    "nav-about":"Про нас","nav-code":"Код","nav-project":"Проект","nav-docs":"Документи",
+    "nav-team":"Команда","nav-place":"Місце","nav-contact":"Контакт","nav-cta":"Зв'язатися",
+    "hero-badge":"✨ Команда FLL 2025-26","hero-title":"МЕХАНО",
+    "hero-desc":"Молода команда FIRST LEGO League з інженерів, мислителів та мрійників. Будуємо роботів, вирішуємо проблеми та залишаємо слід.",
+    "hero-btn-docs":"📄 Документи","hero-btn-code":"💻 Код","hero-btn-more":"Дізнатись більше →","scroll":"Прокрутка",
+    "about-badge":"Про нас","about-title-1":"Хто","about-title-2":"ми",
+    "about-sub":"Команда з семи молодих людей, об'єднаних пристрастю до інженерії та інновацій.",
+    "stat-members":"Учасники","stat-seasons":"Сезони","stat-passion":"Відданість","stat-ideas":"Ідеї",
+    "feat1-title":"Дизайн робота","feat1-desc":"Проектуємо, будуємо та програмуємо LEGO® роботів, оптимізованих для точності та швидкості.",
+    "feat2-title":"Інноваційний проект","feat2-desc":"Вирішуємо реальні проблеми за допомогою творчих інженерних ідей, натхненних темою сезону.",
+    "feat3-title":"Основні цінності","feat3-desc":"Повага, відкритість, вплив, інклюзивність, командна робота та веселощі — наша ДНК.",
+    "btn-presentation":"ПРЕЗЕНТАЦІЯ","btn-folder":"ПАПКА","btn-video":"Відео","btn-code":"Код",
+    "code-badge":"Код","code-title-1":"Наш","code-title-2":"переможний","code-title-3":"код",
+    "code-sub":"Чистий Python для SPIKE Prime. Відкритий код, модульний, оптимізований.",
+    "proj-badge":"Проект","proj-title-1":"Наш","proj-title-2":"інноваційний","proj-title-3":"проект",
+    "proj-sub":"Рішення, яке робить навколишній світ кращим місцем.",
+    "proj-name":"Автоматизована система знесолення артефактів",
+    "proj-s1-title":"Проблема","proj-s1-desc":"Традиційне знесолення морських артефактів — повільний, повністю ручний та неточний процес.",
+    "proj-s2-title":"Рішення","proj-s2-desc":"Система ASOA 2.0 автоматизує моніторинг знесолення через IoT-платформу та науковий алгоритм виявлення плато.",
+    "proj-s3-title":"Вплив","proj-s3-desc":"Впровадження ASOA 2.0 скорочує час консервації на місяці та забезпечує збереження підводної культурної спадщини.",
+    "proj-btn-docs":"📄 Переглянути документацію","proj-btn-site":"Переглянути сайт",
+    "docs-badge":"Документи","docs-title-1":"Архів","docs-title-2":"команди",
+    "docs-sub":"Вся наша робота в одному місці — відкрита та доступна.",
+    "doc1-title":"Золоті правила Механо","doc2-title":"Інструкції робота",
+    "doc3-title":"Інженерний зошит","doc4-title":"3D моделі","doc-open":"Відкрити ↗",
+    "docs-drive-btn":"📁 Відкрити Google Drive →",
+    "team-badge":"Команда","team-title-1":"Люди за","team-title-2":"Механо",
+    "team-sub":"Сім унікальних розумів. Одна спільна місія.",
+    "role-mentor":"Ментор","role-programmer":"Програміст","role-tech":"Технік",
+    "role-builder":"Конструктор","role-3d":"3D моделювання","role-research":"Дослідження",
+    "partner-badge":"Офіційний партнер","partner-title-1":"Разом будуємо","partner-title-2":"майбутнє",
+    "partner-desc":"Команда Power Vortex із Шумена. Дякуємо нашому офіційному партнеру за підтримку, ресурси та довіру.",
+    "contact-badge":"Контакт","contact-title-1":"Зв'яжіться","contact-title-2":"з нами",
+    "contact-sub":"Є питання, ідея або хочете стати партнером? Напишіть нам.",
+    "contact-email-title":"Електронна пошта","contact-social-title":"Соціальні мережі",
+    "contact-location-title":"Місцезнаходження","contact-location-val":"Бургас, Болгарія",
+    "place-badge":"Місце проекту","place-title-1":"Де відбувається","place-title-2":"магія",
+    "place-sub":"Тут ми збираємося, проектуємо та програмуємо нашого робота.",
+    "place-school":"Професійна гімназія з мехатроніки та електроніки",
+    "place-address":"вул. Стефан Стамболов 67",
+    "place-desc":"Наша база — шкільна STEM-лабораторія, де народжується кожен прототип, кожен рядок коду та кожна нова ідея.",
+    "place-map-btn":"📍 Переглянути на карті","footer-tag":"Команда Механо 2025-26",
+    "contact-toast":"Перехід до контактів... 📬"
+  }
+};
+
+const LANG_META = {
+  bg: { flag: '🇧🇬', name: 'Български', short: 'БГ' },
+  en: { flag: '🇬🇧', name: 'English', short: 'EN' },
+  de: { flag: '🇩🇪', name: 'Deutsch', short: 'DE' },
+  el: { flag: '🇬🇷', name: 'Ελληνικά', short: 'EL' },
+  zh: { flag: '🇨🇳', name: '中文', short: 'ZH' },
+  ja: { flag: '🇯🇵', name: '日本語', short: 'JA' },
+  fr: { flag: '🇫🇷', name: 'Français', short: 'FR' },
+  es: { flag: '🇪🇸', name: 'Español', short: 'ES' },
+  ru: { flag: '🇷🇺', name: 'Русский', short: 'RU' },
+  tr: { flag: '🇹🇷', name: 'Türkçe', short: 'TR' },
+  ar: { flag: '🇸🇦', name: 'العربية', short: 'AR' },
+  ko: { flag: '🇰🇷', name: '한국어', short: 'KO' },
+  pl: { flag: '🇵🇱', name: 'Polski', short: 'PL' },
+  uk: { flag: '🇺🇦', name: 'Українська', short: 'UK' }
+};
+
+let currentLang = 'bg';
+let langOpen = false;
+
+function buildLangMenu() {
+  const dd = document.getElementById('langDropdown');
+  dd.innerHTML = Object.entries(LANG_META).map(([code, m]) => `
+    <div class="lang-opt ${code === currentLang ? 'active' : ''}" onclick="applyLang('${code}')">
+      <span class="lo-flag">${m.flag}</span>
+      <span class="lo-name">${m.name}</span>
+      <svg class="lo-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3,8 7,12 13,4"/></svg>
+    </div>
+  `).join('');
+}
+
+function toggleLangDropdown() {
+  langOpen = !langOpen;
+  document.getElementById('langDropdown').classList.toggle('open', langOpen);
+  document.getElementById('langToggleBtn').classList.toggle('open', langOpen);
+  if (langOpen) buildLangMenu();
+}
+
+function applyLang(code) {
+  currentLang = code;
+  const m = LANG_META[code];
+  const t = TRANSLATIONS[code] || TRANSLATIONS['bg'];
+  document.getElementById('navFlag').textContent = m.flag;
+  document.getElementById('navLangName').textContent = m.short;
+  document.documentElement.lang = code;
+  document.documentElement.dir = (code === 'ar') ? 'rtl' : 'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+  langOpen = false;
+  document.getElementById('langDropdown').classList.remove('open');
+  document.getElementById('langToggleBtn').classList.remove('open');
+}
+
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('#langSwitcher')) {
+    langOpen = false;
+    document.getElementById('langDropdown').classList.remove('open');
+    document.getElementById('langToggleBtn').classList.remove('open');
+  }
+});
+
+// ============================================================
+// TOAST + BUTTON LOADING
+// ============================================================
+(function () {
+  const toast = document.getElementById('toast');
+  let toastTimer;
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 3500);
+  }
+  document.querySelectorAll('a[data-load-link], .btn').forEach(link => {
+    link.addEventListener('click', function (e) {
+      const href = link.getAttribute('href') || '';
+      const isPlaceholder = href.startsWith('#REPLACE_ME');
+      const customMsg = link.getAttribute('data-msg');
+      if (href.startsWith('#') && !isPlaceholder) return;
+      if (href.startsWith('mailto:')) return;
+      e.preventDefault();
+      link.classList.add('is-loading');
+      setTimeout(() => {
+        link.classList.remove('is-loading');
+        if (customMsg) showToast(customMsg);
+        else if (isPlaceholder) showToast('🔗 Линкът ще бъде добавен скоро: ' + href);
+        if (href && !isPlaceholder && !href.startsWith('#')) {
+          setTimeout(() => window.open(href, '_blank', 'noopener'), 2300);
+        }
+      }, 2000);
+    });
+  });
+})();
+</script>
+</body>
+</html>    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto; padding: 1rem 1.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-family: 'Space Grotesk'; font-weight: 700;
+    transition: opacity 0.2s;
+  }
+  .logo:hover { opacity: 0.85; }
 
   .logo-mark {
     width: 36px; height: 36px; border-radius: 10px;
