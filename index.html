@@ -67,6 +67,1056 @@
   .nav-inner {
     max-width: 1200px; margin: 0 auto; padding: 1rem 1.5rem;
     display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-family: 'Space Grotesk'; font-weight: 700;
+    transition: opacity 0.2s; flex-shrink: 0;
+  }
+  .logo:hover { opacity: 0.85; }
+  .logo-mark {
+    width: 36px; height: 36px; border-radius: 10px;
+    overflow: hidden; flex-shrink: 0;
+    transition: transform 0.3s;
+    box-shadow: 0 2px 8px rgba(30, 64, 175, 0.25);
+  }
+  .logo:hover .logo-mark { transform: scale(1.08); }
+  .logo-mark img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .nav-links { display: none; gap: 1.75rem; font-size: 0.9rem; font-weight: 500; color: var(--text-muted); }
+  .nav-links a:hover { color: var(--cyan); }
+  @media (min-width: 768px) { .nav-links { display: flex; } }
+
+  /* LANGUAGE SWITCHER */
+  .lang-switcher-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+  .lang-btn {
+    display: flex; align-items: center; gap: 7px;
+    padding: 0.45rem 0.9rem; border-radius: 999px;
+    border: 1.5px solid rgba(6,182,212,0.4);
+    background: rgba(6,182,212,0.06);
+    color: var(--cyan);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem; font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .lang-btn:hover {
+    background: rgba(6,182,212,0.13);
+    border-color: var(--cyan);
+  }
+  .lang-btn.open .lang-chevron { transform: rotate(180deg); }
+  .lang-chevron { transition: transform 0.3s; }
+
+  .lang-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background: var(--surface);
+    border: 1px solid rgba(6,182,212,0.18);
+    border-radius: 18px;
+    box-shadow: 0 20px 60px -15px rgba(15,24,56,0.2);
+    padding: 6px;
+    z-index: 200;
+    width: 230px;
+    display: none;
+    max-height: 360px;
+    overflow-y: auto;
+  }
+  .lang-dropdown.show { display: block; animation: dd-in 0.2s ease; }
+  @keyframes dd-in {
+    from { opacity:0; transform: translateY(-8px) scale(0.97); }
+    to   { opacity:1; transform: translateY(0) scale(1); }
+  }
+  .lang-dropdown::-webkit-scrollbar { width: 4px; }
+  .lang-dropdown::-webkit-scrollbar-thumb { background: rgba(6,182,212,0.2); border-radius: 4px; }
+
+  .dd-header {
+    display: flex; align-items: center; gap: 6px;
+    padding: 7px 10px 9px;
+    border-bottom: 1px solid rgba(6,182,212,0.1);
+    margin-bottom: 4px;
+    font-size: 11px; color: var(--text-muted);
+  }
+  .status-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green);
+    animation: sdot 2s infinite;
+  }
+  @keyframes sdot { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  .lang-opt {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 10px; border-radius: 10px;
+    cursor: pointer; transition: background 0.15s;
+    font-size: 13px; color: var(--text);
+  }
+  .lang-opt:hover { background: rgba(6,182,212,0.07); }
+  .lang-opt.active { background: rgba(6,182,212,0.1); color: var(--cyan); font-weight: 600; }
+  .lang-flag { font-size: 18px; line-height: 1; width: 26px; text-align: center; }
+  .lang-info { flex: 1; }
+  .lang-name { font-size: 13px; }
+  .lang-native { font-size: 11px; color: var(--text-muted); }
+  .lang-opt.active .lang-native { color: rgba(6,182,212,0.7); }
+  .lang-check { opacity: 0; color: var(--cyan); }
+  .lang-opt.active .lang-check { opacity: 1; }
+
+  /* TRANSLATION OVERLAY */
+  .trans-overlay {
+    position: fixed; inset: 0;
+    background: rgba(15,24,56,0.6);
+    backdrop-filter: blur(6px);
+    z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .trans-overlay.show { opacity: 1; pointer-events: all; }
+  .trans-card {
+    background: var(--surface);
+    border-radius: 28px;
+    padding: 2.5rem 3rem;
+    text-align: center;
+    box-shadow: 0 40px 80px -20px rgba(15,24,56,0.4);
+    max-width: 320px; width: 90%;
+    border: 1px solid var(--border);
+  }
+  .trans-spinner-wrap {
+    width: 64px; height: 64px; margin: 0 auto 1.5rem;
+    position: relative;
+  }
+  .trans-flag-bg {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: rgba(6,182,212,0.08);
+    border: 2px solid rgba(6,182,212,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    animation: flag-pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes flag-pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
+  .trans-ring {
+    position: absolute; inset: -4px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: var(--cyan);
+    border-right-color: rgba(6,182,212,0.3);
+    animation: ring-spin 0.9s linear infinite;
+  }
+  @keyframes ring-spin { to { transform:rotate(360deg); } }
+  .trans-card h3 {
+    font-family: 'Space Grotesk'; font-size: 1.2rem;
+    margin-bottom: 0.35rem; color: var(--text);
+  }
+  .trans-card p { font-size: 0.88rem; color: var(--text-muted); }
+  .trans-progress {
+    margin-top: 1.25rem;
+    height: 3px; background: rgba(6,182,212,0.1);
+    border-radius: 999px; overflow: hidden;
+  }
+  .trans-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cyan), var(--blue));
+    border-radius: 999px;
+    width: 0%; transition: width 0.5s ease;
+  }
+  .trans-stages {
+    display: flex; justify-content: center; gap: 6px; margin-top: 1rem; flex-wrap: wrap;
+  }
+  .trans-stage {
+    font-size: 10.5px; padding: 3px 8px; border-radius: 999px;
+    background: var(--surface-2); color: var(--text-muted);
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+  .trans-stage.done {
+    background: rgba(16,185,129,0.1); color: var(--green);
+    border-color: rgba(16,185,129,0.3);
+  }
+  .trans-stage.active {
+    background: rgba(6,182,212,0.1); color: var(--cyan);
+    border-color: rgba(6,182,212,0.3);
+    animation: stage-pulse 1s infinite;
+  }
+  @keyframes stage-pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    font-family: inherit; font-weight: 600; font-size: 0.95rem;
+    padding: 0.7rem 1.4rem; border-radius: 12px; cursor: pointer;
+    border: none; transition: all 0.3s; text-decoration: none;
+  }
+  .btn-lg { padding: 0.95rem 1.8rem; font-size: 1rem; border-radius: 14px; }
+  .btn-xl { padding: 1.15rem 2.3rem; font-size: 1.05rem; border-radius: 16px; }
+  .btn-hero {
+    background: var(--grad-hero); color: white;
+    box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.5);
+    background-size: 200% 200%;
+  }
+  .btn-hero:hover { background-position: 100% 50%; transform: translateY(-2px); box-shadow: 0 15px 40px -10px rgba(139, 92, 246, 0.6); }
+  .btn-cyan { background: rgba(6, 182, 212, 0.1); color: var(--cyan); border: 1px solid rgba(6, 182, 212, 0.3); }
+  .btn-cyan:hover { background: var(--cyan); color: white; }
+  .btn-purple { background: rgba(139, 92, 246, 0.1); color: var(--purple); border: 1px solid rgba(139, 92, 246, 0.3); }
+  .btn-purple:hover { background: var(--purple); color: white; }
+  .btn-yellow { background: var(--yellow); color: white; box-shadow: 0 10px 25px -8px rgba(245, 158, 11, 0.5); }
+  .btn-yellow:hover { transform: translateY(-2px); }
+  .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .btn-outline:hover { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 20px rgba(6, 182, 212, 0.2); }
+  .btn-run {
+    background: var(--green); color: white; font-weight: 600;
+    animation: pulse-glow 2s infinite;
+  }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+    50% { box-shadow: 0 0 0 14px rgba(16, 185, 129, 0); }
+  }
+  .btn.is-loading { pointer-events: none; opacity: 0.85; position: relative; }
+  .btn.is-loading > * { visibility: hidden; }
+  .btn.is-loading::after {
+    content: ""; position: absolute;
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2.5px solid rgba(255,255,255,0.35);
+    border-top-color: #fff;
+    animation: btn-spin 0.7s linear infinite;
+    visibility: visible;
+  }
+  .btn-cyan.is-loading::after, .btn-purple.is-loading::after, .btn-outline.is-loading::after {
+    border-color: rgba(15, 24, 56, 0.2); border-top-color: var(--cyan);
+  }
+  @keyframes btn-spin { to { transform: rotate(360deg); } }
+
+  /* TOAST */
+  .toast {
+    position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--text); color: white;
+    padding: 0.85rem 1.4rem; border-radius: 12px;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
+    box-shadow: var(--shadow-lg); z-index: 100;
+    opacity: 0; transition: all 0.3s; pointer-events: none;
+    max-width: 90vw; word-break: break-all; text-align: center;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* BADGE */
+  .badge {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.35rem 0.85rem; border-radius: 999px;
+    font-size: 0.78rem; font-weight: 600; margin-bottom: 1rem; border: 1px solid;
+  }
+  .badge-cyan { background: rgba(6, 182, 212, 0.1); color: var(--cyan); border-color: rgba(6, 182, 212, 0.3); }
+  .badge-purple { background: rgba(139, 92, 246, 0.1); color: var(--purple); border-color: rgba(139, 92, 246, 0.3); }
+  .badge-pink { background: rgba(236, 72, 153, 0.1); color: var(--pink); border-color: rgba(236, 72, 153, 0.3); }
+  .badge-green { background: rgba(16, 185, 129, 0.1); color: var(--green); border-color: rgba(16, 185, 129, 0.3); }
+  .badge-yellow { background: rgba(245, 158, 11, 0.12); color: var(--yellow); border-color: rgba(245, 158, 11, 0.3); }
+  .badge-glow { background: rgba(6, 182, 212, 0.1); color: var(--cyan); border-color: rgba(6, 182, 212, 0.3); box-shadow: 0 0 25px rgba(6, 182, 212, 0.25); }
+
+  /* CARD */
+  .card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+    padding: 1.75rem; box-shadow: var(--shadow-sm); transition: all 0.4s;
+  }
+  .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+
+  /* TEXT GRADIENTS */
+  .text-grad {
+    background: var(--grad-text);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; position: relative; padding: 8rem 1.5rem 4rem;
+    background-image:
+      linear-gradient(rgba(59, 130, 246, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59, 130, 246, 0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  .blob { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; z-index: 0; }
+  .blob-1 { width: 380px; height: 380px; top: 15%; left: -100px; background: rgba(139, 92, 246, 0.25); animation: float 6s ease-in-out infinite; }
+  .blob-2 { width: 380px; height: 380px; bottom: 15%; right: -100px; background: rgba(6, 182, 212, 0.25); animation: float 6s ease-in-out infinite 2s; }
+  .blob-3 { width: 500px; height: 500px; top: 30%; left: 50%; transform: translateX(-50%); background: rgba(236, 72, 153, 0.12); }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+  .hero-content { position: relative; z-index: 1; max-width: 900px; }
+  .hero h1 {
+    font-size: clamp(4.5rem, 14vw, 11rem); font-weight: 700; margin: 1.5rem 0 1.5rem;
+    background: var(--grad-hero); background-size: 200% 200%;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: gradient-shift 8s ease infinite;
+  }
+  @keyframes gradient-shift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+  .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 2.2rem; }
+  .hero-buttons { display: flex; flex-wrap: wrap; gap: 0.85rem; justify-content: center; }
+  .scroll-hint { margin-top: 4rem; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: rgba(91, 101, 132, 0.6); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em; }
+  .scroll-line { width: 1px; height: 48px; background: linear-gradient(to bottom, var(--cyan), transparent); }
+
+  .section-header { text-align: center; max-width: 700px; margin: 0 auto 4rem; }
+  .section-header h2 { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 700; margin-bottom: 1rem; }
+  .section-header p { color: var(--text-muted); font-size: 1.1rem; }
+
+  .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 4rem; }
+  @media (min-width: 768px) { .stats { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; } }
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 1.5rem 1rem; text-align: center; transition: all 0.3s; box-shadow: var(--shadow-sm); }
+  .stat:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .stat-icon { width: 28px; height: 28px; margin: 0 auto 0.75rem; }
+  .stat-value { font-family: 'Space Grotesk'; font-weight: 700; font-size: 2.5rem; line-height: 1; margin-bottom: 0.4rem; }
+  .stat-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+
+  .grid-3 { display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
+  @media (min-width: 768px) { .grid-3 { grid-template-columns: repeat(3, 1fr); } }
+  .feature-icon { width: 56px; height: 56px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; color: white; transition: transform 0.4s; }
+  .card:hover .feature-icon { transform: scale(1.1) rotate(6deg); }
+  .icon-cyan { background: linear-gradient(135deg, var(--cyan), var(--blue)); }
+  .icon-purple { background: linear-gradient(135deg, var(--purple), var(--pink)); }
+  .icon-green { background: linear-gradient(135deg, var(--green), var(--cyan)); }
+  .feature-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.6rem; }
+  .feature-desc { color: var(--text-muted); margin-bottom: 1.25rem; }
+  .feature-btns { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: auto; }
+  .btn-sm { padding: 0.5rem 1rem; font-size: 0.82rem; border-radius: 10px; }
+
+  .code-block { background: #1e1b4b; color: #e0e7ff; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid rgba(139, 92, 246, 0.3); }
+  .code-header { display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1.25rem; background: rgba(0, 0, 0, 0.25); border-bottom: 1px solid rgba(255, 255, 255, 0.08); font-family: 'JetBrains Mono'; font-size: 0.75rem; }
+  .dots { display: flex; gap: 0.45rem; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot-r { background: #f87171; } .dot-y { background: #fbbf24; } .dot-g { background: #34d399; }
+  .file-name { color: rgba(224, 231, 255, 0.6); }
+  .lang-tag { color: #67e8f9; font-weight: 600; }
+  pre.code-body { padding: 1.5rem; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.7; }
+  .code-line { display: flex; gap: 1rem; padding: 0 0.5rem; }
+  .code-line:hover { background: rgba(255, 255, 255, 0.04); }
+  .ln { color: rgba(224, 231, 255, 0.3); width: 1.5rem; text-align: right; flex-shrink: 0; user-select: none; }
+  .tk-comment { color: rgba(224, 231, 255, 0.45); font-style: italic; }
+  .tk-string { color: #6ee7b7; }
+  .tk-keyword { color: #f9a8d4; font-weight: 600; }
+  .tk-fn { color: #67e8f9; }
+  .tk-class { color: #fde68a; }
+  .tk-num { color: #c4b5fd; }
+  .cursor { display: inline-block; width: 8px; height: 14px; background: var(--green); animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 2.5rem; }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+  .code-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; padding: 1.25rem 1.5rem; gap: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.08); background: rgba(0, 0, 0, 0.15); }
+
+  .project-block { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-md); }
+  .project-header { display: flex; align-items: center; gap: 0.75rem; padding: 0.85rem 1.25rem; background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(59, 130, 246, 0.08)); border-bottom: 1px solid var(--border); }
+  .project-body { padding: 2rem 2rem 1.5rem; }
+  .project-title { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; color: var(--purple); margin-bottom: 0.75rem; }
+  .project-desc { font-size: 1.05rem; color: var(--text); line-height: 1.7; margin-bottom: 1.5rem; }
+  .project-section { margin-bottom: 1.25rem; padding-left: 1rem; border-left: 3px solid var(--cyan); }
+  .project-section h4 { font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--cyan); margin-bottom: 0.4rem; }
+  .project-section p { color: var(--text-muted); font-size: 0.95rem; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+  .proj-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; padding: 0.35rem 0.75rem; border-radius: 999px; background: rgba(6, 182, 212, 0.1); color: var(--cyan); border: 1px solid rgba(6, 182, 212, 0.25); }
+  .project-block .code-footer { background: var(--surface-2); border-top: 1px solid var(--border); }
+  .project-block .branch { color: var(--text-muted); }
+  .branch { display: flex; align-items: center; gap: 0.5rem; color: rgba(224, 231, 255, 0.6); font-family: 'JetBrains Mono'; font-size: 0.75rem; }
+  .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  .grid-4 { display: grid; gap: 1.25rem; grid-template-columns: 1fr; margin-bottom: 3rem; }
+  @media (min-width: 640px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .grid-4 { grid-template-columns: repeat(4, 1fr); } }
+  .doc-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; transition: transform 0.3s; }
+  .card:hover .doc-icon { transform: scale(1.1); }
+  .di-cyan { background: rgba(6, 182, 212, 0.12); color: var(--cyan); border: 1px solid rgba(6, 182, 212, 0.3); }
+  .di-purple { background: rgba(139, 92, 246, 0.12); color: var(--purple); border: 1px solid rgba(139, 92, 246, 0.3); }
+  .di-pink { background: rgba(236, 72, 153, 0.12); color: var(--pink); border: 1px solid rgba(236, 72, 153, 0.3); }
+  .di-yellow { background: rgba(245, 158, 11, 0.12); color: var(--yellow); border: 1px solid rgba(245, 158, 11, 0.3); }
+  .doc-title { font-family: 'Space Grotesk'; font-weight: 700; font-size: 1.1rem; margin-bottom: 0.25rem; }
+  .doc-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; }
+  .doc-link { font-size: 0.85rem; font-weight: 600; opacity: 0; transition: opacity 0.3s; display: flex; align-items: center; gap: 0.3rem; }
+  .card:hover .doc-link { opacity: 1; }
+  .center { text-align: center; }
+
+  .team-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: 640px) { .team-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1024px) { .team-grid { grid-template-columns: repeat(4, 1fr); } }
+  .member { text-align: center; padding: 1.4rem 1rem; }
+  .avatar-wrap { position: relative; width: 80px; height: 80px; margin: 0 auto 1rem; }
+  .avatar-glow { position: absolute; inset: 0; border-radius: 50%; filter: blur(14px); opacity: 0.5; transition: opacity 0.3s; }
+  .member:hover .avatar-glow { opacity: 0.85; }
+  .avatar { position: relative; width: 100%; height: 100%; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk'; font-weight: 700; font-size: 1.75rem; color: white; }
+  .num-badge { position: absolute; bottom: -2px; right: -2px; width: 24px; height: 24px; border-radius: 50%; background: white; border: 2px solid var(--green); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono'; font-size: 0.6rem; color: var(--green); font-weight: 600; }
+  .member-name { font-family: 'Space Grotesk'; font-weight: 600; font-size: 1.05rem; }
+  .member-role { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-top: 0.3rem; }
+
+  .partner-card { background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 3rem 2rem; position: relative; overflow: hidden; box-shadow: var(--shadow-md); }
+  .partner-blob-1 { position: absolute; top: 0; right: 0; width: 220px; height: 220px; background: rgba(245, 158, 11, 0.2); border-radius: 50%; filter: blur(80px); }
+  .partner-blob-2 { position: absolute; bottom: 0; left: 0; width: 220px; height: 220px; background: rgba(236, 72, 153, 0.2); border-radius: 50%; filter: blur(80px); }
+  .partner-inner { position: relative; display: grid; gap: 2rem; align-items: center; }
+  @media (min-width: 768px) { .partner-inner { grid-template-columns: 1fr auto; } }
+  .partner-card h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 1rem; }
+  .partner-card p { color: var(--text-muted); margin-bottom: 1.5rem; max-width: 520px; }
+
+  .contact-grid { display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
+  @media (min-width: 768px) { .contact-grid { grid-template-columns: repeat(3, 1fr); } }
+  .ci-pink { background: rgba(236, 72, 153, 0.12); color: var(--pink); border: 1px solid rgba(236, 72, 153, 0.3); }
+  .contact-card { text-align: center; padding: 1.75rem 1.25rem; }
+  .contact-icon-wrap { width: 56px; height: 56px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; }
+  .ci-cyan { background: rgba(6, 182, 212, 0.12); color: var(--cyan); border: 1px solid rgba(6, 182, 212, 0.3); }
+  .ci-purple { background: rgba(139, 92, 246, 0.12); color: var(--purple); border: 1px solid rgba(139, 92, 246, 0.3); }
+  .ci-green { background: rgba(16, 185, 129, 0.12); color: var(--green); border: 1px solid rgba(16, 185, 129, 0.3); }
+  .contact-card h3 { font-family: 'Space Grotesk'; font-weight: 600; margin-bottom: 0.4rem; }
+  .contact-card p { font-size: 0.9rem; color: var(--text-muted); }
+  .socials { display: flex; gap: 0.5rem; justify-content: center; margin-top: 0.6rem; }
+  .social { width: 38px; height: 38px; border-radius: 10px; background: var(--surface-2); color: var(--text-muted); display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+  .social:hover { background: var(--purple); color: white; transform: translateY(-2px); }
+
+  .project-place-card { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 2.5rem 1.75rem; gap: 1rem; background: linear-gradient(135deg, rgba(236, 72, 153, 0.06), rgba(139, 92, 246, 0.06)); border: 1px solid rgba(236, 72, 153, 0.2); }
+  @media (min-width: 768px) { .project-place-card { flex-direction: row; text-align: left; padding: 2.5rem; gap: 2rem; } }
+  .pp-body h3 { font-family: 'Space Grotesk'; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .pp-address { font-size: 0.95rem; color: var(--purple); font-weight: 500; margin-bottom: 0.6rem; }
+  .pp-desc { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; }
+  .pp-logo-img { width: 160px; height: 160px; border-radius: 22px; overflow: hidden; flex-shrink: 0; box-shadow: 0 8px 30px rgba(245,158,11,0.25); }
+  .pp-logo-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  footer { border-top: 1px solid var(--border); margin-top: 3rem; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; padding: 2.5rem 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; color: var(--text-muted); font-size: 0.88rem; }
+  .footer-brand { display: flex; align-items: center; gap: 0.6rem; }
+  .footer-logo-img { width: 32px; height: 32px; border-radius: 8px; overflow: hidden; flex-shrink: 0; box-shadow: 0 2px 8px rgba(30, 64, 175, 0.2); }
+  .footer-logo-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .footer-brand strong { color: var(--text); font-family: 'Space Grotesk'; }
+  .footer-tag { font-family: 'JetBrains Mono'; font-size: 0.75rem; }
+  .heart { color: var(--pink); }
+
+  .c-cyan { color: var(--cyan); } .c-yellow { color: var(--yellow); } .c-pink { color: var(--pink); } .c-green { color: var(--green); }
+  .av-1 { background: linear-gradient(135deg, var(--cyan), var(--blue)); }
+  .av-2 { background: linear-gradient(135deg, var(--purple), var(--pink)); }
+  .av-3 { background: linear-gradient(135deg, var(--green), var(--cyan)); }
+  .av-4 { background: linear-gradient(135deg, var(--yellow), var(--pink)); }
+  .av-5 { background: linear-gradient(135deg, var(--blue), var(--purple)); }
+  .av-6 { background: linear-gradient(135deg, var(--pink), var(--purple)); }
+  .av-7 { background: linear-gradient(135deg, var(--green), var(--yellow)); }
+  .av-8 { background: linear-gradient(135deg, var(--cyan), var(--purple)); }
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#hero" class="logo">
+      <div class="logo-mark">
+        <img src="https://scontent.fsof9-1.fna.fbcdn.net/v/t39.30808-6/475967058_122103989282752743_8280670784437931498_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=iummlJ37nFAQ7kNvwGCCXDy&_nc_oc=Adphg8hgdNRN-n0oO2JOlkFi5zno5xp8BH5bZLIuDrWMX6w83IMB-Zi3HkdZ9cxy6K0&_nc_zt=23&_nc_ht=scontent.fsof9-1.fna&_nc_gid=-xF0cwIaIaJNGRp9gys_KQ&oh=00_Af1fuH1wlT8k37O42xOrFAvw8skhAhafIOoKywTB0O867Q&oe=69F101B5" alt="Механо лого"/>
+      </div>
+      <span>МЕХАНО</span>
+    </a>
+    <div class="nav-links">
+      <a href="#about" data-i18n="nav_about">За нас</a>
+      <a href="#code" data-i18n="nav_code">Код</a>
+      <a href="#project" data-i18n="nav_project">Проект</a>
+      <a href="#docs" data-i18n="nav_docs">Документи</a>
+      <a href="#team" data-i18n="nav_team">Отбор</a>
+      <a href="#project-place" data-i18n="nav_place">Място</a>
+      <a href="#contact" data-i18n="nav_contact">Контакт</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:0.6rem;flex-shrink:0;">
+      <!-- LANGUAGE SWITCHER -->
+      <div class="lang-switcher-wrap" id="langSwitcher">
+        <button class="lang-btn" id="langBtn" onclick="toggleLangMenu()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          <span id="currentLangLabel">🇧🇬 БГ</span>
+          <svg class="lang-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="lang-dropdown" id="langDropdown">
+          <div class="dd-header">
+            <span class="status-dot"></span>
+            <span id="ddHeaderText">Claude превежда в реално време</span>
+          </div>
+        </div>
+      </div>
+      <a href="#contact" class="btn btn-cyan" style="padding: 0.5rem 1rem; font-size: 0.85rem;" data-msg="Преминаване към контакт... 📬" data-i18n="btn_contact">Свържи се</a>
+    </div>
+  </div>
+</nav>
+
+<!-- TRANSLATION OVERLAY -->
+<div class="trans-overlay" id="transOverlay">
+  <div class="trans-card">
+    <div class="trans-spinner-wrap">
+      <div class="trans-flag-bg" id="overlayFlag">🌐</div>
+      <div class="trans-ring"></div>
+    </div>
+    <h3 id="overlayTitle">Превеждане...</h3>
+    <p id="overlayLang">Моля изчакайте</p>
+    <div class="trans-progress"><div class="trans-bar" id="transBar"></div></div>
+    <div class="trans-stages" id="transStages">
+      <span class="trans-stage" id="st1">Анализ</span>
+      <span class="trans-stage" id="st2">Превод</span>
+      <span class="trans-stage" id="st3">Прилагане</span>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="hero" class="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="hero-content">
+    <span class="badge badge-glow" data-i18n="hero_badge">✨ FLL Отбор 2025-26</span>
+    <h1>МЕХАНО</h1>
+    <p data-i18n="hero_desc">Млад FIRST LEGO League отбор от инженери, мислители и мечтатели. Изграждаме роботи, решаваме проблеми и оставяме следа.</p>
+    <div class="hero-buttons">
+      <a href="#docs" class="btn btn-hero btn-lg" data-msg="Зареждане на документите... 📄" data-i18n="hero_docs">📄 Документи</a>
+      <a href="#code" class="btn btn-purple btn-lg" data-msg="Зареждане на кода... 💻" data-i18n="hero_code">💻 Код</a>
+      <a href="#about" class="btn btn-outline btn-lg" data-msg="Зареждане на секцията... 🔍" data-i18n="hero_more">Научи повече →</a>
+    </div>
+    <div class="scroll-hint">
+      <span data-i18n="scroll">Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge badge-cyan" data-i18n="about_badge">За нас</span>
+      <h2 data-i18n="about_h2">Кои сме <span class="text-grad">ние</span></h2>
+      <p data-i18n="about_sub">Отбор от седем младежи, обединени от страст към инженерството и иновациите.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><svg class="stat-icon c-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><div class="stat-value c-cyan">7</div><div class="stat-label" data-i18n="stat_members">Члена</div></div>
+      <div class="stat"><svg class="stat-icon c-yellow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg><div class="stat-value c-yellow">2</div><div class="stat-label" data-i18n="stat_seasons">Сезона</div></div>
+      <div class="stat"><svg class="stat-icon c-pink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><div class="stat-value c-pink">100%</div><div class="stat-label" data-i18n="stat_dedication">Отдаденост</div></div>
+      <div class="stat"><svg class="stat-icon c-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.178 8c5.096 0 5.096 8 0 8-5.095 0-7.133-8-12.739-8-4.585 0-4.585 8 0 8 5.606 0 7.644-8 12.739-8z"/></svg><div class="stat-value c-green">∞</div><div class="stat-label" data-i18n="stat_ideas">Идеи</div></div>
+    </div>
+    <div class="grid-3">
+      <div class="card" style="display: flex; flex-direction: column;">
+        <div class="feature-icon icon-cyan"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="2" x2="9" y2="4"/><line x1="15" y1="2" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="22"/><line x1="15" y1="20" x2="15" y2="22"/><line x1="20" y1="9" x2="22" y2="9"/><line x1="20" y1="14" x2="22" y2="14"/><line x1="2" y1="9" x2="4" y2="9"/><line x1="2" y1="14" x2="4" y2="14"/></svg></div>
+        <h3 class="feature-title" data-i18n="feat1_title">Дизайн на робот</h3>
+        <p class="feature-desc" data-i18n="feat1_desc">Проектираме, конструираме и програмираме LEGO® роботи, оптимизирани за прецизност и скорост.</p>
+        <div class="feature-btns">
+          <a href="https://canva.link/491v3cl21s1koi3" data-load-link data-msg="Отваряне на презентацията... 🎨" class="btn btn-cyan btn-sm"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span data-i18n="btn_pres">ПРЕЗЕНТАЦИЯ</span></a>
+          <a href="https://drive.google.com/drive/folders/1SoWDqH_odCqcLkXzXpdhtHkOlf-KHDih?usp=drive_link" data-load-link data-msg="Отваряне на папката... 📁" class="btn btn-purple btn-sm"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg><span data-i18n="btn_folder">ПАПКА</span></a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="feature-icon icon-purple"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></div>
+        <h3 class="feature-title" data-i18n="feat2_title">Иновативен проект</h3>
+        <p class="feature-desc" data-i18n="feat2_desc">Решаваме реални проблеми с креативни инженерни идеи, вдъхновени от темата на сезона.</p>
+        <div class="feature-btns">
+          <a href="https://www.youtube.com/watch?v=vKIvQ5kc4ow&feature=youtu.be" data-load-link data-msg="Отваряне на видеото.. 🎨" class="btn btn-cyan btn-sm"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span data-i18n="btn_video">Видео</span></a>
+        </div>
+        <div class="feature-btns">
+          <a href="https://github.com/Djef-h/ASOA2.0" data-load-link data-msg="Отваряне на кода.. 🎨" class="btn btn-cyan btn-sm"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span data-i18n="btn_code">Код</span></a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="feature-icon icon-green"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3 class="feature-title" data-i18n="feat3_title">Основни ценности</h3>
+        <p class="feature-desc" data-i18n="feat3_desc">Уважение, откритост, въздействие, приобщаване, работа в екип и забавление — нашата ДНК.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CODE -->
+<section id="code" class="section">
+  <div class="container" style="max-width: 900px;">
+    <div class="section-header">
+      <span class="badge badge-green" data-i18n="code_badge">Код</span>
+      <h2 data-i18n="code_h2">Нашият <span class="text-grad">код</span> на победата</h2>
+      <p data-i18n="code_sub">Чист Python за SPIKE Prime. Open-source, модулен, оптимизиран.</p>
+    </div>
+    <div class="code-block">
+      <div class="code-header">
+        <div class="dots"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div>
+        <span class="file-name">mehano_bot.py</span>
+        <span class="lang-tag">PYTHON 3</span>
+      </div>
+      <pre class="code-body"><div class="code-line"><span class="ln">1</span><span class="tk-comment"># ⚙️ МЕХАНО v2.0 — Секретен алгоритъм (не показвай на съдиите)</span></div>
+<div class="code-line"><span class="ln">2</span><span class="tk-keyword">import</span> <span class="tk-class">spike</span><span class="tk-string">, food, random, dreams, panic</span></div>
+<div class="code-line"><span class="ln">3</span><span class="tk-keyword">from</span> <span class="tk-class">mehano</span> <span class="tk-keyword">import</span> <span class="tk-fn">надежда, воля, храна</span></div>
+<div class="code-line"><span class="ln">4</span></div>
+<div class="code-line"><span class="ln">5</span><span class="tk-class">РОБОТ</span>         = <span class="tk-string">"Робо"</span>   <span class="tk-comment"># най-умният робот в Бургас</span></div>
+<div class="code-line"><span class="ln">6</span><span class="tk-class">ХРАНА_ИЗЯДЕНА</span> = <span class="tk-num">47</span>            <span class="tk-comment"># точно колкото commits</span></div>
+<div class="code-line"><span class="ln">7</span><span class="tk-class">ВЕРОЯТНОСТ_ПОБЕДА</span> = <span class="tk-num">0.999</span>    <span class="tk-comment"># останалото е за всеки случай</span></div>
+<div class="code-line"><span class="ln">8</span><span class="tk-class">МЕНТОР_СПИ</span>    = <span class="tk-class">True</span>          <span class="tk-comment"># винаги True след 22:00</span></div>
+<div class="code-line"><span class="ln">9</span></div>
+<div class="code-line"><span class="ln">10</span><span class="tk-keyword">def</span> <span class="tk-fn">зареди_робота</span>():</div>
+<div class="code-line"><span class="ln">11</span>    <span class="tk-keyword">if</span> <span class="tk-fn">food.is_empty</span>():</div>
+<div class="code-line"><span class="ln">12</span>        <span class="tk-keyword">raise</span> <span class="tk-class">CriticalError</span>(<span class="tk-string">"Екипът не може без храна 🍔"</span>)</div>
+<div class="code-line"><span class="ln">13</span>    <span class="tk-fn">print</span>(<span class="tk-string">"Робо-9000 се събужда..."</span>)</div>
+<div class="code-line"><span class="ln">14</span>    <span class="tk-fn">spike.motor_a.run</span>(speed=<span class="tk-num">100</span>)  <span class="tk-comment"># пълна газ, няма нерви</span></div>
+<div class="code-line"><span class="ln">15</span>    <span class="tk-keyword">return</span> <span class="tk-string">"🤖 Готов за битка"</span></div>
+<div class="code-line"><span class="ln">16</span></div>
+<div class="code-line"><span class="ln">17</span><span class="tk-keyword">def</span> <span class="tk-fn">изпълни_мисия</span>(мисия, опити=<span class="tk-num">3</span>):</div>
+<div class="code-line"><span class="ln">18</span>    <span class="tk-keyword">for</span> i <span class="tk-keyword">in</span> <span class="tk-fn">range</span>(опити):</div>
+<div class="code-line"><span class="ln">19</span>        <span class="tk-keyword">try</span>:</div>
+<div class="code-line"><span class="ln">20</span>            <span class="tk-fn">робот.направи_нещо_умно</span>(мисия)</div>
+<div class="code-line"><span class="ln">21</span>            <span class="tk-fn">print</span>(<span class="tk-string">f"Мисия {мисия} — успех! 🎉"</span>)</div>
+<div class="code-line"><span class="ln">22</span>            <span class="tk-keyword">break</span></div>
+<div class="code-line"><span class="ln">23</span>        <span class="tk-keyword">except</span> <span class="tk-class">LegoPадна</span>:</div>
+<div class="code-line"><span class="ln">24</span>            <span class="tk-fn">print</span>(<span class="tk-string">"Не видяха... надявам се 🙈"</span>)</div>
+<div class="code-line"><span class="ln">25</span>        <span class="tk-keyword">except</span> <span class="tk-class">РоботЗаспа</span>:</div>
+<div class="code-line"><span class="ln">26</span>            <span class="tk-fn">panic.execute</span>()  <span class="tk-comment"># събуди ментора</span></div>
+<div class="code-line"><span class="ln">27</span>        <span class="tk-keyword">except</span> <span class="tk-class">Exception</span> <span class="tk-keyword">as</span> e:</div>
+<div class="code-line"><span class="ln">28</span>            <span class="tk-fn">print</span>(<span class="tk-string">f"Хм. {e}. Питаме отбора."</span>)</div>
+<div class="code-line"><span class="ln">29</span></div>
+<div class="code-line"><span class="ln">30</span><span class="tk-keyword">def</span> <span class="tk-fn">спечели_турнира</span>():</div>
+<div class="code-line"><span class="ln">31</span>    <span class="tk-fn">зареди_робота</span>()</div>
+<div class="code-line"><span class="ln">32</span>    мисии = [<span class="tk-num">9</span>, <span class="tk-num">10</span>, <span class="tk-num">13</span>]</div>
+<div class="code-line"><span class="ln">33</span>    <span class="tk-keyword">for</span> мисия <span class="tk-keyword">in</span> мисии:</div>
+<div class="code-line"><span class="ln">34</span>        <span class="tk-fn">изпълни_мисия</span>(мисия)</div>
+<div class="code-line"><span class="ln">35</span>    <span class="tk-keyword">if</span> <span class="tk-fn">random.random</span>() &lt; <span class="tk-class">ВЕРОЯТНОСТ_ПОБЕДА</span>:</div>
+<div class="code-line"><span class="ln">36</span>        <span class="tk-keyword">return</span> <span class="tk-string">"🏆 Трофей получен. Поръчваме храна."</span></div>
+<div class="code-line"><span class="ln">37</span>    <span class="tk-keyword">else</span>:</div>
+<div class="code-line"><span class="ln">38</span>        <span class="tk-keyword">return</span> <span class="tk-string">"😤"</span></div>
+<div class="code-line"><span class="ln">39</span></div>
+<div class="code-line"><span class="ln">40</span><span class="tk-comment"># TODO: да попитаме ментора дали това е легално</span></div>
+<div class="code-line"><span class="ln">41</span><span class="tk-comment"># FIXME: Робо-9000 пак отиде наляво вместо надясно</span></div>
+<div class="code-line"><span class="ln">42</span><span class="tk-fn">print</span>(<span class="tk-fn">спечели_турнира</span>())<span class="cursor"></span></div></pre>
+      <div class="code-footer">
+        <div class="branch"><span class="live-dot"></span>main · 47 commits · MIT</div>
+        <a href="https://github.com/Djef-h/First-lego-league---mehano-/blob/main/fll.py" data-load-link data-msg="Отваряне на кода в GitHub... 🚀" class="btn btn-run btn-lg">▶ Run</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT -->
+<section id="project" class="section">
+  <div class="container" style="max-width: 900px;">
+    <div class="section-header">
+      <span class="badge badge-purple" data-i18n="proj_badge">Проект</span>
+      <h2 data-i18n="proj_h2">Нашият <span class="text-grad">иновативен</span> проект</h2>
+      <p data-i18n="proj_sub">Решение, което прави света около нас по-добро място.</p>
+    </div>
+    <div class="project-block">
+      <div class="project-header">
+        <div class="dots"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div>
+        <span class="file-name">project.md</span>
+      </div>
+      <div class="project-body">
+        <h3 class="project-title" data-i18n="proj_title">Автоматизирана система за обесоляване на артефакти</h3>
+        <div class="project-section">
+          <h4>## <span data-i18n="proj_prob_lbl">Проблем</span></h4>
+          <p data-i18n="proj_prob">Традиционното обезсоляване на морски артефакти е бавен, изцяло ръчен и неточен процес, който изисква консерваторите да пътуват стотици километри за рутинни измервания, рискувайки необратимото разрушаване на ценни находки поради закъснели реакции.</p>
+        </div>
+        <div class="project-section">
+          <h4>## <span data-i18n="proj_sol_lbl">Решение</span></h4>
+          <p data-i18n="proj_sol">Системата ASOA 2.0 автоматизира мониторинга и управлението на дезалинацията чрез IoT платформа и научен алгоритъм за засичане на „плато", който самостоятелно взима решения за смяна на водата и позволява на експертите да следят процеса в реално време от разстояние.</p>
+        </div>
+        <div class="project-section">
+          <h4>## <span data-i18n="proj_imp_lbl">Въздействие</span></h4>
+          <p data-i18n="proj_imp">Внедряването на ASOA 2.0 съкращава времето за консервация с месеци, минимизира човешките грешки и разходите за логистика, като гарантира успешното спасяване и дигитализиране на световното подводно културно наследство за бъдещите поколения.</p>
+        </div>
+      </div>
+      <div class="code-footer">
+        <div class="branch"><span class="live-dot"></span>v2.0</div>
+        <a href="https://drive.google.com/drive/folders/1JfkDEAHzE26PmlVjOceU90hMgJUhKxNV?dmr=1&ec=wgc-drive-globalnav-goto" data-load-link data-msg="Отваряне на документацията..." class="btn btn-purple btn-lg" data-i18n="proj_docs_btn">📄 Виж документацията</a>
+        <a href="https://asoa-2-0.vercel.app/" data-load-link data-msg="Отваряне на сайта..." class="btn btn-purple btn-lg" data-i18n="proj_site_btn">Виж сайта</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCS -->
+<section id="docs" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge badge-purple" data-i18n="docs_badge">Документи</span>
+      <h2 data-i18n="docs_h2">Архив на <span class="text-grad">отбора</span></h2>
+      <p data-i18n="docs_sub">Цялата ни работа на едно място — открита и достъпна.</p>
+    </div>
+    <div class="grid-4">
+      <a href="https://drive.google.com/drive/folders/1pkNxtbc_5aT8RLkeyaWXmX5R3W2jLFLT" data-load-link data-msg="Отваряне на Златните правила... 📖" class="card">
+        <div class="doc-icon di-cyan"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+        <div class="doc-title" data-i18n="doc1_title">Златните правила на Механо</div>
+        <div class="doc-link c-cyan">Отвори ↗</div>
+      </a>
+      <a href="https://drive.google.com/drive/folders/19Tqg8oOmj24J8g9Azah4YjSm_EUY7NfH" data-load-link data-msg="Отваряне на инструкциите..." class="card">
+        <div class="doc-icon di-purple"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div class="doc-title" data-i18n="doc2_title">Инструкции на робота</div>
+        <div class="doc-link" style="color: var(--purple);">Отвори ↗</div>
+      </a>
+      <a href="https://docs.google.com/document/d/1UVPokITjS_qrf5jUWPVRBeSxqiv0j6vT/edit" data-load-link data-msg="Отваряне на тетрадката..." class="card">
+        <div class="doc-icon di-pink"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg></div>
+        <div class="doc-title" data-i18n="doc3_title">Инженерна тетрадка</div>
+        <div class="doc-link c-pink">Отвори ↗</div>
+      </a>
+      <a href="https://drive.google.com/drive/folders/1jevfHf_yTP0FisgBv4sSLYA5WUY4JVP2" data-load-link class="card">
+        <div class="doc-icon di-yellow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div>
+        <div class="doc-title" data-i18n="doc4_title">3D модели</div>
+        <div class="doc-link c-yellow">Отвори ↗</div>
+      </a>
+    </div>
+    <div class="center">
+      <a href="https://drive.google.com/drive/folders/1jevfHf_yTP0FisgBv4sSLYA5WUY4JVP2" data-load-link data-msg="Отваряне на Google Drive..." class="btn btn-hero btn-xl" data-i18n="docs_drive_btn">📁 Отвори Google Drive →</a>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge badge-pink" data-i18n="team_badge">Отбор</span>
+      <h2 data-i18n="team_h2">Хората зад <span class="text-grad">Механо</span></h2>
+      <p data-i18n="team_sub">Седем уникални умове. Една обща мисия.</p>
+    </div>
+    <div class="team-grid">
+      <div class="card member"><div class="avatar-wrap"><div class="avatar-glow av-1"></div><div class="avatar av-1">БГ</div><div class="num-badge">01</div></div><div class="member-name">инж. Бояна Георгиева</div><div class="member-role" data-i18n="role_mentor">Ментор</div></div>
+      <div class="card member"><div class="avatar-wrap"><div class="avatar-glow av-1"></div><div class="avatar av-1">НЧ</div><div class="num-badge">02</div></div><div class="member-name">инж. Никола Чанев</div><div class="member-role" data-i18n="role_mentor">Ментор</div></div>
+      <div class="card member"><div class="avatar-wrap"><div class="avatar-glow av-1"></div><div class="avatar av-1">ДХ</div><div class="num-badge">03</div></div><div class="member-name">Джефер Ходжов</div><div class="member-role" data-i18n="role_prog">Програмист</div></div>
+      <div class="card member"><div class="avatar-wrap"><div class="avatar-glow av-2"></div><div class="avatar av-2">БЦ</div><div class="num-badge">04</div></div><div class="member-name">Борис Царев</div><div class="member-role" data-i18n="role_tech">Техник</div></div>
+      <div class="card member"><div class="avatar-wrap"><div class="avatar-glow av-3"></div><div class="avatar av-3">ДЖ</div><div class="num-badge">05</div></div><div class="member-name">Дейвид Желязков</div><div class="member-role" data-i18n="role_builder">Конструктор</div></div>
+      <div class="card member"><div class="avatar-wrap"><div class="avatar-glow av-4"></div><div class="avatar av-4">ДХ</div><div class="num-badge">06</div></div><div class="member-name">Данаил Хитров</div><div class="member-role" data-i18n="role_prog">Програмист</div></div>
+      <div class="card member"><div class="avatar-wrap"><div class="avatar-glow av-5"></div><div class="avatar av-5">ИП</div><div class="num-badge">07</div></div><div class="member-name">Иван Пашов</div><div class="member-role" data-i18n="role_builder">Конструктор</div></div>
+      <div class="card member"><div class="avatar-wrap"><div class="avatar-glow av-6"></div><div class="avatar av-6">ДЙ</div><div class="num-badge">08</div></div><div class="member-name">Дилян Йорданов</div><div class="member-role" data-i18n="role_3d">3D моделиране</div></div>
+      <div class="card member"><div class="avatar-wrap"><div class="avatar-glow av-7"></div><div class="avatar av-7">КП</div><div class="num-badge">09</div></div><div class="member-name">Кристиан Петков</div><div class="member-role" data-i18n="role_research">Проучване</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNER -->
+<section id="partner" class="section">
+  <div class="container" style="max-width: 1000px;">
+    <div class="partner-card">
+      <div class="partner-blob-1"></div>
+      <div class="partner-blob-2"></div>
+      <div class="partner-inner">
+        <div>
+          <span class="badge badge-yellow" data-i18n="partner_badge">Официален партньор</span>
+          <h2 data-i18n="partner_h2">Заедно правим <span class="text-grad">бъдещето</span></h2>
+          <p data-i18n="partner_desc">За отбора — Отборът Power Vortex е от Шумен – град с богата история, известен като мястото, откъдето започва българската държава. Градът съчетава традиции и развитие в образованието и технологиите. Отборът представя своето училище – СУ „Панайот Волов", с голяма мотивация, екипен дух и стремеж към развитие и иновации. Благодарим на нашия официален партньор за подкрепата, ресурсите и доверието.</p>
+        </div>
+        <div>
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjF3SpfjXqbx87N9uiRVUJVyjJ_mr0uG714w&s" alt="Power Vortex" style="width:160px;height:160px;object-fit:cover;border-radius:22px;box-shadow:0 8px 30px rgba(245,158,11,0.25);margin:0 auto;"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="container" style="max-width: 1000px;">
+    <div class="section-header">
+      <span class="badge badge-cyan" data-i18n="contact_badge">Контакт</span>
+      <h2 data-i18n="contact_h2">Свържи се с <span class="text-grad">нас</span></h2>
+      <p data-i18n="contact_sub">Имаш въпрос, идея или искаш да си партньор? Пиши ни.</p>
+    </div>
+    <div class="contact-grid">
+      <a href="mailto:teamehano@gmail.com" class="card contact-card">
+        <div class="contact-icon-wrap ci-cyan"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <h3 data-i18n="contact_email_lbl">Имейл</h3>
+        <p>teamehano@gmail.com</p>
+      </a>
+      <div class="card contact-card">
+        <div class="contact-icon-wrap ci-purple"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l1.9 5.8h6.1l-4.9 3.6 1.9 5.8L12 14.6l-4.9 3.6 1.9-5.8L4 8.8h6.1z"/></svg></div>
+        <h3 data-i18n="contact_social_lbl">Социални мрежи</h3>
+        <div class="socials">
+          <a href="https://www.instagram.com/team.mehano/?hl=bg" target="_blank" rel="noopener" class="social" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="https://www.facebook.com/share/1baHPgzvYh/" target="_blank" rel="noopener" class="social" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        </div>
+      </div>
+      <a href="https://pgmee.com/wp/" target="_blank" rel="noopener" class="card contact-card">
+        <div class="contact-icon-wrap ci-green"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <h3 data-i18n="contact_loc_lbl">Локация</h3>
+        <p data-i18n="contact_loc">Бургас, България</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT PLACE -->
+<section id="project-place" class="section">
+  <div class="container" style="max-width: 1100px;">
+    <div class="section-header">
+      <span class="badge badge-pink" data-i18n="place_badge">Място на проекта</span>
+      <h2 data-i18n="place_h2">Къде се случва <span class="text-grad">магията</span></h2>
+      <p data-i18n="place_sub">Тук се събираме, проектираме и програмираме нашия робот.</p>
+    </div>
+    <div class="card project-place-card">
+      <div class="pp-logo-img"><img src="https://yt3.googleusercontent.com/ytc/AIdro_mmsK8C3BWwe2jIt-Gk-ebvjI1R1j9qMB2X__AD2eQN-Q=s900-c-k-c0x00ffffff-no-rj" alt="ПГМЕЕ лого"/></div>
+      <div class="pp-body">
+        <h3 data-i18n="place_name">Професионална гимназия по механоелектроника и електроника</h3>
+        <p class="pp-address">ул. Стефан Стамболов 67</p>
+        <p class="pp-desc" data-i18n="place_desc">Нашата база — училищната STEM лаборатория, където се ражда всеки прототип, всяка линия код и всяка нова идея.</p>
+        <a href="https://www.google.com/maps/place/..." target="_blank" rel="noopener" data-load-link data-msg="Отваряне на Google maps... 📍" class="btn btn-cyan btn-lg" style="margin-top: 18px;" data-i18n="place_map_btn">📍 Виж на картата</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo-img"><img src="https://scontent.fsof9-1.fna.fbcdn.net/v/t39.30808-6/475967058_122103989282752743_8280670784437931498_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=iummlJ37nFAQ7kNvwGCCXDy&_nc_oc=Adphg8hgdNRN-n0oO2JOlkFi5zno5xp8BH5bZLIuDrWMX6w83IMB-Zi3HkdZ9cxy6K0&_nc_zt=23&_nc_ht=scontent.fsof9-1.fna&_nc_gid=-xF0cwIaIaJNGRp9gys_KQ&oh=00_Af1fuH1wlT8k37O42xOrFAvw8skhAhafIOoKywTB0O867Q&oe=69F101B5" alt="Механо лого"/></div>
+      <strong>МЕХАНО</strong>
+      <span>· FLL 2025-26</span>
+    </div>
+    <div class="footer-tag"><span class="heart">♥</span> <span data-i18n="footer_tag">Механо Отбор 2025-26</span></div>
+  </div>
+</footer>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+const LANGS = [
+  { code:'bg', flag:'🇧🇬', label:'🇧🇬 БГ', name:'Bulgarian',   native:'Български',  display:'БГ — Български' },
+  { code:'en', flag:'🇬🇧', label:'🇬🇧 EN', name:'English',     native:'English',    display:'EN — English' },
+  { code:'el', flag:'🇬🇷', label:'🇬🇷 GR', name:'Greek',       native:'Ελληνικά',   display:'GR — Ελληνικά' },
+  { code:'de', flag:'🇩🇪', label:'🇩🇪 DE', name:'German',      native:'Deutsch',    display:'DE — Deutsch' },
+  { code:'zh', flag:'🇨🇳', label:'🇨🇳 ZH', name:'Chinese',     native:'中文',        display:'ZH — 中文' },
+  { code:'ja', flag:'🇯🇵', label:'🇯🇵 JA', name:'Japanese',    native:'日本語',      display:'JA — 日本語' },
+  { code:'fr', flag:'🇫🇷', label:'🇫🇷 FR', name:'French',      native:'Français',   display:'FR — Français' },
+  { code:'es', flag:'🇪🇸', label:'🇪🇸 ES', name:'Spanish',     native:'Español',    display:'ES — Español' },
+  { code:'it', flag:'🇮🇹', label:'🇮🇹 IT', name:'Italian',     native:'Italiano',   display:'IT — Italiano' },
+  { code:'ru', flag:'🇷🇺', label:'🇷🇺 RU', name:'Russian',     native:'Русский',    display:'RU — Русский' },
+  { code:'pt', flag:'🇵🇹', label:'🇵🇹 PT', name:'Portuguese',  native:'Português',  display:'PT — Português' },
+  { code:'ar', flag:'🇸🇦', label:'🇸🇦 AR', name:'Arabic',      native:'العربية',    display:'AR — العربية', rtl:true },
+  { code:'ko', flag:'🇰🇷', label:'🇰🇷 KO', name:'Korean',      native:'한국어',      display:'KO — 한국어' },
+  { code:'tr', flag:'🇹🇷', label:'🇹🇷 TR', name:'Turkish',     native:'Türkçe',     display:'TR — Türkçe' },
+  { code:'nl', flag:'🇳🇱', label:'🇳🇱 NL', name:'Dutch',       native:'Nederlands', display:'NL — Nederlands' },
+  { code:'pl', flag:'🇵🇱', label:'🇵🇱 PL', name:'Polish',      native:'Polski',     display:'PL — Polski' },
+  { code:'uk', flag:'🇺🇦', label:'🇺🇦 UA', name:'Ukrainian',   native:'Українська', display:'UA — Українська' },
+];
+
+const translCache = {};
+let currentLang = 'bg';
+let menuOpen = false;
+
+function toggleLangMenu() {
+  menuOpen = !menuOpen;
+  const dd = document.getElementById('langDropdown');
+  const btn = document.getElementById('langBtn');
+  dd.classList.toggle('show', menuOpen);
+  btn.classList.toggle('open', menuOpen);
+  if (menuOpen) renderMenu();
+}
+
+function renderMenu() {
+  const dd = document.getElementById('langDropdown');
+  dd.innerHTML = `<div class="dd-header"><span class="status-dot"></span><span id="ddHeaderText">Claude превежда в реално време</span></div>`;
+  LANGS.forEach(lang => {
+    const opt = document.createElement('div');
+    opt.className = 'lang-opt' + (lang.code === currentLang ? ' active' : '');
+    opt.innerHTML = `
+      <span class="lang-flag">${lang.flag}</span>
+      <div class="lang-info">
+        <div class="lang-name">${lang.name}</div>
+        <div class="lang-native">${lang.native}</div>
+      </div>
+      <svg class="lang-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>`;
+    opt.onclick = () => selectLang(lang);
+    dd.appendChild(opt);
+  });
+}
+
+document.addEventListener('click', e => {
+  if (!document.getElementById('langSwitcher').contains(e.target) && menuOpen) {
+    menuOpen = false;
+    document.getElementById('langDropdown').classList.remove('show');
+    document.getElementById('langBtn').classList.remove('open');
+  }
+});
+
+function collectTexts() {
+  const els = document.querySelectorAll('[data-i18n]');
+  const texts = {};
+  els.forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    texts[key] = el.innerText.trim();
+  });
+  return texts;
+}
+
+function applyTranslation(translations) {
+  const els = document.querySelectorAll('[data-i18n]');
+  els.forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (translations[key]) {
+      if (el.querySelector('.text-grad')) {
+        const gradSpan = el.querySelector('.text-grad');
+        const gradWord = gradSpan.textContent.trim();
+        const fullTranslated = translations[key];
+        const words = fullTranslated.split(/\s+/);
+        const midIdx = Math.floor(words.length / 2);
+        const gradWordTranslated = words[midIdx] || gradWord;
+        const rest = words.filter((_, i) => i !== midIdx);
+        rest.splice(midIdx, 0, `<span class="text-grad">${gradWordTranslated}</span>`);
+        el.innerHTML = rest.join(' ');
+      } else {
+        el.textContent = translations[key];
+      }
+    }
+  });
+}
+
+function showOverlay(lang) {
+  const overlay = document.getElementById('transOverlay');
+  document.getElementById('overlayFlag').textContent = lang.flag;
+  document.getElementById('overlayTitle').textContent = 'Translating...';
+  document.getElementById('overlayLang').textContent = `→ ${lang.name} (${lang.native})`;
+  document.getElementById('transBar').style.width = '0%';
+  ['st1','st2','st3'].forEach(id => {
+    const el = document.getElementById(id);
+    el.className = 'trans-stage';
+  });
+  overlay.classList.add('show');
+}
+
+function hideOverlay() {
+  document.getElementById('transOverlay').classList.remove('show');
+}
+
+function animateProgress(cb) {
+  const bar = document.getElementById('transBar');
+  const stages = [
+    { id:'st1', pct: 25 },
+    { id:'st2', pct: 70 },
+    { id:'st3', pct: 100 },
+  ];
+  let i = 0;
+  function next() {
+    if (i >= stages.length) { cb(); return; }
+    const s = stages[i];
+    document.getElementById(s.id).className = 'trans-stage active';
+    if (i > 0) document.getElementById(stages[i-1].id).className = 'trans-stage done';
+    bar.style.width = s.pct + '%';
+    i++;
+    setTimeout(next, i === stages.length ? 600 : 900);
+  }
+  next();
+}
+
+async function selectLang(lang) {
+  menuOpen = false;
+  document.getElementById('langDropdown').classList.remove('show');
+  document.getElementById('langBtn').classList.remove('open');
+
+  if (lang.code === currentLang) return;
+
+  if (translCache[lang.code]) {
+    applyTranslation(translCache[lang.code]);
+    currentLang = lang.code;
+    document.getElementById('currentLangLabel').textContent = lang.label;
+    document.documentElement.lang = lang.code;
+    document.documentElement.dir = lang.rtl ? 'rtl' : 'ltr';
+    return;
+  }
+
+  showOverlay(lang);
+
+  const texts = collectTexts();
+  const prompt = `You are a professional translator. Translate the following UI text keys from Bulgarian to ${lang.name} (${lang.native}).
+
+Return ONLY a valid JSON object where keys match exactly and values are the translated strings. No explanation, no markdown, no extra text.
+
+Texts to translate:
+${JSON.stringify(texts, null, 2)}`;
+
+  try {
+    animateProgress(async () => {
+      try {
+        const resp = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model: 'claude-sonnet-4-20250514',
+            max_tokens: 3000,
+            messages: [{ role: 'user', content: prompt }]
+          })
+        });
+        const data = await resp.json();
+        const raw = data.content?.[0]?.text || '{}';
+        const clean = raw.replace(/```json|```/g, '').trim();
+        const translations = JSON.parse(clean);
+        translCache[lang.code] = translations;
+        applyTranslation(translations);
+        currentLang = lang.code;
+        document.getElementById('currentLangLabel').textContent = lang.label;
+        document.documentElement.lang = lang.code;
+        document.documentElement.dir = lang.rtl ? 'rtl' : 'ltr';
+      } catch(e) {
+        console.error('Translation error:', e);
+        showToast('⚠️ Грешка при превод. Опитайте отново.');
+      } finally {
+        setTimeout(hideOverlay, 400);
+      }
+    });
+  } catch(e) {
+    hideOverlay();
+    showToast('⚠️ Грешка при превод.');
+  }
+}
+
+// Original link handler
+const toast = document.getElementById('toast');
+let toastTimer;
+function showToast(msg) {
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 3500);
+}
+
+document.querySelectorAll('a[data-load-link], .btn:not(.lang-btn)').forEach(link => {
+  link.addEventListener('click', function (e) {
+    const href = link.getAttribute('href') || '';
+    if (href.startsWith('#') || href.startsWith('mailto:') || !link.hasAttribute('data-load-link')) return;
+    const customMsg = link.getAttribute('data-msg');
+    e.preventDefault();
+    link.classList.add('is-loading');
+    setTimeout(() => {
+      link.classList.remove('is-loading');
+      if (customMsg) showToast(customMsg);
+      if (href && !href.startsWith('#')) setTimeout(() => window.open(href, '_blank', 'noopener'), 2300);
+    }, 2000);
+  });
+});
+</script>
+</body>
+</html>
+    --shadow-lg: 0 24px 60px -20px rgba(59, 130, 246, 0.25);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    background-image:
+      radial-gradient(ellipse at top left, rgba(59, 130, 246, 0.08), transparent 50%),
+      radial-gradient(ellipse at top right, rgba(6, 182, 212, 0.08), transparent 50%);
+    background-attachment: fixed;
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em; line-height: 1.1; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+  .section { padding: 6rem 0; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto; padding: 1rem 1.5rem;
+    display: flex; align-items: center; justify-content: space-between;
   }
   .logo {
     display: flex; align-items: center; gap: 0.6rem;
